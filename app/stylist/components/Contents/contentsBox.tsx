@@ -10,7 +10,7 @@ export default function ContentsBox() {
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   return (
     <div className="flex w-full flex-col items-center overflow-scroll px-[30px] pb-[60px]">
-      {stylists["testStylist"].contentsList.map(
+      {stylists["testStylist"]?.contentsList.map(
         (content: contentsType, idx: number) => {
           return (
             <ContentsCard
