@@ -28,7 +28,7 @@ export default function ContentsCard({ id, title, text, image }: Props) {
             stylistId: "testStylist",
             contentId: id,
           });
-          router.push("./stylistdetail/Contents");
+          // router.push("./stylist/Contents");
         }}
       >
         <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">
