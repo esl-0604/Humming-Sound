@@ -4,7 +4,7 @@ export default function StylistProfileCard() {
   const router = useRouter();
   return (
     <div
-      onClick={() => router.push("/stylistdetail")}
+      onClick={() => router.push("/stylist")}
       className="relative z-0 mb-[10px] flex h-fit w-full cursor-pointer flex-col bg-[#161616] px-[21.5px]"
     >
       <div className="relative flex h-full w-full flex-row items-center justify-between">
