@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { ContentContext } from "../../page";
 import ContentsDetail from "./contentsDetail";
 import { useRecoilState } from "recoil";
 
@@ -7,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { contentsType } from "@/app/utils/atom/stylistTestData";
 import { ShowContentsDetail } from "@/app/utils/atom/showContentsDetail";
 import { formatText } from "@/app/utils/function/formatText";
+import { ContentContext } from "../../context";
 
 interface Props extends contentsType {}
 

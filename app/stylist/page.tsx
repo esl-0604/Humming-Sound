@@ -11,8 +11,8 @@ import ReservationButton from "./components/reservationButton";
 import ScrolledReservationButton from "./components/scrolledReservationButton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ContentContext } from "./context";
 
-export const ContentContext = createContext<any>(null);
 export default function StylistDetail() {
   const [viewType, setViewType] = useState<string>("소개");
   const [showScrolledButton, setShowScrolledButton] = useState(false);
