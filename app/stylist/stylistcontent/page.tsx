@@ -2,11 +2,12 @@
 
 import { useRecoilState } from "recoil";
 import Image from "next/image";
-import StickyBarV2 from "./stickyBar_v2";
-import ContentsDetailCard from "./contentsDetailCard";
+
 import { useRouter } from "next/navigation";
 import ARROW from "@/public/images/Arrow/bigArrow.svg";
 import { contentsType } from "@/app/utils/atom/stylistTestData";
+import StickyBarV2 from "../components/Contents/stickyBar_v2";
+import ContentsDetailCard from "../components/Contents/contentsDetailCard";
 
 interface Props extends contentsType {}
 

@@ -76,4 +76,3 @@ export default function StickyBar({ viewType, setViewType }: Props) {
     </div>
   );
 }
-/* nameCard2 */

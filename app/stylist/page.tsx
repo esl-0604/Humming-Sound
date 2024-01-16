@@ -8,7 +8,6 @@ import IntroduceBox from "./components/introduceBox";
 import ReviewBox from "./components/Review/reviewBox";
 import ContentsBox from "./components/Contents/contentsBox";
 import ReservationButton from "./components/reservationButton";
-import ScrolledReservationButton from "./components/scrolledReservationButton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ContentContext } from "./context";
@@ -80,7 +79,7 @@ export default function StylistDetail() {
             router.back();
           }}
         >
-          <Image src={ARROW} alt="arrow" className="" />
+          <Image src={ARROW} alt="arrow" className="rotate-180" />
         </div>
         <ThumbnailBox />
         <StickyBar viewType={viewType} setViewType={setViewType} />
@@ -98,11 +97,7 @@ export default function StylistDetail() {
       </div> */}
 
         {viewType !== "후기" ? (
-          showScrolledButton ? (
-            <ScrolledReservationButton />
-          ) : (
-            <ReservationButton />
-          )
+          <ReservationButton isScrolled={showScrolledButton} />
         ) : null}
       </main>
     </ContentContext.Provider>
