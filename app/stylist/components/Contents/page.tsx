@@ -5,7 +5,7 @@ import Image from "next/image";
 import StickyBarV2 from "./stickyBar_v2";
 import ContentsDetailCard from "./contentsDetailCard";
 import { useRouter } from "next/navigation";
-import ARROW from "@/utils/assets/images/stylistintroduce/backArrow.svg";
+import ARROW from "@/public/images/Arrow/bigArrow.svg";
 import { contentsType } from "@/app/utils/atom/stylistTestData";
 
 interface Props extends contentsType {}
