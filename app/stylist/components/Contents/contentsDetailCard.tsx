@@ -1,13 +1,16 @@
 import Image from "next/image";
 import BLOCK from "@/public/images/stylistintroduce/block.svg";
 import { useRecoilState } from "recoil";
-import { ShowContentsDetail } from "@/app/utils/atom/showContentsDetail";
+import {
+  ShowContentsDetail,
+  ShowContentsDetailType,
+} from "@/app/utils/atom/showContentsDetail";
 import {
   contentsType,
   stylistData,
   stylistType,
 } from "@/app/utils/atom/stylistTestData";
-import { formatText } from "@/app/utils/function/formatText";
+import { formatHilightText } from "@/app/utils/function/formatHilightText";
 
 interface Props {
   title?: boolean;
@@ -15,7 +18,7 @@ interface Props {
 
 export default function ContentsDetailCard({ title }: Props) {
   const [showContentData, setShowContentData] =
-    useRecoilState(ShowContentsDetail);
+    useRecoilState<ShowContentsDetailType>(ShowContentsDetail);
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   console.log(stylists);
   console.log(showContentData);
@@ -45,7 +48,7 @@ export default function ContentsDetailCard({ title }: Props) {
             </div>
             <div className="absolute left-0 top-0 z-20 flex h-full w-full flex-col items-center justify-center">
               <div className="flex h-[24.91px] w-full flex-nowrap items-center justify-center font-main text-[18.327px]">
-                {formatText(showContent[0].title)}
+                {formatHilightText(showContent[0].title)}
               </div>
               <div className="flex h-[20px] w-full items-center justify-center text-[12.22px] font-extralight">
                 {showContent[0].text}
