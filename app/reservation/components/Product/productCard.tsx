@@ -29,6 +29,7 @@ export default function ProductCard({ title, productList }: Props) {
         {productList.map((product: ProductType, index: number) => {
           return (
             <ProductRow
+              key={index}
               card={title}
               RowId={index}
               title={product.title}

@@ -78,7 +78,7 @@ export default function StylistDetail() {
     >
       <main className="relative flex min-h-screen w-full flex-col bg-[#161616] text-[#E8E8E8]">
         <div
-          className="sticky top-[13px] z-40 h-0 w-full cursor-pointer bg-blue-600 px-[13px]"
+          className="sticky top-[13px] z-40 h-0 w-full cursor-pointer px-[13px]"
           onClick={() => {
             // if (showContentDetail) setShowContentDetail(false);
             // else router.back();
@@ -87,6 +87,7 @@ export default function StylistDetail() {
         >
           <Image src={ARROW} alt="arrow" className="rotate-180" />
         </div>
+
         <ThumbnailBox />
         <StickyBar viewType={viewType} setViewType={setViewType} />
         {viewType === "소개" ? <IntroduceBox /> : null}
