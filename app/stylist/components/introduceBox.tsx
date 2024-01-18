@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useRecoilState } from "recoil";
 import React from "react";
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
-import { formatText } from "@/app/utils/function/formatText";
+import { formatHilightText } from "@/app/utils/function/formatHilightText";
 
 export default function IntroduceBox() {
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
@@ -86,7 +86,7 @@ export default function IntroduceBox() {
 
             {stylists["testStylist"].phillosophy.map(
               (list: string, idx: number) => {
-                const result = formatText(list);
+                const result = formatHilightText(list);
                 return (
                   <div
                     key={idx}
