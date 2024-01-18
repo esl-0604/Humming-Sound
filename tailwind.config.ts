@@ -12,6 +12,7 @@ const config: Config = {
         highlight: ["Pretendard-Black"],
         main: ["Pretendard-Medium"],
         default: ["Pretendard-Thin"],
+        branding: ["SugarMagic-Branding"],
       },
       boxShadow: {
         button1:

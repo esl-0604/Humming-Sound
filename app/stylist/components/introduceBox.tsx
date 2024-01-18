@@ -46,7 +46,7 @@ export default function IntroduceBox() {
             return (
               <div
                 key={idx}
-                className="flex h-[30px] w-full items-center text-[15px] font-extralight"
+                className="flex min-h-[30px]  w-full items-center text-[15px] font-extralight"
               >
                 : {list}
               </div>
@@ -65,7 +65,7 @@ export default function IntroduceBox() {
             return (
               <div
                 key={idx}
-                className="flex h-[30px] w-full items-center text-[15px] font-extralight"
+                className="flex min-h-[30px] w-full items-center text-[15px] font-extralight"
               >
                 : {list}
               </div>
@@ -90,7 +90,7 @@ export default function IntroduceBox() {
                 return (
                   <div
                     key={idx}
-                    className="flex h-[30px] w-full min-w-[250px] items-center justify-center text-[15px] font-extralight"
+                    className="flex min-h-[30px] w-full min-w-[250px] items-center justify-center text-[15px] font-extralight"
                   >
                     {result}
                   </div>

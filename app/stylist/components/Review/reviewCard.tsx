@@ -52,8 +52,8 @@ export default function ReviewCard({
 
           <div className="flex h-full w-[60px] flex-col whitespace-nowrap pt-[5px]">
             <div className="flex h-[15px] w-full items-start  justify-end text-[10px] font-extralight">
-              <span className="font-main">{grade} 점</span>
-              &nbsp;/ 5.0 점
+              <span className="whitespace-pre font-main ">{grade} 점 </span>/
+              5.0 점
             </div>
             <div className="flex h-[60px] w-full items-center justify-center overflow-hidden rounded-[5px] bg-white">
               <img

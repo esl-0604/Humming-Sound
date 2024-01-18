@@ -19,25 +19,28 @@ export default function StickyBar({ viewType, setViewType }: Props) {
               {stylists["testStylist"].name}
             </span>
 
-            <span className="font-extralight">&nbsp;스타일리스트</span>
+            <span className="whitespace-pre font-extralight">
+              {" "}
+              스타일리스트
+            </span>
           </div>
           <div className="mt-[5px] flex h-[10px] items-center font-main text-[10px] ">
             {"미니멀한 당신을 위해"}
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-[1px] pt-[5px] ">
-          <div className="flex h-[12px] items-center text-[10px] font-extralight">
+        <div className="flex flex-col items-end gap-[1px] whitespace-pre pt-[5px]">
+          <div className="flex h-[12px] items-center  text-[10px] font-extralight">
             <span className="font-main">
               {stylists["testStylist"].avgGrade} 점
-            </span>
-            &nbsp;/ 5.0 점
+            </span>{" "}
+            / 5.0 점
           </div>
           <div className="flex h-[12px] items-center text-[10px] font-extralight">
             <span className="font-main">
               {stylists["testStylist"].consultingAmount} 회
-            </span>
-            &nbsp;스타일링
+            </span>{" "}
+            스타일링
           </div>
         </div>
       </div>

@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "mongodb": "^6.3.0",
     "lottie-react": "^2.4.0",
+    "mongodb": "^6.3.0",
     "next": "14.0.4",
     "react": "^18",
+    "react-calendar": "^4.8.0",
     "react-dom": "^18",
     "recoil": "^0.7.7"
   },

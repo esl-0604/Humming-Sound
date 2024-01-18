@@ -5,7 +5,7 @@ import WHAT from "@/public/images/Reservation/what.svg";
 import HOW from "@/public/images/Reservation/how.svg";
 import ADD from "@/public/images/Reservation/add.svg";
 import Image from "next/image";
-import ProductRow from "./productRow";
+import ProductRow from "./ProductRow";
 import { ProductType } from "@/app/utils/atom/productData";
 
 interface Props {
