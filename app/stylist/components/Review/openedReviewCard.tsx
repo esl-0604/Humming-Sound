@@ -19,8 +19,9 @@ export default function OpenedReviewCard({
           </div>
         </div>
 
-        <div className="flex h-[15px] w-[60px] items-center justify-end whitespace-nowrap pt-[5px] text-[10px] font-extralight">
-          <span className="font-main">{grade} 점</span>&nbsp;/ 5.0 점
+        <div className="flex h-[15px] w-[60px] items-start justify-end whitespace-nowrap pt-[5px] text-[10px] font-extralight">
+          <span className="font-main">{grade} 점</span>
+          &nbsp;/ 5.0 점
         </div>
       </div>
 

@@ -8,12 +8,15 @@ import LoginButton from "./components/loginButton";
 import StylistProfileCard from "./components/stylistProfileCard";
 import StylistApplyButton from "./components/stylistApplyButton";
 import { useSearchParams } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { ScrolledButton } from "./utils/atom/scrolledButton";
+import { stylistData, stylistType } from "./utils/atom/stylistTestData";
 
 export default function Home() {
   const [showScrolledLoginButton, setShowScrolledLoginButton] = useState(false);
   const param = useSearchParams();
   const kakaoCode = param.get("code");
-
+  const [stData, setStData] = useRecoilState<stylistType>(stylistData);
   useEffect(() => {
     if (kakaoCode) {
       fetch("/api/kakao/getToken", {
@@ -25,7 +28,7 @@ export default function Home() {
       }).then((res) => res.json());
     }
   }, [kakaoCode]);
-
+  
   useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
@@ -35,8 +38,10 @@ export default function Home() {
 
       if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
         setShowScrolledLoginButton(true);
+        setIsScrolled(true);
       } else {
         setShowScrolledLoginButton(false);
+        setIsScrolled(false);
       }
     };
 
@@ -51,9 +56,14 @@ export default function Home() {
     <main className="flex min-h-screen w-full flex-col items-center bg-[#161616]">
       <IntroBox />
       <FilterBox />
-      <StylistProfileCard />
-      <StylistProfileCard />
-      <StylistProfileCard />
+      {Object.keys(stData).map((key) => (
+        <StylistProfileCard
+          key={key}
+          stylistKey={key}
+          stylistName={stData[key].name}
+          stylistComment={stData[key].comment}
+        />
+      ))}
       <ContentBox />
       <StylistApplyButton isScrolled={showScrolledLoginButton} />
       <LoginButton isScrolled={showScrolledLoginButton} />

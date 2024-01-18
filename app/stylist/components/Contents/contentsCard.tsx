@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import { contentsType } from "@/app/utils/atom/stylistTestData";
 import { ShowContentsDetail } from "@/app/utils/atom/showContentsDetail";
-import { formatText } from "@/app/utils/function/formatText";
+import { formatHilightText } from "@/app/utils/function/formatHilightText";
 import { ContentContext } from "../../context";
 
 interface Props extends contentsType {}
@@ -43,7 +43,7 @@ export default function ContentsCard({ id, title, text, image }: Props) {
         </div>
         <div className="absolute left-0 top-0 z-20 flex h-full w-full flex-col items-center justify-center">
           <div className="flex h-[24.91px] w-full flex-nowrap items-center justify-center font-main text-[18.327px]">
-            {formatText(title)}
+            {formatHilightText(title)}
           </div>
           <div className="flex h-[20px] w-full items-center justify-center text-[12.22px] font-extralight">
             {text}
