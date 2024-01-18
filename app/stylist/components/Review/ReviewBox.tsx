@@ -1,6 +1,6 @@
 "use client";
 import { useRecoilState } from "recoil";
-import ReviewCard from "./reviewCard";
+import ReviewCard from "./ReviewCard";
 import { useState } from "react";
 import {
   reviewType,

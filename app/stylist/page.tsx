@@ -2,12 +2,12 @@
 
 import { createContext, useEffect, useRef, useState } from "react";
 import ARROW from "@/public/images/toggleClosed.svg";
-import StickyBar from "./components/stickyBar";
-import ThumbnailBox from "./components/thumbnailBox";
-import IntroduceBox from "./components/introduceBox";
-import ReviewBox from "./components/Review/reviewBox";
-import ContentsBox from "./components/Contents/contentsBox";
-import ReservationButton from "./components/reservationButton";
+import StickyBar from "./components/StickyBar";
+import ThumbnailBox from "./components/ThumbnailBox";
+import IntroduceBox from "./components/IntroduceBox";
+import ReviewBox from "./components/Review/ReviewBox";
+import ContentsBox from "./components/Contents/ContentsBox";
+import ReservationButton from "./components/ReservationButton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ContentContext } from "./context";

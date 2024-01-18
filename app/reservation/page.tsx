@@ -1,13 +1,13 @@
 "use client";
 
 import { useRecoilState } from "recoil";
-import ProductList from "./components/Product/productList";
-import Block from "./components/block";
+import ProductList from "./components/Product/ProductList";
+import Block from "./components/Block";
 import { ScrolledButton } from "../utils/atom/scrolledButton";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ARROW from "@/public/images/toggleClosed.svg";
-import ContinueButton from "./components/continueButton";
+import ContinueButton from "./components/ContinueButton";
 import { ReservationContext } from "./context";
 import { useState } from "react";
 import CalendarCard from "./components/Calendar/CalendarCard";

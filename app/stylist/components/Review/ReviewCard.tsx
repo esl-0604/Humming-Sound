@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import OpenedReviewCard from "./openedReviewCard";
+import OpenedReviewCard from "./OpenedReviewCard";
 import { reviewType } from "@/app/utils/atom/stylistTestData";
 
 export default function ReviewCard({

@@ -3,7 +3,7 @@ import {
   stylistData,
   stylistType,
 } from "@/app/utils/atom/stylistTestData";
-import ContentsCard from "./contentsCard";
+import ContentsCard from "./ContentsCard";
 import { useRecoilState } from "recoil";
 
 export default function ContentsBox() {
