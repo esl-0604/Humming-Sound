@@ -6,7 +6,7 @@ export default function LoginButton() {
   return (
     <div className="itmes-center absolute bottom-[30px] z-10 flex h-fit w-full justify-center px-[55px]">
       <Link
-        href={`https://kauth.kakao.com/oauth/authorize?client_id=992dcbe3b69e70d74e47863a4eaf2471&redirect_uri=http://localhost:3000&response_type=code&scope=talk_message`}
+        href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code&scope=talk_message`}
       >
         <img
           src="/images/kakao_login_large_wide.png"
