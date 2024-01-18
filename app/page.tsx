@@ -7,14 +7,28 @@ import IntroBox from "./components/introBox";
 import LoginButton from "./components/loginButton";
 import StylistProfileCard from "./components/stylistProfileCard";
 import StylistApplyButton from "./components/stylistApplyButton";
+import { useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { ScrolledButton } from "./utils/atom/scrolledButton";
 import { stylistData, stylistType } from "./utils/atom/stylistTestData";
 
 export default function Home() {
   const [showScrolledLoginButton, setShowScrolledLoginButton] = useState(false);
-  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
+  const param = useSearchParams();
+  const kakaoCode = param.get("code");
   const [stData, setStData] = useRecoilState<stylistType>(stylistData);
+  useEffect(() => {
+    if (kakaoCode) {
+      fetch("/api/kakao/getToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authCode: kakaoCode,
+        },
+      }).then((res) => res.json());
+    }
+  }, [kakaoCode]);
+
   useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
@@ -24,10 +38,8 @@ export default function Home() {
 
       if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
         setShowScrolledLoginButton(true);
-        setIsScrolled(true);
       } else {
         setShowScrolledLoginButton(false);
-        setIsScrolled(false);
       }
     };
 
