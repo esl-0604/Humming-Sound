@@ -7,9 +7,24 @@ import IntroBox from "./components/introBox";
 import LoginButton from "./components/loginButton";
 import StylistProfileCard from "./components/stylistProfileCard";
 import StylistApplyButton from "./components/stylistApplyButton";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [showScrolledLoginButton, setShowScrolledLoginButton] = useState(false);
+  const param = useSearchParams();
+  const kakaoCode = param.get("code");
+
+  useEffect(() => {
+    if (kakaoCode) {
+      fetch("/api/kakao/getToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authCode: kakaoCode,
+        },
+      }).then((res) => res.json());
+    }
+  }, [kakaoCode]);
 
   useEffect(() => {
     const handleScroll = () => {
