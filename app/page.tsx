@@ -22,7 +22,7 @@ export default function Home() {
   const kakaoCode = param.get("code");
   const [stData, setStData] = useRecoilState<stylistType>(stylistData);
   const [isLogined, setIsLogined] = useRecoilState<boolean>(IsLogined);
-  let userId = LocalStorage.getItem("userId");
+  const userId = LocalStorage.getItem("userId");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +37,10 @@ export default function Home() {
             },
           });
           const data = await loginResponse.json();
+
           if (data) {
             LocalStorage.setItem("userId", data.userId);
-            router.push("/");
+            router.replace("/");
           }
         } catch (error) {
           console.error("Error fetching data:", error);

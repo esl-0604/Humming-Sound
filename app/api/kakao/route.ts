@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
       .collection("users")
       .findOne({ id: Number(userInfoResponse.id) });
     if (findUserResponse == null) {
-      const createUserResponse = await db.collection("users").insertOne({
+      await db.collection("users").insertOne({
         id: Number(userInfoResponse.id),
         email: userInfoResponse.kakao_account.email,
       });
