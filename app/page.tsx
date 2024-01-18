@@ -28,7 +28,7 @@ export default function Home() {
       }).then((res) => res.json());
     }
   }, [kakaoCode]);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
@@ -38,10 +38,8 @@ export default function Home() {
 
       if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
         setShowScrolledLoginButton(true);
-        setIsScrolled(true);
       } else {
         setShowScrolledLoginButton(false);
-        setIsScrolled(false);
       }
     };
 
