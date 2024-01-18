@@ -7,9 +7,12 @@ import IntroBox from "./components/introBox";
 import LoginButton from "./components/loginButton";
 import StylistProfileCard from "./components/stylistProfileCard";
 import StylistApplyButton from "./components/stylistApplyButton";
+import { useRecoilState } from "recoil";
+import { ScrolledButton } from "./utils/atom/scrolledButton";
 
 export default function Home() {
   const [showScrolledLoginButton, setShowScrolledLoginButton] = useState(false);
+  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,8 +23,10 @@ export default function Home() {
 
       if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
         setShowScrolledLoginButton(true);
+        setIsScrolled(true);
       } else {
         setShowScrolledLoginButton(false);
+        setIsScrolled(false);
       }
     };
 

@@ -40,6 +40,12 @@ export default function StylistDetail() {
   }, []);
 
   useEffect(() => {
+    fetch("api/test")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
