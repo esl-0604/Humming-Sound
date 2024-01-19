@@ -9,10 +9,11 @@ import ReviewBox from "./components/Review/reviewBox";
 import ContentsBox from "./components/Contents/contentsBox";
 import ReservationButton from "./components/reservationButton";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ContentContext } from "./context";
 
 export default function StylistDetail() {
+  const stylistKey = useSearchParams().get("stylistKey");
   const [viewType, setViewType] = useState<string>("소개");
   const [showScrolledButton, setShowScrolledButton] = useState(false);
   const [showContentDetail, setShowContentDetail] = useState(false);
@@ -88,11 +89,21 @@ export default function StylistDetail() {
           <Image src={ARROW} alt="arrow" className="rotate-180" />
         </div>
 
-        <ThumbnailBox />
-        <StickyBar viewType={viewType} setViewType={setViewType} />
-        {viewType === "소개" ? <IntroduceBox /> : null}
-        {viewType === "후기" ? <ReviewBox /> : null}
-        {viewType === "컨텐츠" ? <ContentsBox /> : null}
+        <ThumbnailBox stylistKey={stylistKey ? stylistKey : "testStylist"} />
+        <StickyBar
+          viewType={viewType}
+          setViewType={setViewType}
+          stylistKey={stylistKey ? stylistKey : "testStylist"}
+        />
+        {viewType === "소개" ? (
+          <IntroduceBox stylistKey={stylistKey ? stylistKey : "testStylist"} />
+        ) : null}
+        {viewType === "후기" ? (
+          <ReviewBox stylistKey={stylistKey ? stylistKey : "testStylist"} />
+        ) : null}
+        {viewType === "컨텐츠" ? (
+          <ContentsBox stylistKey={stylistKey ? stylistKey : "testStylist"} />
+        ) : null}
         {/* <div ref={ref1}>
         <IntroduceBox />
       </div>

@@ -14,16 +14,20 @@ import React from "react";
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import { formatHilightText } from "@/app/utils/function/formatHilightText";
 
-export default function IntroduceBox() {
-  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+interface Props {
+  stylistKey: string;
+}
 
+export default function IntroduceBox({ stylistKey }: Props) {
+  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+  const stylist = stylists[stylistKey];
   return (
     <div className="flex w-full flex-col pb-[60px]">
       <div className="flex w-full flex-col px-[30px]">
         <div className="relative flex w-full justify-center pt-[39px]">
           <div className="relative h-[143px] w-[143px] overflow-hidden rounded-full shadow-lg">
             <img
-              src={stylists["testStylist"].profile}
+              src={stylist.profile}
               alt="profile"
               className="h-full w-full object-cover"
             />
@@ -42,11 +46,11 @@ export default function IntroduceBox() {
             <Image src={ABOUTME} alt="aboutme" />
           </div>
 
-          {stylists["testStylist"].aboutMe.map((list: string, idx: number) => {
+          {stylist.aboutMe.map((list: string, idx: number) => {
             return (
               <div
                 key={idx}
-                className="flex h-[30px] w-full items-center text-[15px] font-extralight"
+                className="flex min-h-[30px] w-full items-center text-[15px] font-extralight"
               >
                 : {list}
               </div>
@@ -61,11 +65,11 @@ export default function IntroduceBox() {
             <Image src={FORWHO} alt="forwho" />
           </div>
 
-          {stylists["testStylist"].forWho.map((list: string, idx: number) => {
+          {stylist.forWho.map((list: string, idx: number) => {
             return (
               <div
                 key={idx}
-                className="flex h-[30px] w-full items-center text-[15px] font-extralight"
+                className="flex min-h-[30px] w-full items-center text-[15px] font-extralight"
               >
                 : {list}
               </div>
@@ -84,19 +88,17 @@ export default function IntroduceBox() {
               <Image src={UPQUOTES} alt="upquotes" />
             </div>
 
-            {stylists["testStylist"].phillosophy.map(
-              (list: string, idx: number) => {
-                const result = formatHilightText(list);
-                return (
-                  <div
-                    key={idx}
-                    className="flex h-[30px] w-full min-w-[250px] items-center justify-center text-[15px] font-extralight"
-                  >
-                    {result}
-                  </div>
-                );
-              },
-            )}
+            {stylist.phillosophy.map((list: string, idx: number) => {
+              const result = formatHilightText(list);
+              return (
+                <div
+                  key={idx}
+                  className="flex min-h-[30px] w-full min-w-[250px] items-center text-[15px] font-extralight"
+                >
+                  {result}
+                </div>
+              );
+            })}
 
             <div className="flex h-[15px] items-end pb-[5px]">
               <Image src={DOWNQUOTES} alt="downquotes" />
@@ -119,23 +121,21 @@ export default function IntroduceBox() {
         />
 
         <div className="relative flex h-[200px] w-full gap-[10px] overflow-x-scroll">
-          {stylists["testStylist"].personalImageList.map(
-            (list: string, idx: number) => {
-              return (
-                <div
-                  key={idx}
-                  className="relative h-full w-[110px] flex-none rounded-[5px]"
-                >
-                  <div className="to-[#161616]-0% absolute top-0 z-10 h-[200px] w-[110px] bg-gradient-to-t from-[#161616]" />
-                  <img
-                    src={list}
-                    alt="image"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              );
-            },
-          )}
+          {stylist.personalImageList.map((list: string, idx: number) => {
+            return (
+              <div
+                key={idx}
+                className="relative h-full w-[110px] flex-none rounded-[5px]"
+              >
+                <div className="to-[#161616]-0% absolute top-0 z-10 h-[200px] w-[110px] bg-gradient-to-t from-[#161616]" />
+                <img
+                  src={list}
+                  alt="image"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
