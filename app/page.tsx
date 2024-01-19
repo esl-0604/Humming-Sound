@@ -22,10 +22,10 @@ export default function Home() {
 
   const param = useSearchParams();
   const kakaoCode = param.get("code");
-  const [stData, setStData] = useRecoilState<stylistType>(stylistData);
   const [isLogined, setIsLogined] = useRecoilState<boolean>(IsLogined);
   const userId = LocalStorage.getItem("userId");
 
+  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   useEffect(() => {
     const fetchData = async () => {
       if (kakaoCode) {
@@ -103,12 +103,12 @@ export default function Home() {
     <main className="flex min-h-screen w-full flex-col items-center bg-[#161616]">
       <IntroBox />
       <FilterBox />
-      {Object.keys(stData).map((key) => (
+      {Object.keys(stylists).map((key) => (
         <StylistProfileCard
           key={key}
           stylistKey={key}
-          stylistName={stData[key].name}
-          stylistComment={stData[key].comment}
+          stylistName={stylists[key].name}
+          stylistComment={stylists[key].comment}
         />
       ))}
       <ContentBox />
