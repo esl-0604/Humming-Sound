@@ -503,11 +503,7 @@ export const stylistDB = {
         grade: "5.0",
         comment:
           "스타일링 최고 스타일링 더 받을래요 스타일링 어쩌구저쩌구 후기는 2줄만 보이는거로 더 넘어가면 일단 말줄임표로 마무리 합시다 이정도로 글은 어느정도까지 보여줄까요? 글자수 제한을 두기는 해야할 것 같은데 사실 펼쳤을때 이정도면 충분히 리뷰하기에는 부족하지 않을 것 같은데요 음 더 들어가야하나 모르겠는데 좌우로 늘리고 5줄이면 솔직히 이거보다 더 적을 사람 있을까 싶긴 합니다 충분한 리뷰가 될 듯 사진도 충분해이.",
-        imageList: [
-          jenfloxStylistReviewImages[0].default.src,
-          jenfloxStylistReviewImages[1].default.src,
-          jenfloxStylistReviewImages[2].default.src,
-        ],
+        imageList: [],
       },
       {
         reviewer: "허**",
@@ -515,33 +511,7 @@ export const stylistDB = {
         grade: "5.0",
         comment:
           "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          jenfloxStylistReviewImages[3].default.src,
-          jenfloxStylistReviewImages[4].default.src,
-        ],
-      },
-      {
-        reviewer: "소**",
-        date: "23.11.21",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          jenfloxStylistReviewImages[8].default.src,
-          jenfloxStylistReviewImages[9].default.src,
-        ],
-      },
-      {
-        reviewer: "이**",
-        date: "23.10.31",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          jenfloxStylistReviewImages[5].default.src,
-          jenfloxStylistReviewImages[6].default.src,
-          jenfloxStylistReviewImages[7].default.src,
-        ],
+        imageList: [],
       },
     ],
     contentsList: [
@@ -607,11 +577,7 @@ export const stylistDB = {
         grade: "5.0",
         comment:
           "스타일링 최고 스타일링 더 받을래요 스타일링 어쩌구저쩌구 후기는 2줄만 보이는거로 더 넘어가면 일단 말줄임표로 마무리 합시다 이정도로 글은 어느정도까지 보여줄까요? 글자수 제한을 두기는 해야할 것 같은데 사실 펼쳤을때 이정도면 충분히 리뷰하기에는 부족하지 않을 것 같은데요 음 더 들어가야하나 모르겠는데 좌우로 늘리고 5줄이면 솔직히 이거보다 더 적을 사람 있을까 싶긴 합니다 충분한 리뷰가 될 듯 사진도 충분해이.",
-        imageList: [
-          wooklasStylistReviewImages[0].default.src,
-          wooklasStylistReviewImages[1].default.src,
-          wooklasStylistReviewImages[2].default.src,
-        ],
+        imageList: [],
       },
       {
         reviewer: "허**",
@@ -619,33 +585,7 @@ export const stylistDB = {
         grade: "5.0",
         comment:
           "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          wooklasStylistReviewImages[3].default.src,
-          wooklasStylistReviewImages[4].default.src,
-        ],
-      },
-      {
-        reviewer: "소**",
-        date: "23.11.21",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          wooklasStylistReviewImages[8].default.src,
-          wooklasStylistReviewImages[9].default.src,
-        ],
-      },
-      {
-        reviewer: "이**",
-        date: "23.10.31",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          wooklasStylistReviewImages[5].default.src,
-          wooklasStylistReviewImages[6].default.src,
-          wooklasStylistReviewImages[7].default.src,
-        ],
+        imageList: [],
       },
     ],
     contentsList: [
@@ -709,11 +649,7 @@ export const stylistDB = {
         grade: "5.0",
         comment:
           "스타일링 최고 스타일링 더 받을래요 스타일링 어쩌구저쩌구 후기는 2줄만 보이는거로 더 넘어가면 일단 말줄임표로 마무리 합시다 이정도로 글은 어느정도까지 보여줄까요? 글자수 제한을 두기는 해야할 것 같은데 사실 펼쳤을때 이정도면 충분히 리뷰하기에는 부족하지 않을 것 같은데요 음 더 들어가야하나 모르겠는데 좌우로 늘리고 5줄이면 솔직히 이거보다 더 적을 사람 있을까 싶긴 합니다 충분한 리뷰가 될 듯 사진도 충분해이.",
-        imageList: [
-          josknStylistReviewImages[0].default.src,
-          josknStylistReviewImages[1].default.src,
-          josknStylistReviewImages[2].default.src,
-        ],
+        imageList: [],
       },
       {
         reviewer: "허**",
@@ -721,33 +657,7 @@ export const stylistDB = {
         grade: "5.0",
         comment:
           "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          josknStylistReviewImages[3].default.src,
-          josknStylistReviewImages[4].default.src,
-        ],
-      },
-      {
-        reviewer: "소**",
-        date: "23.11.21",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          josknStylistReviewImages[8].default.src,
-          josknStylistReviewImages[9].default.src,
-        ],
-      },
-      {
-        reviewer: "이**",
-        date: "23.10.31",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          josknStylistReviewImages[5].default.src,
-          josknStylistReviewImages[6].default.src,
-          josknStylistReviewImages[7].default.src,
-        ],
+        imageList: [],
       },
     ],
     contentsList: [
@@ -923,54 +833,7 @@ export const stylistDB = {
     personalImageList: jenfloxStylistPersonalImages.map(
       (curr) => curr.default.src,
     ),
-    reviewList: [
-      {
-        reviewer: "양**",
-        date: "23.12.23",
-        grade: "5.0",
-        comment:
-          "스타일링 최고 스타일링 더 받을래요 스타일링 어쩌구저쩌구 후기는 2줄만 보이는거로 더 넘어가면 일단 말줄임표로 마무리 합시다 이정도로 글은 어느정도까지 보여줄까요? 글자수 제한을 두기는 해야할 것 같은데 사실 펼쳤을때 이정도면 충분히 리뷰하기에는 부족하지 않을 것 같은데요 음 더 들어가야하나 모르겠는데 좌우로 늘리고 5줄이면 솔직히 이거보다 더 적을 사람 있을까 싶긴 합니다 충분한 리뷰가 될 듯 사진도 충분해이.",
-        imageList: [
-          jenfloxStylistReviewImages[0].default.src,
-          jenfloxStylistReviewImages[1].default.src,
-          jenfloxStylistReviewImages[2].default.src,
-        ],
-      },
-      {
-        reviewer: "허**",
-        date: "23.10.25",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          jenfloxStylistReviewImages[3].default.src,
-          jenfloxStylistReviewImages[4].default.src,
-        ],
-      },
-      {
-        reviewer: "소**",
-        date: "23.11.21",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          jenfloxStylistReviewImages[8].default.src,
-          jenfloxStylistReviewImages[9].default.src,
-        ],
-      },
-      {
-        reviewer: "이**",
-        date: "23.10.31",
-        grade: "5.0",
-        comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-        imageList: [
-          jenfloxStylistReviewImages[5].default.src,
-          jenfloxStylistReviewImages[6].default.src,
-          jenfloxStylistReviewImages[7].default.src,
-        ],
-      },
-    ],
+    reviewList: [],
     contentsList: [
       {
         id: 0,
