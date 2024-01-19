@@ -1,28 +1,28 @@
 // stylist_test ------------------------------------------------------------
 // 이미지 폴더 내의 모든 PNG 파일 가져오기
-const testStylistContext = require.context("./stylist_test", false, /\.png$/);
-const testStylistReviewContext = require.context(
-  "./stylist_test/review_images",
-  false,
-  /\.png$/,
-);
-const testStylistPersonalContext = require.context(
-  "./stylist_test/personal_images",
-  false,
-  /\.png$/,
-);
-// context.keys()는 해당 폴더 내의 모든 파일 경로를 배열로 반환합니다.
-const testStylistPngFiles = testStylistContext.keys();
-const testStylistReviewPngFiles = testStylistReviewContext.keys();
-const testStylistPersonalPngFiles = testStylistPersonalContext.keys();
-// pngFiles 배열을 사용하여 각 이미지를 import
-const testStylistImages = testStylistPngFiles.map(testStylistContext);
-const testStylistReviewImages = testStylistReviewPngFiles.map(
-  testStylistReviewContext,
-);
-const testStylistPersonalImages = testStylistPersonalPngFiles.map(
-  testStylistPersonalContext,
-);
+// const testStylistContext = require.context("./stylist_test", false, /\.png$/);
+// const testStylistReviewContext = require.context(
+//   "./stylist_test/review_images",
+//   false,
+//   /\.png$/,
+// );
+// const testStylistPersonalContext = require.context(
+//   "./stylist_test/personal_images",
+//   false,
+//   /\.png$/,
+// );
+// // context.keys()는 해당 폴더 내의 모든 파일 경로를 배열로 반환합니다.
+// const testStylistPngFiles = testStylistContext.keys();
+// const testStylistReviewPngFiles = testStylistReviewContext.keys();
+// const testStylistPersonalPngFiles = testStylistPersonalContext.keys();
+// // pngFiles 배열을 사용하여 각 이미지를 import
+// const testStylistImages = testStylistPngFiles.map(testStylistContext);
+// const testStylistReviewImages = testStylistReviewPngFiles.map(
+//   testStylistReviewContext,
+// );
+// const testStylistPersonalImages = testStylistPersonalPngFiles.map(
+//   testStylistPersonalContext,
+// );
 // -------------------------------------------------------------------------
 
 // stylist_test ------------------------------------------------------------
