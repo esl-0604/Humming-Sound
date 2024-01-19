@@ -38,10 +38,14 @@ export default function StylistProfileCard({
       className="relative z-0 mb-[10px] flex h-fit w-full cursor-pointer flex-col bg-[#161616] px-[21.5px]"
     >
       <div className="relative flex h-full w-full flex-row items-center justify-between">
-        {previewImages.map((current) => {
+        {previewImages.map((current, index) => {
           return (
             <div className="mr-[2.5%] flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">
-              <img className="h-full w-full object-cover" src={current} />
+              <img
+                key={index}
+                className="h-full w-full object-cover"
+                src={current}
+              />
             </div>
           );
         })}
