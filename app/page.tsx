@@ -18,6 +18,8 @@ import LocalStorage from "./utils/localstorage";
 export default function Home() {
   const router = useRouter();
   const [showScrolledLoginButton, setShowScrolledLoginButton] = useState(false);
+  const [showScrolledApplyButton, setShowScrolledApplyButton] = useState(false);
+
   const param = useSearchParams();
   const kakaoCode = param.get("code");
   const [stData, setStData] = useRecoilState<stylistType>(stylistData);
@@ -76,6 +78,26 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+
+      const scrollThreshold = 0.8;
+
+      if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
+        setShowScrolledApplyButton(true);
+      } else {
+        setShowScrolledApplyButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center bg-[#161616]">
@@ -90,7 +112,9 @@ export default function Home() {
         />
       ))}
       <ContentBox />
-      <StylistApplyButton isScrolled={showScrolledLoginButton} />
+      {showScrolledApplyButton ? (
+        <StylistApplyButton isScrolled={showScrolledLoginButton} />
+      ) : null}
       {isLogined ? (
         <StyleProcessButton isScrolled={showScrolledLoginButton} />
       ) : (
