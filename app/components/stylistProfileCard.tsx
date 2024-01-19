@@ -40,12 +40,11 @@ export default function StylistProfileCard({
       <div className="relative flex h-full w-full flex-row items-center justify-between">
         {previewImages.map((current, index) => {
           return (
-            <div className="mr-[2.5%] flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">
-              <img
-                key={index}
-                className="h-full w-full object-cover"
-                src={current}
-              />
+            <div
+              key={index}
+              className="mr-[2.5%] flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]"
+            >
+              <img className="h-full w-full object-cover" src={current} />
             </div>
           );
         })}
