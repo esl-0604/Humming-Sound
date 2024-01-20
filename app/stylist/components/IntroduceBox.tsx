@@ -117,7 +117,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
         <Image
           src={ARROW}
           alt="rightarrow"
-          className="absolute right-[30px] top-[106.5px] z-20 cursor-pointer"
+          className="absolute right-[30px] top-[106.5px] z-20 rotate-180 cursor-pointer"
         />
 
         <div className="relative flex h-[200px] w-full gap-[10px] overflow-x-scroll">

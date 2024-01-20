@@ -15,14 +15,11 @@ interface Props {
 
 export default function ProductCard({ title, productList }: Props) {
   return (
-    <div className="flex h-fit w-full flex-col">
+    <div className="mt-[5px] flex h-fit w-full flex-col">
       <Image src={BLOCK} alt="block" />
 
-      <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px]">
-        <Image
-          src={title === "what" ? WHAT : title === "how" ? HOW : ADD}
-          alt="title"
-        />
+      <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px] font-branding text-[30px] font-normal">
+        {title}
       </div>
 
       <div className="flex h-fit w-full flex-col gap-[15px]">
@@ -36,6 +33,7 @@ export default function ProductCard({ title, productList }: Props) {
               cost={product.cost}
               memo={product.memo}
               byHour={product.byHour}
+              byEA={product.byEA}
               gifUrl={product.gifUrl}
             />
           );

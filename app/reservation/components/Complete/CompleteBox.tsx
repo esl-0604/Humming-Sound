@@ -15,7 +15,7 @@ export default function CompleteBox({}: Props) {
     <div className="flex h-fit w-full flex-col text-[#E8E8E8]">
       <Image src={BLOCK} alt="block" />
 
-      <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px]">
+      <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px] font-branding text-[30px] font-normal">
         <Image src={DONE} alt="when" />
       </div>
 

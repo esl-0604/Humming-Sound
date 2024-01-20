@@ -4,13 +4,11 @@ import ProductCard from "./ProductCard";
 import { ProductCategoryType, productData } from "@/app/utils/atom/productData";
 
 export default function ProductBox() {
-  const categoryList = Object.keys(productData);
-  console.log(categoryList);
+  const cardList = Object.keys(productData);
 
   return (
     <div className="flex h-fit w-full flex-col gap-[15px] pb-[50px]">
-      {categoryList.map((category: string, index: number) => {
-        // console.log(category);
+      {cardList.map((category: string, index: number) => {
         return (
           <ProductCard
             key={index}
