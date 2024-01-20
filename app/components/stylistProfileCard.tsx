@@ -37,14 +37,14 @@ export default function StylistProfileCard({
       onClick={() => router.push(`/stylist?stylistKey=${stylistKey}`)}
       className="relative z-0 mb-[10px] flex h-fit w-full cursor-pointer flex-col bg-[#161616] px-[21.5px]"
     >
-      <div className="relative flex h-full w-full flex-row items-center justify-between">
+      <div className="relative flex h-full w-full flex-row justify-between gap-[2.5%]">
         {previewImages.map((current, index) => {
           return (
             <div
               key={index}
-              className="mr-[2.5%] flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]"
+              className="relative flex h-[250px] w-full flex-col items-start overflow-hidden rounded-[5px]"
             >
-              <img className="h-full w-full object-cover" src={current} />
+              <img className="h-[250px] w-full object-cover" src={current} />
             </div>
           );
         })}
