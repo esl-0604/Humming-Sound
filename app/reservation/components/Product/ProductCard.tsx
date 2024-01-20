@@ -1,9 +1,9 @@
 "use client";
 
 import BLOCK from "@/public/images/stylistintroduce/block.svg";
-import WHAT from "@/public/images/Reservation/what.svg";
-import HOW from "@/public/images/Reservation/how.svg";
-import ADD from "@/public/images/Reservation/add.svg";
+import WHAT from "@/public/images/reservation/what.svg";
+import HOW from "@/public/images/reservation/how.svg";
+import ADD from "@/public/images/reservation/add.svg";
 import Image from "next/image";
 import ProductRow from "./ProductRow";
 import { ProductType } from "@/app/utils/atom/productData";
