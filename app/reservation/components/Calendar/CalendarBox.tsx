@@ -9,7 +9,7 @@ import TimeSlot from "./TimeSlot";
 
 interface Props {}
 
-export default function CalendarCard({}: Props) {
+export default function CalendarBox({}: Props) {
   return (
     <div className="flex h-fit w-full flex-col text-[#E8E8E8]">
       <Image src={BLOCK} alt="block" />
@@ -18,7 +18,7 @@ export default function CalendarCard({}: Props) {
         <Image src={WHEN} alt="when" />
       </div>
 
-      <div className="text flex min-h-[45px] w-full flex-col font-default text-[15px] leading-[20px]">
+      <div className="flex min-h-[45px] w-full flex-col font-default text-[15px] leading-[20px]">
         <span>{formatMainText("선택하신 <b>대면 컨설팅의</b>")}</span>
         {formatMainText("날짜와 시간을 정해주세요!")}
       </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRecoilState } from "recoil";
-import ProductList from "./components/Product/ProductList";
 import Block from "./components/Block";
 import { ScrolledButton } from "../utils/atom/scrolledButton";
 import { useRouter } from "next/navigation";
@@ -10,7 +9,9 @@ import ARROW from "@/public/images/toggleClosed.svg";
 import ContinueButton from "./components/ContinueButton";
 import { ReservationContext } from "./context";
 import { useState } from "react";
-import CalendarCard from "./components/Calendar/CalendarCard";
+import ProductBox from "./components/Product/ProductBox";
+import CalendarBox from "./components/Calendar/CalendarBox";
+import CompleteBox from "./components/Complete/CompleteBox";
 
 export default function Reservation() {
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
@@ -59,7 +60,8 @@ export default function Reservation() {
           </div>
 
           <div className="w-full">
-            {showCalendar ? <CalendarCard /> : <ProductList />}
+            {/* {showCalendar ? <CalendarBox /> : <ProductBox />} */}
+            <CompleteBox />
           </div>
           <ContinueButton />
         </div>

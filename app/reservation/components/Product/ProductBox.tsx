@@ -3,7 +3,7 @@
 import ProductCard from "./ProductCard";
 import { ProductCategoryType, productData } from "@/app/utils/atom/productData";
 
-export default function ProductList() {
+export default function ProductBox() {
   const categoryList = Object.keys(productData);
   console.log(categoryList);
 
@@ -19,9 +19,6 @@ export default function ProductList() {
           />
         );
       })}
-
-      {/* <ProductCard title="how" />
-      <ProductCard title="add" /> */}
     </div>
   );
 }
