@@ -1,34 +1,20 @@
-import { useContext, useState } from "react";
-import ContentsDetail from "./ContentsDetail";
-import { useRecoilState } from "recoil";
-
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { contentsType } from "@/app/utils/atom/stylistTestData";
-import { ShowContentsDetail } from "@/app/utils/atom/showContentsDetail";
 import { formatHilightText } from "@/app/utils/function/formatHilightText";
-import { ContentContext } from "../../context";
 
 interface Props extends contentsType {}
 
 export default function ContentsCard({ id, title, text, image }: Props) {
-  const { showContentDetail, setShowContentDetail } =
-    useContext(ContentContext);
-  const [showContentData, setShowContentData] =
-    useRecoilState(ShowContentsDetail);
-
   const router = useRouter();
+  const stylistKey = useSearchParams().get("stylistKey");
+  console.log(id);
   return (
     <>
-      {showContentDetail ? <ContentsDetail /> : null}
+      {/* {showContentDetail ? <ContentsDetail /> : null} */}
       <div
         className="relative mt-[20px] h-[200px] w-full min-w-[280px] cursor-pointer"
         onClick={() => {
-          // setShowContentDetail(true);
-          setShowContentData({
-            stylistId: "testStylist",
-            contentId: id,
-          });
-          // router.push("./stylist/Contents");
+          router.push(`/stylist?stylistKey=${stylistKey}&contentId=${id}`);
         }}
       >
         <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">

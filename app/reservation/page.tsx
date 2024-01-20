@@ -2,9 +2,9 @@
 
 import { useRecoilState } from "recoil";
 import Block from "./components/Block";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ContinueButton from "./components/ContinueButton";
-import { ReservationContext, StepType } from "./context";
+import { ReservationContext } from "./context";
 import { useEffect, useState } from "react";
 import ProductBox from "./components/Product/ProductBox";
 import CalendarBox from "./components/Calendar/CalendarBox";
@@ -13,17 +13,33 @@ import { stylistData, stylistType } from "../utils/atom/stylistTestData";
 
 export default function Reservation() {
   const stylistKey = useSearchParams().get("stylistKey");
+  const stepKey = useSearchParams().get("step");
+  const router = useRouter();
 
-  const [step, setStep] = useState<StepType>({ step: "Product" });
-  const [productList, setProductList] = useState<object>({});
-  const [dateList, setDateList] = useState();
+  const [step, setStep] = useState<any>({ step: "Product" });
+  const [productList, setProductList] = useState<any>({});
+  const [dateList, setDateList] = useState<any>({});
+  const [totalCost, setTotalCost] = useState<number>(0);
 
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
 
   useEffect(() => {
-    console.log(productList);
+    // console.log(productList);
+    const CardList = Object.keys(productList);
+    let costs = 0;
+    CardList.forEach((card: any) => {
+      productList[card].forEach((product: any) => {
+        if (card === "optional") costs += product.cost * product.optionNum;
+        else costs += product.cost;
+      });
+    });
+    setTotalCost(costs);
   }, [productList]);
+
+  useEffect(() => {
+    if (stepKey) setStep({ step: stepKey });
+  }, [stepKey]);
 
   return (
     <ReservationContext.Provider
@@ -32,6 +48,8 @@ export default function Reservation() {
         setStep,
         productList,
         setProductList,
+        totalCost,
+        setTotalCost,
         dateList,
         setDateList,
       }}
@@ -69,7 +87,7 @@ export default function Reservation() {
           <div className="w-full">
             {step.step === "Product" ? (
               <ProductBox />
-            ) : step.step === "Date" ? (
+            ) : step.step === "Date1" || step.step === "Date2" ? (
               <CalendarBox />
             ) : (
               <CompleteBox />

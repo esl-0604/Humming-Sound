@@ -1,26 +1,47 @@
 "use client";
 import { ScrolledButton } from "@/app/utils/atom/scrolledButton";
-import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useContext, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { ReservationContext } from "../context";
+import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
 
 interface Props {}
 
 export default function ContinueButton({}: Props) {
-  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
-  const { step, setStep } = useContext(ReservationContext);
   const router = useRouter();
+  const stylistKey = useSearchParams().get("stylistKey");
+
+  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
+  const { step, setStep, totalCost, productList } =
+    useContext(ReservationContext);
+
   const ContinueClick = () => {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
-    if (step.step === "Product") setStep({ step: "Date" });
-    else if (step.step === "Date") setStep({ step: "Done" });
+    if (step.step === "Product") {
+      const CardList = Object.keys(productList);
+      if (!CardList.includes("consulting") || !CardList.includes("how"))
+        console.log("필수 상품을 선택해주세요!");
+      else {
+        if (productList["how"][0].title === "설문지")
+          router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
+        else router.push(`/reservation?stylistKey=${stylistKey}&step=Date1`);
+      }
+    } else if (step.step === "Date1") {
+      if (productList["shopping"]) {
+        if (productList["shopping"][0].title !== "제품 추천")
+          router.push(`/reservation?stylistKey=${stylistKey}&step=Date2`);
+        else router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
+      } else router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
+    } else if (step.step === "Date2")
+      router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
     else router.push("/");
   };
+
   return (
     <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
       <div
@@ -49,22 +70,27 @@ export default function ContinueButton({}: Props) {
             &gt;
           </p>
         ) : (
-          <p
-            className={` text-[16px] ${
-              isScrolled ? "font-main" : "font-default"
-            }`}
-          >
-            계속
-            <span
-              className={`whitespace-pre ${
-                isScrolled ? "font-highlight" : "font-main"
+          <div className="flex h-full w-full items-center justify-between px-[25px]">
+            <p className={` "font-main" text-[16px]`}>
+              ₩{addCommasToNumber(totalCost)}~
+            </p>
+            <p
+              className={` whitespace-nowrap text-[16px] ${
+                isScrolled ? "font-main" : "font-default"
               }`}
             >
-              {" "}
-              진행하기
-            </span>{" "}
-            &gt;
-          </p>
+              계속
+              <span
+                className={`whitespace-pre ${
+                  isScrolled ? "font-highlight" : "font-main"
+                }`}
+              >
+                {" "}
+                진행하기
+              </span>{" "}
+              &gt;
+            </p>
+          </div>
         )}
       </div>
     </div>
