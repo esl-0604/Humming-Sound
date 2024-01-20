@@ -7,12 +7,56 @@ import IntroBox from "./components/introBox";
 import LoginButton from "./components/loginButton";
 import StylistProfileCard from "./components/stylistProfileCard";
 import StylistApplyButton from "./components/stylistApplyButton";
+import { useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
-import { ScrolledButton } from "./utils/atom/scrolledButton";
+import { stylistData, stylistType } from "./utils/atom/stylistTestData";
+import StyleProcessButton from "./components/styleProcessButton";
+import { useRouter } from "next/navigation";
+import { IsLogined } from "./utils/atom/isLogined";
+import LocalStorage from "./utils/localstorage";
 
 export default function Home() {
+  const router = useRouter();
   const [showScrolledLoginButton, setShowScrolledLoginButton] = useState(false);
-  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
+  const [showScrolledApplyButton, setShowScrolledApplyButton] = useState(false);
+
+  const param = useSearchParams();
+  const kakaoCode = param.get("code");
+  const [isLogined, setIsLogined] = useRecoilState<boolean>(IsLogined);
+  const userId = LocalStorage.getItem("userId");
+
+  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (kakaoCode) {
+        try {
+          // Get Kakao Token
+          const loginResponse = await fetch("/api/kakao", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              authCode: kakaoCode,
+            },
+          });
+          const data = await loginResponse.json();
+
+          if (data) {
+            LocalStorage.setItem("userId", data.userId);
+            router.replace("/");
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [kakaoCode]);
+
+  useEffect(() => {
+    if (userId) setIsLogined(true);
+    else setIsLogined(false);
+  }, [userId]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,10 +67,28 @@ export default function Home() {
 
       if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
         setShowScrolledLoginButton(true);
-        setIsScrolled(true);
       } else {
         setShowScrolledLoginButton(false);
-        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+
+      const scrollThreshold = 0.8;
+
+      if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
+        setShowScrolledApplyButton(true);
+      } else {
+        setShowScrolledApplyButton(false);
       }
     };
 
@@ -41,12 +103,23 @@ export default function Home() {
     <main className="flex min-h-screen w-full flex-col items-center bg-[#161616] ">
       <IntroBox />
       <FilterBox />
-      <StylistProfileCard />
-      <StylistProfileCard />
-      <StylistProfileCard />
+      {Object.keys(stylists).map((key) => (
+        <StylistProfileCard
+          key={key}
+          stylistKey={key}
+          stylistName={stylists[key].name}
+          stylistComment={stylists[key].comment}
+        />
+      ))}
       <ContentBox />
-      <StylistApplyButton isScrolled={showScrolledLoginButton} />
-      <LoginButton isScrolled={showScrolledLoginButton} />
+      {showScrolledApplyButton ? (
+        <StylistApplyButton isScrolled={showScrolledLoginButton} />
+      ) : null}
+      {isLogined ? (
+        <StyleProcessButton isScrolled={showScrolledLoginButton} />
+      ) : (
+        <LoginButton isScrolled={showScrolledLoginButton} />
+      )}
     </main>
   );
 }

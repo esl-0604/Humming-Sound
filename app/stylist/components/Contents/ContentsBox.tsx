@@ -6,25 +6,29 @@ import {
 import ContentsCard from "./ContentsCard";
 import { useRecoilState } from "recoil";
 
-export default function ContentsBox() {
+interface Props {
+  stylistKey: string;
+}
+
+export default function ContentsBox({ stylistKey }: Props) {
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+  const stylist = stylists[stylistKey];
+
   return (
     <div className="flex w-full flex-col items-center overflow-scroll px-[30px] pb-[60px]">
-      {stylists["testStylist"]?.contentsList.map(
-        (content: contentsType, idx: number) => {
-          return (
-            <ContentsCard
-              key={idx}
-              id={content.id}
-              title={content.title}
-              text={content.text}
-              type={content.type}
-              image={content.image}
-              link={content.link}
-            />
-          );
-        },
-      )}
+      {stylist?.contentsList.map((content: contentsType, idx: number) => {
+        return (
+          <ContentsCard
+            key={idx}
+            id={content.id}
+            title={content.title}
+            text={content.text}
+            type={content.type}
+            image={content.image}
+            link={content.link}
+          />
+        );
+      })}
     </div>
   );
 }

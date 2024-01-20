@@ -1,15 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-interface LoginButtonProps {
+interface StyleProcessButtonProps {
   isScrolled?: boolean;
 }
-export default function LoginButton({ isScrolled }: LoginButtonProps) {
+export default function StyleProcessButton({
+  isScrolled,
+}: StyleProcessButtonProps) {
   const router = useRouter();
   return (
-    <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
+    <div className="sticky bottom-[30px] z-10 h-[50px] w-full px-[55px]">
       <div
-        onClick={() => router.push(`/login`)}
+        onClick={() => router.push(`/process`)}
         className={`flex h-[50px] w-full items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] ${
           isScrolled
             ? "bg-[#E8E8E8] transition duration-500 ease-in-out"
@@ -19,16 +21,9 @@ export default function LoginButton({ isScrolled }: LoginButtonProps) {
         <p
           className={`text-[16px] ${
             isScrolled ? "text-[#161617]" : "text-[#ffffff]"
-          } font-highlight`}
+          } `}
         >
-          로그인{" "}
-          <span
-            className={`font-main ${
-              isScrolled ? "text-[#161617]" : "text-[#ffffff]"
-            } `}
-          >
-            하러 가기 &gt;
-          </span>
+          스타일링 현황 바로가기 &gt;
         </p>
       </div>
     </div>

@@ -5,6 +5,7 @@ export interface stylistType {
   [stylistId: string]: {
     thumbnail: string;
     profile: string;
+    styleTags: string[];
     name: string;
     comment: string;
     avgGrade: string;

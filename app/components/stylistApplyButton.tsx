@@ -9,7 +9,7 @@ export default function StylistApplyButton({
 }: StylistApplyButtonProps) {
   const router = useRouter();
   return (
-    <div className="sticky bottom-[94px] z-10 h-[30px] w-full">
+    <div className="fixed bottom-[94px] z-10 h-[30px] w-full max-w-[480px]">
       <div
         onClick={() => router.push(`/stylistapply`)}
         className="flex h-[30px] w-full items-center justify-center"
