@@ -1,7 +1,6 @@
 "use client";
 
-import { useRecoilState } from "recoil";
-import ProductCard from "./productCard";
+import ProductCard from "./ProductCard";
 import { ProductCategoryType, productData } from "@/app/utils/atom/productData";
 
 export default function ProductList() {

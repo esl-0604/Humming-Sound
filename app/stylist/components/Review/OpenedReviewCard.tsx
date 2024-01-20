@@ -20,8 +20,7 @@ export default function OpenedReviewCard({
         </div>
 
         <div className="flex h-[15px] w-[60px] items-start justify-end whitespace-nowrap pt-[5px] text-[10px] font-extralight">
-          <span className="font-main">{grade} 점</span>
-          &nbsp;/ 5.0 점
+          <span className="whitespace-pre font-main">{grade} 점 </span>/ 5.0 점
         </div>
       </div>
 

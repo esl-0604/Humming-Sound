@@ -12,6 +12,7 @@ const config: Config = {
         highlight: ["Pretendard-Black"],
         main: ["Pretendard-Medium"],
         default: ["Pretendard-Thin"],
+        branding: ["SugarMagic-Branding"],
       },
       boxShadow: {
         button1:
@@ -23,6 +24,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-border": "rgba(232, 232, 232, 0.5)",
       },
     },
   },

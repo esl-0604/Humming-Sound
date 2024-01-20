@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import ContentsDetail from "./contentsDetail";
+import ContentsDetail from "./ContentsDetail";
 import { useRecoilState } from "recoil";
 
 import { useRouter } from "next/navigation";

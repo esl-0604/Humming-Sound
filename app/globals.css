@@ -17,6 +17,12 @@
   src: url("/fonts/Pretendard-Thin.ttf");
 }
 
+@font-face {
+  font-family: "SugarMagic";
+  src: url("/fonts/sugarmagicpersonaluseonly-jemyo.otf") format("opentype");
+  font-style: normal;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

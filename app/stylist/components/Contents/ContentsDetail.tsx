@@ -2,8 +2,8 @@
 
 import { useRecoilState } from "recoil";
 import Image from "next/image";
-import StickyBarV2 from "./stickyBar_v2";
-import ContentsDetailCard from "./contentsDetailCard";
+import StickyBarV2 from "./StickyBar_v2";
+import ContentsDetailCard from "./ContentsDetailCard";
 import { contentsType } from "@/app/utils/atom/stylistTestData";
 
 interface Props extends contentsType {}

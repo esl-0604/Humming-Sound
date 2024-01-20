@@ -23,7 +23,10 @@ export default function StickyBar({
           <div className="flex h-[15px] items-center text-[15px]">
             <span className="font-highlight">{stylist.name}</span>
 
-            <span className="font-extralight">&nbsp;스타일리스트</span>
+            <span className="whitespace-pre font-extralight">
+              {" "}
+              스타일리스트
+            </span>
           </div>
           <div className="mt-[5px] flex h-[10px] items-center font-main text-[10px] ">
             {stylist.comment}
