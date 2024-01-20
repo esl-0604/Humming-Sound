@@ -1,7 +1,6 @@
 "use client";
 
 import "./Calendar.css";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Calendar from "react-calendar";
 
@@ -38,10 +37,10 @@ export default function STCLCalendar({}: Props) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log({ width: ref.current?.offsetWidth });
-    console.log({ height: height });
-  }, [height]);
+  // useEffect(() => {
+  //   console.log({ width: ref.current?.offsetWidth });
+  //   console.log({ height: height });
+  // }, [height]);
 
   const formatShortWeekday = (locale: string | undefined, date: Date) => {
     return date.toLocaleDateString(locale, { weekday: "short" })[0];

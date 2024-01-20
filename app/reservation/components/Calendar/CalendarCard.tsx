@@ -5,6 +5,7 @@ import WHEN from "@/public/images/reservation/when.svg";
 import Image from "next/image";
 import { formatMainText } from "@/app/utils/function/formatMainText";
 import STCLCalendar from "./STCLCalendar";
+import TimeSlot from "./TimeSlot";
 
 interface Props {}
 
@@ -34,7 +35,13 @@ export default function CalendarCard({}: Props) {
             </div>
 
             <div className="h-[70px] w-full overflow-x-auto py-[20px]">
-              <div className="h-full w-[1000px] bg-slate-600"></div>
+              <div className="flex h-full w-[1000px] items-center gap-[15.12px]">
+                <TimeSlot />
+                <TimeSlot />
+                <TimeSlot />
+                <TimeSlot />
+                <TimeSlot />
+              </div>
             </div>
           </div>
         </div>
