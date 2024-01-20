@@ -112,12 +112,13 @@ abbr[title] {
 }
 
 /* 오늘 타일 */
-.react-calendar__tile--now {
+/* .react-calendar__tile--now {
   border-radius: 100%;
   border-width: 0.5px;
   border-color: #e8e8e8;
-}
+} */
 
 .react-calendar__month-view__days__day--neighboringMonth {
-  opacity: 20%;
+  opacity: 0%;
+  pointer-events: none;
 }

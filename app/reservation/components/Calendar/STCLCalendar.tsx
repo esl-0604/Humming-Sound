@@ -59,7 +59,7 @@ export default function STCLCalendar({}: Props) {
         formatMonthYear={formatMonthYear}
         next2Label={null}
         prev2Label={null}
-        showNeighboringMonth={false}
+        // showNeighboringMonth={false}
         view={"month"}
       />
     </div>
