@@ -7,7 +7,7 @@ interface Props extends contentsType {}
 export default function ContentsCard({ id, title, text, image }: Props) {
   const router = useRouter();
   const stylistKey = useSearchParams().get("stylistKey");
-  console.log(id);
+  // console.log(id);
   return (
     <>
       {/* {showContentDetail ? <ContentsDetail /> : null} */}

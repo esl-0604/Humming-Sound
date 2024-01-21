@@ -5,6 +5,7 @@ import { useContext, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { ReservationContext } from "../context";
 import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
+import PopUp from "./PopUp";
 
 interface Props {}
 
@@ -13,7 +14,7 @@ export default function ContinueButton({}: Props) {
   const stylistKey = useSearchParams().get("stylistKey");
 
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
-  const { step, setStep, totalCost, productList } =
+  const { step, setStep, totalCost, productList, popUp, setPopUp } =
     useContext(ReservationContext);
 
   const ContinueClick = () => {
@@ -24,9 +25,10 @@ export default function ContinueButton({}: Props) {
     });
     if (step.step === "Product") {
       const CardList = Object.keys(productList);
-      if (!CardList.includes("consulting") || !CardList.includes("how"))
+      if (!CardList.includes("consulting") || !CardList.includes("how")) {
         console.log("필수 상품을 선택해주세요!");
-      else {
+        setPopUp({ pop: true, type: "필수" });
+      } else {
         if (productList["how"][0].title === "설문지")
           router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
         else router.push(`/reservation?stylistKey=${stylistKey}&step=Date1`);
@@ -45,10 +47,10 @@ export default function ContinueButton({}: Props) {
   return (
     <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
       <div
-        className={`flex h-[50px] w-full cursor-pointer items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] ${
+        className={`flex h-[50px] w-full cursor-pointer items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out ${
           isScrolled
-            ? "bg-[#E8E8E8] text-[#161617] transition duration-500 ease-in-out"
-            : "bg-[rgba(0,0,0,0.10)] text-[#E8E8E8] transition duration-500 ease-in-out"
+            ? "bg-[#E8E8E8] text-[#161617]"
+            : "bg-[rgba(0,0,0,0.10)] text-[#E8E8E8]"
         }`}
         onClick={ContinueClick}
       >

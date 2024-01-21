@@ -21,7 +21,7 @@ export default function ContentsDetailCard({ title }: Props) {
   const StylistContent = stylists[
     stylistKey ? stylistKey : "testStylist"
   ].contentsList.find((content) => content.id === Number(contentId));
-  console.log(stylists);
+  // console.log(stylists);
 
   return (
     <div className="mt-[10px] flex w-full min-w-[280px] flex-col gap-[10px]">

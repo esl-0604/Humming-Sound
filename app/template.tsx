@@ -43,7 +43,7 @@ export default function RootTemplate({
       {children}
       {path !== "/" ? (
         <div
-          className="fixed top-[13px] z-40 cursor-pointer px-[13px]"
+          className="fixed top-[13px] z-30 cursor-pointer px-[13px]"
           onClick={() => {
             router.back();
           }}

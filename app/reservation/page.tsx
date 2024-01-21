@@ -10,6 +10,12 @@ import ProductBox from "./components/Product/ProductBox";
 import CalendarBox from "./components/Calendar/CalendarBox";
 import CompleteBox from "./components/Complete/CompleteBox";
 import { stylistData, stylistType } from "../utils/atom/stylistTestData";
+import PopUp from "./components/PopUp";
+
+export interface PopUpType {
+  pop: boolean;
+  type: string;
+}
 
 export default function Reservation() {
   const stylistKey = useSearchParams().get("stylistKey");
@@ -20,6 +26,8 @@ export default function Reservation() {
   const [productList, setProductList] = useState<any>({});
   const [dateList, setDateList] = useState<any>({});
   const [totalCost, setTotalCost] = useState<number>(0);
+
+  const [popUp, setPopUp] = useState<PopUpType>({ pop: false, type: "필수" });
 
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
@@ -52,9 +60,12 @@ export default function Reservation() {
         setTotalCost,
         dateList,
         setDateList,
+        popUp,
+        setPopUp,
       }}
     >
       <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
+        {popUp.pop ? <PopUp type={popUp.type} /> : null}
         <div className="relative flex h-full w-full flex-col px-[30px]">
           <div className="sticky top-0 z-30 h-fit w-full bg-[#161616]">
             <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">
