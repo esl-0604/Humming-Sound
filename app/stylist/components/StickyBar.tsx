@@ -1,6 +1,7 @@
 "use client";
 
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
+import { useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
 
 interface Props {
@@ -14,6 +15,7 @@ export default function StickyBar({
   setViewType,
   stylistKey,
 }: Props) {
+  const contentId = useSearchParams().get("contentId");
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
   return (
@@ -44,38 +46,41 @@ export default function StickyBar({
           </div>
         </div>
       </div>
-      <div className="flex h-[46px] w-full items-center">
-        <div
-          className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
-            viewType === "소개"
-              ? "font-highlight"
-              : "border-opacity-30 font-extralight "
-          }`}
-          onClick={() => setViewType("소개")}
-        >
-          소개
+
+      {contentId ? null : (
+        <div className="flex h-[46px] w-full items-center">
+          <div
+            className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
+              viewType === "소개"
+                ? "font-highlight"
+                : "border-opacity-30 font-extralight "
+            }`}
+            onClick={() => setViewType("소개")}
+          >
+            소개
+          </div>
+          <div
+            className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
+              viewType === "후기"
+                ? "font-highlight"
+                : "border-opacity-30 font-extralight "
+            }`}
+            onClick={() => setViewType("후기")}
+          >
+            후기
+          </div>{" "}
+          <div
+            className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
+              viewType === "컨텐츠"
+                ? "font-highlight"
+                : "border-opacity-30 font-extralight "
+            }`}
+            onClick={() => setViewType("컨텐츠")}
+          >
+            컨텐츠
+          </div>
         </div>
-        <div
-          className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
-            viewType === "후기"
-              ? "font-highlight"
-              : "border-opacity-30 font-extralight "
-          }`}
-          onClick={() => setViewType("후기")}
-        >
-          후기
-        </div>{" "}
-        <div
-          className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
-            viewType === "컨텐츠"
-              ? "font-highlight"
-              : "border-opacity-30 font-extralight "
-          }`}
-          onClick={() => setViewType("컨텐츠")}
-        >
-          컨텐츠
-        </div>
-      </div>
+      )}
     </div>
   );
 }

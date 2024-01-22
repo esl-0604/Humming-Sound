@@ -27,7 +27,7 @@ export default function ReviewCard({
           imageList={imageList}
         />
       ) : (
-        <div className="flex h-[95px] max-h-[95px] w-full cursor-pointer pt-[10px] shadow-md">
+        <div className="flex h-[99px] max-h-[95px] w-full cursor-pointer pt-[10px] shadow-md">
           <div className="flex h-full flex-1 flex-col">
             <div className="mb-[5px] flex h-[15px] w-full items-center font-highlight text-[15px]">
               {reviewer}
@@ -36,7 +36,7 @@ export default function ReviewCard({
               {date}
             </div>
             <div
-              className="flex h-[30px] w-full items-center pr-[23px] font-main text-[10px] opacity-[0.75]"
+              className="flex h-[34px] w-full items-center pr-[23px] font-main text-[12px] opacity-[0.75]"
               style={{
                 overflow: "hidden",
                 whiteSpace: "normal",
@@ -50,17 +50,19 @@ export default function ReviewCard({
             </div>
           </div>
 
-          <div className="flex h-full w-[60px] flex-col whitespace-nowrap pt-[5px]">
+          <div className="flex h-full w-[60px] flex-col justify-between whitespace-nowrap pt-[5px]">
             <div className="flex h-[15px] w-full items-start  justify-end text-[10px] font-extralight">
               <span className="whitespace-pre font-main ">{grade} 점 </span>/
               5.0 점
             </div>
-            <div className="flex h-[60px] w-full items-center justify-center overflow-hidden rounded-[5px] bg-white">
-              <img
-                className="h-full w-full object-cover"
-                src={imageList[0]}
-                alt="image"
-              />
+            <div className="flex h-[60px] w-full items-center justify-center overflow-hidden rounded-[5px] bg-transparent">
+              {imageList[0] ? (
+                <img
+                  className="h-full w-full object-cover"
+                  src={imageList[0]}
+                  alt="image"
+                />
+              ) : null}
             </div>
           </div>
         </div>

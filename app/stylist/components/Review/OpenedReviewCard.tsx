@@ -24,16 +24,16 @@ export default function OpenedReviewCard({
         </div>
       </div>
 
-      <div className="flex w-full items-start pb-[5px] font-main text-[10px] opacity-[0.75]">
+      <div className="flex w-full items-start pb-[5px] font-main text-[12px] opacity-[0.75]">
         {comment}
       </div>
 
       <div className="flex w-full flex-col items-center gap-[5px]">
-        {imageList.map((list: string, idx: number) => {
+        {imageList?.map((list: string, idx: number) => {
           return (
             <div
               key={idx}
-              className="flex h-[222px] w-full items-center justify-center overflow-hidden rounded-[5px]"
+              className="flex w-full items-center justify-center overflow-hidden rounded-[5px]"
             >
               <img
                 src={list}
