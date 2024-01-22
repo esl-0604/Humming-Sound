@@ -185,6 +185,42 @@ const bokyeomStylistContentImages = bokyeomStylistContentPngFiles.map(
 );
 // -------------------------------------------------------------------------
 
+// stylist_jenny ------------------------------------------------------------
+// 이미지 폴더 내의 모든 PNG 파일 가져오기
+const jennyStylistContext = require.context("./stylist_jenny", false, /\.png$/);
+const jennyStylistReviewContext = require.context(
+  "./stylist_jenny/review_images",
+  false,
+  /\.png$/,
+);
+const jennyStylistPersonalContext = require.context(
+  "./stylist_jenny/personal_images",
+  false,
+  /\.png$/,
+);
+const jennyStylistContentContext = require.context(
+  "./stylist_jenny/content_images",
+  false,
+  /\.png$/,
+);
+// context.keys()는 해당 폴더 내의 모든 파일 경로를 배열로 반환합니다.
+const jennyStylistPngFiles = jennyStylistContext.keys();
+const jennyStylistReviewPngFiles = jennyStylistReviewContext.keys();
+const jennyStylistPersonalPngFiles = jennyStylistPersonalContext.keys();
+const jennyStylistContentPngFiles = jennyStylistContentContext.keys();
+// pngFiles 배열을 사용하여 각 이미지를 import
+const jennyStylistImages = jennyStylistPngFiles.map(jennyStylistContext);
+const jennyStylistReviewImages = jennyStylistReviewPngFiles.map(
+  jennyStylistReviewContext,
+);
+const jennyStylistPersonalImages = jennyStylistPersonalPngFiles.map(
+  jennyStylistPersonalContext,
+);
+const jennyStylistContentImages = jennyStylistContentPngFiles.map(
+  jennyStylistContentContext,
+);
+// -------------------------------------------------------------------------
+
 export const stylistDB = {
   // testStylist: {
   //   profile: testStylistImages[0].default.src,
@@ -786,6 +822,18 @@ export const stylistDB = {
             content:
               "패션은 자기의 표현이자 선택이다. 누군가가 옷을 어떻게 입어야 할지 모르겠다고 말한다면 거울을 보고 자기 자신부터 연구하라고 이야기 하겠다.이처럼 패션은 자신을 꾸미는 사치스러운 소비이기전,많은 유명디자이너들의 생각처럼 철학적 관점으로 보게되면 패션은 삶의 방향성, 가치관이다. 자신이 주로 생각하고 추구하는 삶의 방향성에 맞게 옷을 입게 되기 때문이다. 직업군에 따라,취향에 따라, 지역, 성별, 나이대에 따라 패션은 다르다. 이 부분을 곰곰히 생각하다보면 자신만의 생각하는 인생이 어떤것인지 느낄 수 있을 것이다",
           },
+          {
+            subTitle: "나를 아는 것이 우선이다.",
+            images: [bokyeomStylistContentImages[1].default.src],
+            content:
+              "그리고 **<나만의 착붙스타일>**을 찾는다 할 때 먼저 자신에 대한 정보가 많아야한다. 내가 추구하는 이미지에 대한 정보, 나의 객관적인 분위기에 대한 정보, 나의 채형에 대한 정보, 나의 피부톤에 대한 정보, ...등등 다양한 정보가 있어야 내가 나에게 패션을 입힐 수 있는 시작점이 된다. 그리고 스타일은 '짠'하고 만들어지는건 아니다. 모든 예술도 그렇듯, **감흥 & 영감 -> 모방 -> 변형 -> 재창조**: 보고 느낀 후 그것을 유사하게 나의 방식대로 재창조하는 것! **<나만의 착붙스타일>**을 찾는 방식과도 묘하게 닮아있다. 패션은 매번 완전 새로운것을 창조해내는것이 아니라, 컬러와, 핏, 소재들이 조금씩 변화하면서 새로운 요소가 접목된다. 오래 전 스타일(레트로)이 다시 트랜드를 이끌기도 한다.",
+          },
+          {
+            subTitle: "최대한 많은 스타일을 시도해보자.",
+            images: [bokyeomStylistContentImages[2].default.src],
+            content:
+              "이처럼 <나만의 착붙스타일>이란? 많이 입어보고 느껴보면서 나라는 사람은 어떤 사람일지 생각해보고 그 정보와 연결된 스타일을 모방하여 입어도보며 나의 분위기와 개성, 체형에 맞는 스타일을 찾는 것! 패션은 나를 표현하는 수단이라고 하는데, 그러나 많은 사람들은 말과 행동으로 나를 표현할 수 있다고 생각한다. 그러나 패션을 통하여 나의 내면의 생각을 나타낼 수 있다. 자신감 넘치는 나 --> 당당한 분위기와 어울리는 아이템 표현 (셔츠, 구두, 시계...) 섬세하고 따뜻한 나 --> 부드러운 컬러와 소재의 스타일 표현 세련되고 시크한 나 --> 모노톤의 심플한 룩으로 표현 그렇다면 나는 어떤 매력과 분위기를 가진 사람일지 생각해보는거 어떨까? 그렇게 해서 <나만의 착붙스타일> 찾아보자!",
+          },
         ],
       },
       {
@@ -794,6 +842,125 @@ export const stylistDB = {
         text: "자신을 호감있는, 매력있는 사람으로 만들고 싶다면",
         type: "image",
         image: bokyeomStylistContentImages[2].default.src,
+        link: "",
+      },
+    ],
+  },
+  jennyStylist: {
+    profile: jennyStylistImages[0].default.src,
+    thumbnail: jennyStylistImages[1].default.src,
+    name: "유제니",
+    comment: "가장 나다운 나를 찾아가는 여정",
+    avgGrade: "5.0",
+    consultingAmount: "6",
+    styleTags: ["미니멀", "클래식", "지적인"],
+    aboutMe: [
+      "(현) 슈어미 대표, 슈어아이엠 공동대표",
+      "국내 남성복 패션브랜드 수석디자이너",
+      "퍼스널컬러 컨설턴트 1급",
+      "동행쇼핑 및 퍼스널컬러 진단 다수 진행 (유투버, 국회의원, 기업대표, 기업임원 등)",
+      "동(전) 패션그룹형지 디자인팀",
+      "(전) LF 디자인팀",
+      "(전) 세정 I&C 디자인팀",
+    ],
+    forWho: [
+      "자신의 매력포인팅 코디를 찾고 싶었던 직장인",
+      "전문성을 보여주고 싶은 전문직 종사자",
+      "취업을 위해 자신감있는 면접복이 필요했던 분",
+      "소개팅룩, 데이트룩 (매력 어필)",
+      "좋은 이미지를 만들고 싶은 사업가",
+      "신뢰감을 주고 싶은 영업직 종사자",
+      "숨겨진 패션감각을 찾고 싶었던 컴퓨터프로그래밍 관련 IT 계열 종사자",
+    ],
+    phillosophy: [
+      "저는 여러분의 목적에 따른 니즈, 그리고 그에 대한 해소로써 스타일링을 도와드립니다.",
+      "",
+      "어떤 분은 자기에게 잘어울리는 스타일을 찾아서, 남의 시선과 상관없이 입고 싶으신 분이 계실 수 있고, ",
+      "어떤 분은 이성분들께 어필이 될 만한 외적인 요소를 업그레이드하기 위해서 스스로를 꾸미고 싶으신 분도 계실 수 있고, ",
+      "어떤 분은 옷을 제대로 사입고 다니신 경험이 없어서 자신에 직업에 맞는 코디들을 알맞게 갖추었으면 하시는 분들도 계실 수 있고, ",
+      "어떤 분은 막연히 입을 옷이 없어서 잘입는다는 느낌보다는 가성비 좋고 범용성 넓게 입을 만한 옷들을 찾고 분이 계실 수도 있습니다. ",
+      "스타일링을 신청해주시는 분들의 니즈는 각각 다 다르기 때문에, ",
+      "일반화 할 수 없고 각각에 목적에 맞게 맞춤화 되어야 한다고 생각하며, ",
+      "그에 맞게 맞춤형 스타일링을 도와드리고 있습니다.",
+      "",
+      "많은 분들의 코디를 만들어드리면서 느낀 점은, 저의 개인적인 취향을 최대한 빼고 고객님의 니즈를 올바르게 반영하는 것이 서비스만족도에 있어서도 좋은 것 같다고 느꼈고, 여기서 올바르게 반영한다라는 것은 고객님께서 간과하고 계시는 부분이나 권장드리는 사항들을 언급드리고, 절충하는 과정을 충분히 거쳐 스타일링에 반영하는 의미합니다.",
+    ],
+    personalImageList: jennyStylistPersonalImages.map(
+      (curr) => curr.default.src,
+    ),
+    reviewList: [
+      {
+        reviewer: "김**",
+        date: "23.12.23",
+        grade: "5.0",
+        comment:
+          "패알못으로서 무난한 옷들만 구매하다가 제 스타일을 찾고 싶어서 신청했어요! 패션컨설팅을 진행하는 곳이 많지 않아서 검색을 많이 하다가 고수님 컨설팅의 좋은 리뷰들을 보고 홀린 듯이 신청했는데 결론적으로 정말 만족하고 강추합니다>.< \\n저는 단순히 체형, 퍼스널컬러에 맞는 컨설팅을 해주시는줄 알았는데 체형과 퍼스널컬러는 물론이고 대화를 통해서 제 이미지를 파악하시고 거기에 맞는 코디와 브랜드를 추천해 주시더라구요. 너무 획기적이고 좋았어요!! 특히 브랜드 추천은 자아 없이 지그재그, 무신사 상위 랭킹 옷만 사던 제게 신세계였어요,,, 평생 모르고 살 뻔했는데 너무 제 스타일의 옷이어서 당분간 지갑 조심해야 할 것 같아요 (이미 하나 지름) 그리고 내향적인 성격 때문에 초면에 대화를 잘 못하는 편인데도 고수님께서 대화를 편하게 이끌어주시는 덕분 에 시간이 후딱 가있었고 나중엔 언니라고 부르고 싶을 정도로 깊은 대화를 하고 있더라구여,,, 고민하지 마시고 신청하셨음 좋겠어요! 상담 너무 감사드리고 또 뵈어용! 새해 복 많이 받으세요~~",
+        imageList: [jennyStylistReviewImages[0].default.src],
+      },
+      {
+        reviewer: "남**",
+        date: "23.10.25",
+        grade: "5.0",
+        comment:
+          "오늘 퍼스널컬러, 패션컨설팅 받았습니다 일단 아주 대만족합니다. 나의 옷입을때 장점,단점을 제가 생각할때 뭔가 감은 있지만, 정확히 알지 못하였는데 퍼스널컬러 패션컨설팅을 듣고 아 이래서 내가 이 옷 입었을 때 이런 느낌이 들었구나 정확히 알려주셨습니다. 최대한 세련되며 고급스러운 분위기를 풍기는게 저의 목표였는데 생각보다 어렵지 않게 이룰 수 있을것같아서 너무 좋습니다. 오늘 여성을 만났는데 패션과 얼굴에 조화가 잘 맞아 엑소 수호 닮은거같다고해서 처음 듣는 연예인이라 누군지 몰라, 검색해보니 내가 느끼게 하고 싶었던 고급스러운 분위기라 완전 1000프로 만족합니다. 무한 경쟁시대에서 나의 최대의 외모 장점을 끌어낼수있는 무조건 들어야 되는 강의 !!",
+        imageList: [jennyStylistReviewImages[1].default.src],
+      },
+      {
+        reviewer: "백**",
+        date: "23.10.25",
+        grade: "5.0",
+        comment:
+          "선생님이 너무 친절하시구? 패션도 관심 많아서 이것저것 물어봤는데도 다 대답 해주시고. 완전 고민 해결입니다!! 제 스타일을 더 찾을 수 있는 기회가 됐고 다음부터 쇼핑에 바로 참고 할 수 있게끔 딱 뭐가 잘 어울리고 이건 좀 피해야한다 자세한 설명 너무 감동이었어요!~ 분위기도 좋고 너무 재밌었습니다 감사합니다!!:)",
+        imageList: [],
+      },
+      {
+        reviewer: "황**",
+        date: "23.10.25",
+        grade: "5.0",
+        comment:
+          "편안한 분위기에서 상담이 진행되었습니다! 평소에 애매해서 고민되었던 부분들을 전문적으로 알기 쉽게 설명해주셔서 궁금했던 부분이 모두 해결되었습니다! 상담 진행 전 진행 주제에 대한 개념과 이유를 범용적으로 알 수 있는 예시로 설명해주셔서 개념이 어느 정도 이해된 상태로 상담이 진행되었습니다. 덕분에 이해도도 올라간 느낌이 들었습니다! 정말 유익하고 도움되는 내용이었습니다. 정말 강력하게 추천합니다ㅠㅠ",
+        imageList: [],
+      },
+      {
+        reviewer: "하**",
+        date: "23.10.25",
+        grade: "5.0",
+        comment:
+          "패션에 대해서 알고싶었고 특히 저의 스타일에 맞춤형 옷을 입고 싶었습니다. 리뷰 및 고용횟수등 인증된 그대로 입니다. 저도 만점 만족도 드리며 전문가답게 정확하게 저의 강점을 살려주셨습니다. 온라인컨설팅도 도움되었지만 같이 동행하면서 하시는걸 강추드립니다. 이분께 진행하면 후회는 없습니다. 이상입니다.",
+        imageList: [],
+      },
+      {
+        reviewer: "황**",
+        date: "23.10.25",
+        grade: "5.0",
+        comment:
+          "처음에 만나면 대화로 시작해서 사람의 성향을 끌어내시고 그에 대한 얘기들로 시간가는줄 몰랐는데 그러는 사이 저를 아주 잘 간파하시고 그에 맞는 니즈를 충족시켜주십니다. 적당히 어느선에서 타협하지 않고 저와 쌤 모두 만족하는 코디를 끝끝내 찾았고 아주 만족스러운 결과물을 얻게 되었습니다. 후에 남겨주시는 결과물또한 차후 혼자서 옷을 고름에 있어서 좋은 가이드라인을 제시해주심으로써 패션레벨 0에서 한단계 두단계 세단계 진화할 수 있을거같습니다. 보통 초반중간마무리 중에 한곳이라도 부족한부분이 생기기마련인데 그런부분없이 만족했습니다! 이미지 변화를 시도하고 싶으신 분들께 추천드립니다!",
+        imageList: [],
+      },
+    ],
+    contentsList: [
+      {
+        id: 0,
+        title: "<b>나만의 착붙스타일 찾기?! <나처럼 옷입기></b>",
+        text: "패션은 자기의 표현이자 선택이다.",
+        type: "image",
+        image: jennyStylistContentImages[0].default.src,
+        link: "",
+        content: [
+          {
+            subTitle: "패션은 자기의 표현이자 선택이다. ",
+            images: [jennyStylistContentImages[0].default.src],
+            content:
+              "패션은 자기의 표현이자 선택이다. 누군가가 옷을 어떻게 입어야 할지 모르겠다고 말한다면 거울을 보고 자기 자신부터 연구하라고 이야기 하겠다.이처럼 패션은 자신을 꾸미는 사치스러운 소비이기전,많은 유명디자이너들의 생각처럼 철학적 관점으로 보게되면 패션은 삶의 방향성, 가치관이다. 자신이 주로 생각하고 추구하는 삶의 방향성에 맞게 옷을 입게 되기 때문이다. 직업군에 따라,취향에 따라, 지역, 성별, 나이대에 따라 패션은 다르다. 이 부분을 곰곰히 생각하다보면 자신만의 생각하는 인생이 어떤것인지 느낄 수 있을 것이다",
+          },
+        ],
+      },
+      {
+        id: 1,
+        title: "<b>호감을 주는 이미지는? <나처럼 옷입기></b>",
+        text: "자신을 호감있는, 매력있는 사람으로 만들고 싶다면",
+        type: "image",
+        image: jennyStylistContentImages[2].default.src,
         link: "",
       },
     ],
