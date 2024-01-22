@@ -109,7 +109,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
 
       <div className="relative flex h-[211px] w-full flex-col items-center px-[21.5px]">
         <div className="mb-[10px] h-[1px] w-[100px] bg-[#E8E8E8]" />
-        <Image
+        {/* <Image
           src={ARROW}
           alt="leftarrow"
           className="absolute left-[30px] top-[106.5px] z-20 cursor-pointer"
@@ -118,14 +118,14 @@ export default function IntroduceBox({ stylistKey }: Props) {
           src={ARROW}
           alt="rightarrow"
           className="absolute right-[30px] top-[106.5px] z-20 rotate-180 cursor-pointer"
-        />
+        /> */}
 
         <div className="relative flex h-[200px] w-full gap-[10px] overflow-x-scroll">
           {stylist.personalImageList.map((list: string, idx: number) => {
             return (
               <div
                 key={idx}
-                className="relative h-full w-[110px] flex-none rounded-[5px]"
+                className="relative h-full w-[110px] flex-none overflow-hidden rounded-[5px]"
               >
                 <div className="to-[#161616]-0% absolute top-0 z-10 h-[200px] w-[110px] bg-gradient-to-t from-[#161616]" />
                 <img

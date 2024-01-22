@@ -14,15 +14,21 @@ interface Props {}
 export default function CalendarBox({}: Props) {
   const { step, productList, dateList, setDateList } =
     useContext(ReservationContext);
-  const [dateSelected, setDateSelected] = useState<boolean>(false);
   const [dateOfWhat, setDateOfWhat] = useState<string>("");
 
+  const [dateSelected, setDateSelected] = useState<boolean>(false);
+  const [timeSelected, setTimeSelected] = useState<boolean>(false);
+
   useEffect(() => {
+    // step == Date1
     if (step.step === "Date1") {
       if (productList["how"]) {
         setDateOfWhat(productList["how"][0].title + " 컨설팅");
       }
-    } else {
+    }
+
+    // step == Date2
+    else {
       if (productList["shopping"]) {
         setDateOfWhat(productList["shopping"][0].title);
       }
@@ -44,7 +50,9 @@ export default function CalendarBox({}: Props) {
 
       <div className="flex h-fit w-full flex-col">
         <div className="flex min-h-[30px] w-full items-end justify-center whitespace-pre font-default text-[10px]">
-          {formatMainText("<b>최소</b> 1시간 / <b>최대</b> 3시간")}
+          {step.step === "Date1"
+            ? formatMainText("<b>최소</b> 1시간 / <b>최대</b> 2시간")
+            : formatMainText("<b>최소</b> 1시간 / <b>최대</b> 4시간")}
         </div>
 
         <div className="relative flex h-[390px] w-full">

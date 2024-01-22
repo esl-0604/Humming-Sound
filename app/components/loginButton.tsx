@@ -1,11 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { ScrolledButton } from "../utils/atom/scrolledButton";
+import { useRecoilState } from "recoil";
 
-interface LoginButtonProps {
-  isScrolled?: boolean;
-}
-export default function LoginButton({ isScrolled }: LoginButtonProps) {
+interface LoginButtonProps {}
+export default function LoginButton({}: LoginButtonProps) {
   const router = useRouter();
+  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
   return (
     <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
       <div

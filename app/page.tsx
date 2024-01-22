@@ -14,18 +14,23 @@ import StyleProcessButton from "./components/styleProcessButton";
 import { useRouter } from "next/navigation";
 import { IsLogined } from "./utils/atom/isLogined";
 import LocalStorage from "./utils/localstorage";
+import {
+  ScrolledButton,
+  ScrolledStylistButton,
+} from "./utils/atom/scrolledButton";
 
 export default function Home() {
   const router = useRouter();
-  const [showScrolledLoginButton, setShowScrolledLoginButton] = useState(false);
-  const [showScrolledApplyButton, setShowScrolledApplyButton] = useState(false);
+  const [isStylistScrolled, setIsStylistScrolled] = useRecoilState(
+    ScrolledStylistButton,
+  );
+  const [isLogined, setIsLogined] = useRecoilState<boolean>(IsLogined);
+  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
 
   const param = useSearchParams();
   const kakaoCode = param.get("code");
-  const [isLogined, setIsLogined] = useRecoilState<boolean>(IsLogined);
   const userId = LocalStorage.getItem("userId");
 
-  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   useEffect(() => {
     const fetchData = async () => {
       if (kakaoCode) {
@@ -58,47 +63,6 @@ export default function Home() {
     else setIsLogined(false);
   }, [userId]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
-
-      const scrollThreshold = 0.9;
-
-      if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
-        setShowScrolledLoginButton(true);
-      } else {
-        setShowScrolledLoginButton(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
-
-      const scrollThreshold = 0.8;
-
-      if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
-        setShowScrolledApplyButton(true);
-      } else {
-        setShowScrolledApplyButton(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <main className="flex min-h-screen w-full flex-col items-center bg-[#161616] ">
       <IntroBox />
@@ -112,14 +76,8 @@ export default function Home() {
         />
       ))}
       <ContentBox />
-      {showScrolledApplyButton ? (
-        <StylistApplyButton isScrolled={showScrolledLoginButton} />
-      ) : null}
-      {isLogined ? (
-        <StyleProcessButton isScrolled={showScrolledLoginButton} />
-      ) : (
-        <LoginButton isScrolled={showScrolledLoginButton} />
-      )}
+      {isStylistScrolled ? <StylistApplyButton /> : null}
+      {isLogined ? <StyleProcessButton /> : <LoginButton />}
     </main>
   );
 }

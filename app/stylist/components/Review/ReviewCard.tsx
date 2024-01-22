@@ -55,12 +55,14 @@ export default function ReviewCard({
               <span className="whitespace-pre font-main ">{grade} 점 </span>/
               5.0 점
             </div>
-            <div className="flex h-[60px] w-full items-center justify-center overflow-hidden rounded-[5px] bg-white">
-              <img
-                className="h-full w-full object-cover"
-                src={imageList[0]}
-                alt="image"
-              />
+            <div className="flex h-[60px] w-full items-center justify-center overflow-hidden rounded-[5px] bg-transparent">
+              {imageList[0] ? (
+                <img
+                  className="h-full w-full object-cover"
+                  src={imageList[0]}
+                  alt="image"
+                />
+              ) : null}
             </div>
           </div>
         </div>

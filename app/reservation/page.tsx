@@ -28,12 +28,13 @@ export default function Reservation() {
   const [totalCost, setTotalCost] = useState<number>(0);
 
   const [popUp, setPopUp] = useState<PopUpType>({ pop: false, type: "필수" });
+  const [firstClick, setFirstClick] = useState<boolean>(true);
 
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
 
   useEffect(() => {
-    // console.log(productList);
+    console.log(productList);
     const CardList = Object.keys(productList);
     let costs = 0;
     CardList.forEach((card: any) => {
@@ -62,6 +63,8 @@ export default function Reservation() {
         setDateList,
         popUp,
         setPopUp,
+        firstClick,
+        setFirstClick,
       }}
     >
       <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">

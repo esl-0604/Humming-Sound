@@ -43,13 +43,16 @@ export default function STCLCalendar({ setDateSelected }: Props) {
       .toLowerCase();
   };
 
-  const { productList, dateList, setDateList } = useContext(ReservationContext);
+  const { step, productList, dateList, setDateList } =
+    useContext(ReservationContext);
   const today = new Date();
   const [date, setDate] = useState<Date | null>(null);
 
   console.log(date?.toLocaleString());
 
   const DatePick = () => {
+    if (step.step === "Date1") {
+    }
     let updateDate = { ...dateList };
   };
   return (

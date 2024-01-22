@@ -1,7 +1,10 @@
 "use client";
 
 import { useRecoilState } from "recoil";
-import { ScrolledButton } from "./utils/atom/scrolledButton";
+import {
+  ScrolledButton,
+  ScrolledStylistButton,
+} from "./utils/atom/scrolledButton";
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
@@ -14,15 +17,27 @@ export default function RootTemplate({
 }) {
   // 1. 플로팅 버튼 스크롤 감지 ----------------------------------------------
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
+  const [isStylistScrolled, setIsStylistScrolled] = useRecoilState(
+    ScrolledStylistButton,
+  );
 
   useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
 
-      const scrollThreshold = 0.9;
+      // console.log({
+      //   scrollTop: scrollTop,
+      //   scrollHeight: scrollHeight,
+      //   clientHeight: clientHeight,
+      // });
+      if (scrollHeight - clientHeight <= scrollTop + 220) {
+        setIsStylistScrolled(true);
+      } else {
+        setIsStylistScrolled(false);
+      }
 
-      if (scrollTop + clientHeight >= scrollHeight * scrollThreshold) {
+      if (scrollHeight - clientHeight <= scrollTop + 120) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);

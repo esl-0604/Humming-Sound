@@ -29,11 +29,11 @@ export default function OpenedReviewCard({
       </div>
 
       <div className="flex w-full flex-col items-center gap-[5px]">
-        {imageList.map((list: string, idx: number) => {
+        {imageList?.map((list: string, idx: number) => {
           return (
             <div
               key={idx}
-              className="flex h-[222px] w-full items-center justify-center overflow-hidden rounded-[5px]"
+              className="flex w-full items-center justify-center overflow-hidden rounded-[5px]"
             >
               <img
                 src={list}

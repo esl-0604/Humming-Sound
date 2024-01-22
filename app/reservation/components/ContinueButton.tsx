@@ -14,7 +14,7 @@ export default function ContinueButton({}: Props) {
   const stylistKey = useSearchParams().get("stylistKey");
 
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
-  const { step, setStep, totalCost, productList, popUp, setPopUp } =
+  const { step, totalCost, productList, setPopUp, firstClick, setFirstClick } =
     useContext(ReservationContext);
 
   const ContinueClick = () => {
@@ -23,24 +23,89 @@ export default function ContinueButton({}: Props) {
       left: 0,
       behavior: "smooth",
     });
+
+    let nextStep = "";
+    const defaultURL = `/reservation?stylistKey=${stylistKey}&step=`;
+    const CardList = Object.keys(productList);
+
+    // 현재 == product 일 경우,
     if (step.step === "Product") {
-      const CardList = Object.keys(productList);
+      // 1) 필수 옵션 선택 안함 (consulting && how) --> 팝업창 : 필수
       if (!CardList.includes("consulting") || !CardList.includes("how")) {
         console.log("필수 상품을 선택해주세요!");
         setPopUp({ pop: true, type: "필수" });
       } else {
-        if (productList["how"][0].title === "설문지")
-          router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
-        else router.push(`/reservation?stylistKey=${stylistKey}&step=Date1`);
+        // 2) 필수 옵션 선택 O && 선택 옵션 하나도 안함 최초 시도 --> 팝업창 : 옵션
+        if (
+          !CardList.includes("optional") &&
+          !CardList.includes("shopping") &&
+          firstClick
+        ) {
+          console.log("옵션 상품들을 다시 한번 살펴봐주세요!");
+          setPopUp({ pop: true, type: "옵션" });
+          setFirstClick(false);
+        }
+
+        // 3) 필수 옵션 선택 O && (재시도 or 선택 옵션 O)
+        else {
+          // 3-1) how == 비대면 or 대면 --> nextStep : Date1
+          if (productList["how"][0].title !== "설문지") {
+            nextStep = "Date1";
+            router.push(defaultURL + nextStep);
+          }
+
+          // 3-2) how == 설문지
+          else {
+            // 3-1-1) shopping == 온라인 or 오프라인 --> nextStep : Date2
+            if (
+              CardList.includes("shopping") &&
+              productList["shopping"][0].title !== "제품 추천"
+            ) {
+              nextStep = "Date2";
+              router.push(defaultURL + nextStep);
+            }
+
+            // 3-1-2) shopping 없음 --> nextStep : Done
+            // 3-1-3) shopping == 제품 추천 --> nextStep : Done
+            else {
+              nextStep = "Done";
+              router.push(defaultURL + nextStep);
+            }
+          }
+        }
       }
-    } else if (step.step === "Date1") {
-      if (productList["shopping"]) {
-        if (productList["shopping"][0].title !== "제품 추천")
-          router.push(`/reservation?stylistKey=${stylistKey}&step=Date2`);
-        else router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
-      } else router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
-    } else if (step.step === "Date2")
-      router.push(`/reservation?stylistKey=${stylistKey}&step=Done`);
+    }
+
+    // 현재 == date1 일 경우,
+    else if (step.step === "Date1") {
+      // 1) shopping 상품 미선택 --> nextStep : Done
+      if (!CardList.includes("shopping")) {
+        nextStep = "Done";
+        router.push(defaultURL + nextStep);
+      }
+
+      // 2) shopping 상품 선택 && shopping == 제품 추천 --> nextStep : Done
+      else {
+        if (productList["shopping"][0].title === "제품 추천") {
+          nextStep = "Done";
+          router.push(defaultURL + nextStep);
+        }
+
+        // 3) shopping 상품 선택 && shopping == 온라인 동행쇼핑 or 오프라인 퍼스널 쇼핑 --> nextStep : Date2
+        else {
+          nextStep = "Date2";
+          router.push(defaultURL + nextStep);
+        }
+      }
+    }
+
+    // 현재 == date2 일 경우, nextStep : Done
+    else if (step.step === "Date2") {
+      nextStep = "Done";
+      router.push(defaultURL + nextStep);
+    }
+
+    // 현재 == done 일 경우, main으로 라우팅
     else router.push("/");
   };
 
