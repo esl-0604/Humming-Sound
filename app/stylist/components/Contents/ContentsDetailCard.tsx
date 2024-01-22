@@ -32,7 +32,7 @@ export default function ContentsDetailCard({
 
       <div className="flex w-full flex-col gap-[5px]">
         <div className="font-highlight text-[30px] ">{subTitle}</div>
-        <div className=" w-full text-[10px] font-extralight ">{content}</div>
+        <div className=" w-full text-[12px] font-extralight ">{content}</div>
       </div>
 
       <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">

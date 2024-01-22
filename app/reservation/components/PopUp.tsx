@@ -39,7 +39,7 @@ export default function PopUp({ type }: Props) {
             animationData={
               type === "필수"
                 ? ESSENTIAL
-                : type === "선택"
+                : type === "옵션"
                   ? OPTIONAL
                   : NOCONTENTS
             }

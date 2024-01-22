@@ -24,7 +24,7 @@ export default function OpenedReviewCard({
         </div>
       </div>
 
-      <div className="flex w-full items-start pb-[5px] font-main text-[10px] opacity-[0.75]">
+      <div className="flex w-full items-start pb-[5px] font-main text-[12px] opacity-[0.75]">
         {comment}
       </div>
 

@@ -19,7 +19,7 @@ export default function StickyBar({
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
   return (
-    <div className="sticky top-0 z-20 flex w-full flex-col whitespace-nowrap bg-[#161616]">
+    <div className="sticky top-0 z-30 flex w-full flex-col whitespace-nowrap bg-[#161616]">
       <div className="flex h-[65px] w-full justify-between px-[30px] pt-[10px]">
         <div className="flex flex-col">
           <div className="flex h-[15px] items-center text-[15px]">

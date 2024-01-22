@@ -10,7 +10,7 @@ import ARROW from "@/public/images/Arrow/smallArrow.svg";
 import DONUT from "@/public/images/stylistintroduce/donut.svg";
 import Image from "next/image";
 import { useRecoilState } from "recoil";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import { formatHilightText } from "@/app/utils/function/formatHilightText";
 
@@ -21,6 +21,21 @@ interface Props {
 export default function IntroduceBox({ stylistKey }: Props) {
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
+  const [open, setOpen] = useState<boolean>(false);
+  const [focusedDiv, setFocusedDiv] = useState<number>(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      const targetElement = ref.current?.children[focusedDiv];
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth", // 스무스한 스크롤 효과
+          block: "center", // 최상단으로 스크롤
+        });
+      }
+    }
+  }, [open]);
   return (
     <div className="flex w-full flex-col pb-[60px]">
       <div className="flex w-full flex-col px-[30px]">
@@ -107,7 +122,12 @@ export default function IntroduceBox({ stylistKey }: Props) {
         </div>
       </div>
 
-      <div className="relative flex h-[211px] w-full flex-col items-center px-[21.5px]">
+      <div
+        className="relative flex w-full flex-col items-center px-[21.5px]"
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
         <div className="mb-[10px] h-[1px] w-[100px] bg-[#E8E8E8]" />
         {/* <Image
           src={ARROW}
@@ -120,14 +140,25 @@ export default function IntroduceBox({ stylistKey }: Props) {
           className="absolute right-[30px] top-[106.5px] z-20 rotate-180 cursor-pointer"
         /> */}
 
-        <div className="relative flex h-[200px] w-full gap-[10px] overflow-x-scroll">
+        <div
+          ref={ref}
+          className={`relative flex w-full gap-[10px] ${
+            open ? "flex-col items-center" : "h-[200px] overflow-x-scroll"
+          }`}
+        >
           {stylist.personalImageList.map((list: string, idx: number) => {
             return (
               <div
                 key={idx}
-                className="relative h-full w-[110px] flex-none overflow-hidden rounded-[5px]"
+                onClick={() => setFocusedDiv(idx)}
+                className={`relative flex-none overflow-hidden rounded-[5px] ${
+                  open ? "w-full" : "h-full w-[110px]"
+                }`}
               >
-                <div className="to-[#161616]-0% absolute top-0 z-10 h-[200px] w-[110px] bg-gradient-to-t from-[#161616]" />
+                {open ? null : (
+                  <div className="to-[#161616]-0% absolute top-0 z-10 h-full w-full bg-gradient-to-t from-[#161616]" />
+                )}
+
                 <img
                   src={list}
                   alt="image"
