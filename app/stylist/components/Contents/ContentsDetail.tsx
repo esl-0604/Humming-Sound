@@ -35,6 +35,7 @@ export default function ContentsDetail() {
         {StylistContent?.content?.map((content: contentType, index: number) => {
           return (
             <ContentsDetailCard
+              key={index}
               subTitle={content.subTitle}
               content={content.content}
               images={content.images}
