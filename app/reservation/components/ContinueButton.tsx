@@ -1,11 +1,12 @@
 "use client";
 import { ScrolledButton } from "@/app/utils/atom/scrolledButton";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { ReservationContext } from "../context";
 import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
 import PopUp from "./PopUp";
+import { popUp } from "@/app/utils/atom/popUp";
 
 interface Props {}
 
@@ -13,8 +14,9 @@ export default function ContinueButton({}: Props) {
   const router = useRouter();
   const stylistKey = useSearchParams().get("stylistKey");
 
+  const [isPopUp, setIsPopUp] = useRecoilState(popUp);
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
-  const { step, totalCost, productList, setPopUp, firstClick, setFirstClick } =
+  const { step, totalCost, productList, firstClick, setFirstClick } =
     useContext(ReservationContext);
 
   const ContinueClick = () => {
@@ -33,7 +35,7 @@ export default function ContinueButton({}: Props) {
       // 1) 필수 옵션 선택 안함 (consulting && how) --> 팝업창 : 필수
       if (!CardList.includes("consulting") || !CardList.includes("how")) {
         console.log("필수 상품을 선택해주세요!");
-        setPopUp({ pop: true, type: "필수" });
+        setIsPopUp({ pop: true, type: "필수" });
       } else {
         // 2) 필수 옵션 선택 O && 선택 옵션 하나도 안함 최초 시도 --> 팝업창 : 옵션
         if (
@@ -42,7 +44,7 @@ export default function ContinueButton({}: Props) {
           firstClick
         ) {
           console.log("옵션 상품들을 다시 한번 살펴봐주세요!");
-          setPopUp({ pop: true, type: "옵션" });
+          setIsPopUp({ pop: true, type: "옵션" });
           setFirstClick(false);
         }
 
@@ -78,24 +80,35 @@ export default function ContinueButton({}: Props) {
 
     // 현재 == date1 일 경우,
     else if (step.step === "Date1") {
-      // 1) shopping 상품 미선택 --> nextStep : Done
-      if (!CardList.includes("shopping")) {
-        nextStep = "Done";
-        router.push(defaultURL + nextStep);
-      }
-
-      // 2) shopping 상품 선택 && shopping == 제품 추천 --> nextStep : Done
-      else {
-        if (productList["shopping"][0].title === "제품 추천") {
+      // 날짜와 타임슬롯을 선택해야만 넘어갈 수 있음.
+      if (
+        productList["how"][0].date &&
+        productList["how"][0].timeSlot.length > 0
+      ) {
+        // 1) shopping 상품 미선택 --> nextStep : Done
+        if (!CardList.includes("shopping")) {
           nextStep = "Done";
           router.push(defaultURL + nextStep);
         }
 
-        // 3) shopping 상품 선택 && shopping == 온라인 동행쇼핑 or 오프라인 퍼스널 쇼핑 --> nextStep : Date2
+        // 2) shopping 상품 선택 && shopping == 제품 추천 --> nextStep : Done
         else {
-          nextStep = "Date2";
-          router.push(defaultURL + nextStep);
+          if (productList["shopping"][0].title === "제품 추천") {
+            nextStep = "Done";
+            router.push(defaultURL + nextStep);
+          }
+
+          // 3) shopping 상품 선택 && shopping == 온라인 동행쇼핑 or 오프라인 퍼스널 쇼핑 --> nextStep : Date2
+          else {
+            nextStep = "Date2";
+            router.push(defaultURL + nextStep);
+          }
         }
+      }
+
+      // 날짜와 타임슬롯을 선택하지 않았다면, 넘어갈 수 없음.
+      else {
+        console.log("날짜와 타임슬롯을 선택해주세요.");
       }
     }
 
@@ -109,8 +122,30 @@ export default function ContinueButton({}: Props) {
     else router.push("/");
   };
 
+  const [disabled, setDisabled] = useState(false);
+  useEffect(() => {
+    if (step.step === "Date1") {
+      if (
+        productList["how"][0].date &&
+        productList["how"][0].timeSlot.length > 0
+      )
+        setDisabled(false);
+      else setDisabled(true);
+    }
+    if (step.step === "Date2") {
+      if (
+        productList["shopping"][0].date &&
+        productList["shopping"][0].timeSlot.length > 0
+      )
+        setDisabled(false);
+      else setDisabled(true);
+    }
+  }, [productList, step]);
+
   return (
-    <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
+    <div
+      className={`fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px] ${disabled ? "opacity-10" : ""}`}
+    >
       <div
         className={`flex h-[50px] w-full cursor-pointer items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out ${
           isScrolled
@@ -137,7 +172,9 @@ export default function ContinueButton({}: Props) {
             &gt;
           </p>
         ) : (
-          <div className="flex h-full w-full items-center justify-between px-[25px]">
+          <div
+            className={`flex h-full w-full items-center justify-between px-[25px]`}
+          >
             <p className={` "font-main" text-[16px]`}>
               ₩{addCommasToNumber(totalCost)}~
             </p>

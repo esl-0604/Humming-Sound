@@ -7,17 +7,28 @@ import { formatMainText } from "@/app/utils/function/formatMainText";
 import STCLCalendar from "./STCLCalendar";
 import TimeSlot from "./TimeSlot";
 import { ReservationContext } from "../../context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { stylistWorkingHours } from "@/app/utils/atom/stylistWorkingHours";
+import { useRouter } from "next/navigation";
 
 interface Props {}
 
 export default function CalendarBox({}: Props) {
-  const { step, productList, dateList, setDateList } =
-    useContext(ReservationContext);
-  const [dateOfWhat, setDateOfWhat] = useState<string>("");
+  const { step, productList, setProductList } = useContext(ReservationContext);
 
+  const [dateOfWhat, setDateOfWhat] = useState<string>("");
   const [dateSelected, setDateSelected] = useState<boolean>(false);
-  const [timeSelected, setTimeSelected] = useState<boolean>(false);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (dateSelected)
+      ref.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+  }, [productList]);
 
   useEffect(() => {
     // step == Date1
@@ -35,8 +46,54 @@ export default function CalendarBox({}: Props) {
     }
   }, [productList, step]);
 
+  const [workingHour, setWorkingHour] = useRecoilState(stylistWorkingHours);
+  const [getDay, setGetDay] = useState<number>(0);
+  const [disabledTimeSlot, setDisabledTimeSlot] = useState<string[]>([]);
+
+  const type = step.step === "Date1" ? "how" : "shopping";
+
+  useEffect(() => {
+    setDateSelected(false);
+    let updatepProductList = { ...productList };
+    updatepProductList[type][0].timeSlot = [];
+    setProductList(updatepProductList);
+  }, [step]);
+
+  useEffect(() => {
+    setGetDay(new Date(productList[type][0].date).getDay());
+
+    let updateDisabledTimeSlot: string[] = [];
+    workingHour.disabled.forEach((item: any) => {
+      if (item.date === productList[type][0].date)
+        updateDisabledTimeSlot = [...item.timeSlots];
+    });
+    setDisabledTimeSlot(updateDisabledTimeSlot);
+  }, [productList]);
+
+  useEffect(() => {
+    if (type === "how") {
+      if (productList[type][0].timeSlot.length === 2) {
+        const updateDisabledTimeSlot = workingHour.working_hour[getDay].filter(
+          (item: string) => {
+            return !productList[type][0].timeSlot.includes(item);
+          },
+        );
+        setDisabledTimeSlot(updateDisabledTimeSlot);
+      }
+    } else {
+      if (productList[type][0].timeSlot.length === 4) {
+        const updateDisabledTimeSlot = workingHour.working_hour[getDay].filter(
+          (item: string) => {
+            return !productList[type][0].timeSlot.includes(item);
+          },
+        );
+        setDisabledTimeSlot(updateDisabledTimeSlot);
+      }
+    }
+  }, [productList]);
+
   return (
-    <div className="flex h-fit w-full flex-col pb-[50px] text-[#E8E8E8]">
+    <div className="flex h-fit w-full flex-col pb-[160px] text-[#E8E8E8]">
       <Image src={BLOCK} alt="block" />
 
       <div className="mb-[15px] mt-[10px] flex h-[30px] w-full items-center px-[10px] ">
@@ -61,14 +118,23 @@ export default function CalendarBox({}: Props) {
               <STCLCalendar setDateSelected={setDateSelected} />
             </div>
 
-            <div className="h-[70px] w-full overflow-x-auto py-[20px]">
+            <div
+              ref={ref}
+              className="h-[70px] w-full overflow-x-auto py-[20px]"
+            >
               {dateSelected ? (
                 <div className="flex h-full w-fit items-center gap-[15.12px] px-[10px]">
-                  <TimeSlot />
-                  <TimeSlot />
-                  <TimeSlot />
-                  <TimeSlot />
-                  <TimeSlot />
+                  {workingHour.working_hour[getDay].map(
+                    (time: string, idx: number) => {
+                      return (
+                        <TimeSlot
+                          key={idx}
+                          time={time}
+                          disabled={disabledTimeSlot.includes(time)}
+                        />
+                      );
+                    },
+                  )}
                 </div>
               ) : null}
             </div>

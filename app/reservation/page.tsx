@@ -11,23 +11,17 @@ import CalendarBox from "./components/Calendar/CalendarBox";
 import CompleteBox from "./components/Complete/CompleteBox";
 import { stylistData, stylistType } from "../utils/atom/stylistTestData";
 import PopUp from "./components/PopUp";
-
-export interface PopUpType {
-  pop: boolean;
-  type: string;
-}
+import { PopUpType, popUp } from "../utils/atom/popUp";
 
 export default function Reservation() {
   const stylistKey = useSearchParams().get("stylistKey");
   const stepKey = useSearchParams().get("step");
-  const router = useRouter();
 
   const [step, setStep] = useState<any>({ step: "Product" });
   const [productList, setProductList] = useState<any>({});
-  const [dateList, setDateList] = useState<any>({});
   const [totalCost, setTotalCost] = useState<number>(0);
 
-  const [popUp, setPopUp] = useState<PopUpType>({ pop: false, type: "필수" });
+  const [isPopUp, setIsPopUp] = useRecoilState<PopUpType>(popUp);
   const [firstClick, setFirstClick] = useState<boolean>(true);
 
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
@@ -35,12 +29,19 @@ export default function Reservation() {
 
   useEffect(() => {
     console.log(productList);
-    const CardList = Object.keys(productList);
+    const typeList = Object.keys(productList);
     let costs = 0;
-    CardList.forEach((card: any) => {
-      productList[card].forEach((product: any) => {
-        if (card === "optional") costs += product.cost * product.optionNum;
-        else costs += product.cost;
+    typeList.forEach((card: any) => {
+      productList[card].forEach((item: any) => {
+        if (item.type === "total") {
+          costs += item.price;
+        } else if (item.type === "byEA") {
+          costs += item.price * item.count;
+        } else {
+          if (item.timeSlot.length > 0)
+            costs += item.price * item.timeSlot.length;
+          else costs += item.price;
+        }
       });
     });
     setTotalCost(costs);
@@ -59,16 +60,12 @@ export default function Reservation() {
         setProductList,
         totalCost,
         setTotalCost,
-        dateList,
-        setDateList,
-        popUp,
-        setPopUp,
         firstClick,
         setFirstClick,
       }}
     >
       <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
-        {popUp.pop ? <PopUp type={popUp.type} /> : null}
+        {isPopUp.pop ? <PopUp type={isPopUp.type} /> : null}
         <div className="relative flex h-full w-full flex-col px-[30px]">
           <div className="sticky top-0 z-30 h-fit w-full bg-[#161616]">
             <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">

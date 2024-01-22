@@ -7,13 +7,15 @@ import OPTIONAL from "@/public/gif/reservation/popup/optional.json";
 import { useContext, useEffect, useState } from "react";
 import { formatMainText } from "@/app/utils/function/formatMainText";
 import { ReservationContext } from "../context";
+import { useRecoilState } from "recoil";
+import { popUp } from "@/app/utils/atom/popUp";
 
 interface Props {
   type: string;
 }
 
 export default function PopUp({ type }: Props) {
-  const { popUp, setPopUp } = useContext(ReservationContext);
+  const [isPopUp, setIsPopUp] = useRecoilState(popUp);
   const [text, setText] = useState<string[]>([]);
 
   const essentialText = "선택 되지 않은\n<b>필수 옵션*</b>을 확인해주세요!";
@@ -31,7 +33,7 @@ export default function PopUp({ type }: Props) {
     <>
       <div
         className="fixed bottom-0 left-0 right-0 top-0 z-40 bg-transparent"
-        onClick={() => setPopUp({ pop: false, type: "필수" })}
+        onClick={() => setIsPopUp({ pop: false, type: "필수" })}
       />
       <div className="fixed left-1/2 top-1/2 z-50 flex h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-[48px] bg-[rgba(0,0,0,0.10)] text-[#E8E8E8] shadow-button2 backdrop-blur-[7.5px]">
         <div className="flex h-[140px] w-full items-center justify-center px-[50px] pb-[12px] pt-[28px]">

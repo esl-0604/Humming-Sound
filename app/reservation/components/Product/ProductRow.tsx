@@ -6,36 +6,25 @@ import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
 import { formatMainText } from "@/app/utils/function/formatMainText";
 import { ReservationContext } from "../../context";
 import { productData } from "@/app/utils/atom/productData";
+import { updateServiceType } from "./ProductCard";
 
-interface Props {
+interface Props extends updateServiceType {
   card: string;
-  RowId: number;
-  title: string;
-  cost: number;
-  memo: string;
-  byHour: boolean;
-  byEA?: boolean;
-  gifUrl: object;
 }
 
 export default function ProductRow({
   card,
-  RowId,
-  title,
-  cost,
-  memo,
-  byHour,
-  byEA,
-  gifUrl,
+  service_id,
+  stylist_id,
+  product,
+  price,
+  gifURL,
 }: Props) {
-  const [select, setSelected] = useState<boolean>(false);
-  const resultArray = memo.split("\n");
+  const memoList = product.memo.split("\n");
+  const titleList = product.title.split("\n");
   const lottieRef = useRef<any>();
-  const titleList = title.split("\n");
-
+  const [select, setSelected] = useState<boolean>(false);
   const [optionNum, setOptionNum] = useState<number>(1);
-
-  const cardList = Object.keys(productData);
   const { productList, setProductList } = useContext(ReservationContext);
 
   useEffect(() => {
@@ -43,7 +32,7 @@ export default function ProductRow({
       // card 당 상품 중복 선택 불가능 (optional은 가능)
       if (card !== "optional") {
         if (Object.keys(productList).includes(card)) {
-          if (productList[card][0].title === title) setSelected(true);
+          if (productList[card][0].title === product.title) setSelected(true);
           else setSelected(false);
         } else setSelected(false);
       }
@@ -85,9 +74,37 @@ export default function ProductRow({
         let updateProductList = {
           ...productList,
         };
-        updateProductList[card] = [
-          { title: title, cost: cost, byHour: byHour },
-        ];
+        if (product.cost_type === "byEA") {
+          updateProductList[card] = [
+            {
+              service_id: service_id,
+              title: product.title,
+              type: product.cost_type,
+              price: price,
+              count: optionNum,
+            },
+          ];
+        } else if (product.cost_type === "byHour") {
+          updateProductList[card] = [
+            {
+              service_id: service_id,
+              title: product.title,
+              type: product.cost_type,
+              price: price,
+              date: null,
+              timeSlot: [],
+            },
+          ];
+        } else {
+          updateProductList[card] = [
+            {
+              service_id: service_id,
+              title: product.title,
+              type: product.cost_type,
+              price: price,
+            },
+          ];
+        }
         setProductList(updateProductList);
       }
     }
@@ -99,24 +116,26 @@ export default function ProductRow({
         if (temp[card]) {
           // console.log(temp);
           let updateCard = temp[card]?.filter(
-            (product: any) => product.title !== title,
+            (item: any) => item.title !== product.title,
           );
           // console.log(updateProductList);
           updateCard.push({
-            title: title,
-            cost: cost,
-            byEA: byEA,
-            optionNum: optionNum,
+            service_id: service_id,
+            title: product.title,
+            type: product.cost_type,
+            price: price,
+            count: optionNum,
           });
           temp[card] = updateCard;
           setProductList(temp);
         } else {
           temp[card] = [];
           temp[card].push({
-            title: title,
-            cost: cost,
-            byEA: byEA,
-            optionNum: optionNum,
+            service_id: service_id,
+            title: product.title,
+            type: product.cost_type,
+            price: price,
+            count: optionNum,
           });
           // console.log(temp);
           setProductList(temp);
@@ -126,7 +145,7 @@ export default function ProductRow({
         // console.log(temp);
         if (temp[card]) {
           let updateCard = temp[card].filter(
-            (product: any) => product.title !== title,
+            (item: any) => item.title !== product.title,
           );
           temp[card] = updateCard;
           setProductList(temp);
@@ -157,7 +176,7 @@ export default function ProductRow({
     >
       <div className="ml-[4px] flex w-[50px] flex-col gap-[10px] text-[#E8E8E8] ">
         <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden">
-          <Lottie animationData={gifUrl} lottieRef={lottieRef} />
+          <Lottie animationData={gifURL} lottieRef={lottieRef} />
         </div>
         <div
           className={`flex h-[16px] w-full  flex-col items-center justify-center text-[13.15px] leading-[100%] ${select ? "font-highlight" : "font-main"}`}
@@ -174,24 +193,26 @@ export default function ProductRow({
       </div>
 
       <div className="flex flex-1 flex-col font-main ">
-        <div className="mb-[2px] flex h-[20px] items-center justify-between text-[10px]">
-          {cost > 0 ? (
+        <div className="mb-[2px] flex h-[20px] items-center justify-between text-[12px]">
+          {price > 0 ? (
             <div className="flex h-full items-center">
-              <span className="flex h-full w-[10px] items-center">₩</span>
-              <span className="flex h-full w-[40px] items-center justify-end">
-                {byHour ? "+" : null}
-                {addCommasToNumber(cost)}
+              <span className="mr-[7px] flex h-full w-[10px] items-center">
+                ₩
               </span>
-              {byHour ? <span className="font-default">/h</span> : null}
+              <span className="flex h-full items-center justify-end">
+                {product.cost_type === "byHour" ? "+" : null}
+                {addCommasToNumber(price)}
+              </span>
+              {product.cost_type === "byHour" ? (
+                <span className="font-default">/h</span>
+              ) : null}
             </div>
           ) : (
             <div className="flex h-full items-center px-[10px]">기본 제공</div>
           )}
-          {card === "optional" && select ? (
+          {product.cost_type === "byEA" && select ? (
             <div
               className="flex h-full w-[50px] items-center justify-between"
-              // onMouseOver={() => setOptionHover(true)}
-              // onMouseOut={() => setOptionHover(false)}
               onClick={(event) => event.stopPropagation()}
             >
               <div
@@ -218,7 +239,7 @@ export default function ProductRow({
         </div>
 
         <div className="flex flex-1 flex-col justify-center font-default text-[10px] leading-[16.157px] opacity-75 ">
-          {resultArray.map((list: string, index: number) => {
+          {memoList.map((list: string, index: number) => {
             const formatText = formatMainText(list);
             return <span key={index}>{formatText}</span>;
           })}

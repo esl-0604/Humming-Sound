@@ -30,8 +30,8 @@ export default function IntroduceBox({ stylistKey }: Props) {
       const targetElement = ref.current?.children[focusedDiv];
       if (targetElement) {
         targetElement.scrollIntoView({
-          behavior: "smooth", // 스무스한 스크롤 효과
-          block: "center", // 최상단으로 스크롤
+          behavior: "smooth",
+          block: "center",
         });
       }
     }
