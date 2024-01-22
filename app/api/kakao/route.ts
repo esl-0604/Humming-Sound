@@ -1,5 +1,4 @@
-import { get } from "http";
-import { connectDB } from "../../utils/database";
+import { connectDB } from "@/app/utils/database";
 import { NextRequest, NextResponse } from "next/server";
 
 interface TokenResponse {
