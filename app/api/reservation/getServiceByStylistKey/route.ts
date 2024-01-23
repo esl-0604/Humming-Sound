@@ -14,16 +14,13 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const stylist_key = searchParams.get(`stylist_key`) || null;
 
-  const getStylistIdByStylistKey = async (stylist_key: string) => {
+  const getServiceByStylistKey = async (stylist_key: string) => {
     const stylistIdByStylistKeyResponse = await db
       .collection("Stylist")
       .findOne({ stylist_key: stylist_key });
-    if (!stylistIdByStylistKeyResponse)
-      return NextResponse.json(
-        { error: `Stylist not found for ${stylist_key}` },
-        { status: 404 },
-      );
-
+    // ----------must be repaired----------
+    if (!stylistIdByStylistKeyResponse) return -1;
+    // -----------------------------------
     const stylist_id = String(stylistIdByStylistKeyResponse._id);
     return getServiceByStylistId(stylist_id);
   };
@@ -88,6 +85,9 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const result = await getStylistIdByStylistKey(stylist_key);
-  return NextResponse.json(result, { status: 200 });
+  const result = await getServiceByStylistKey(stylist_key);
+  // ----------must be repaired----------
+  if (result !== -1) return NextResponse.json(result, { status: 200 });
+  else return NextResponse.json([], { status: 200 });
+  // -----------------------------------
 }
