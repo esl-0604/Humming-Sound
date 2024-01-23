@@ -5,8 +5,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
 import { formatMainText } from "@/app/utils/function/formatMainText";
 import { ReservationContext } from "../../context";
-import { productData } from "@/app/utils/atom/productData";
 import { updateServiceType } from "./ProductCard";
+import { insertNewline } from "@/app/utils/function/insertNewline";
 
 interface Props extends updateServiceType {
   card: string;
@@ -21,7 +21,7 @@ export default function ProductRow({
   gifURL,
 }: Props) {
   const memoList = product.memo.split("\n");
-  const titleList = product.title.split("\n");
+  const titleList = insertNewline(product.title).split("\n");
   const lottieRef = useRef<any>();
   const [select, setSelected] = useState<boolean>(false);
   const [optionNum, setOptionNum] = useState<number>(1);
@@ -92,7 +92,7 @@ export default function ProductRow({
               type: product.cost_type,
               price: price,
               date: null,
-              timeSlot: [],
+              timeslots: [],
             },
           ];
         } else {
@@ -182,10 +182,11 @@ export default function ProductRow({
           className={`flex h-[16px] w-full  flex-col items-center justify-center text-[13.15px] leading-[100%] ${select ? "font-highlight" : "font-main"}`}
         >
           {titleList.map((list: string, index: number) => {
-            const formatText = formatMainText(list);
+            // const formatText = formatMainText(list);
             return (
-              <span key={index} className="whitespace-nowrap ">
-                {formatText}
+              <span key={index} className="whitespace-nowrap">
+                {/* {formatText} */}
+                {list}
               </span>
             );
           })}
