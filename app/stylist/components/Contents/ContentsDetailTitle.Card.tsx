@@ -44,7 +44,7 @@ export default function ContentsDetailTitleCard({
         <div className="to-[#161616]-0% absolute top-0 z-10 h-full w-full bg-gradient-to-t from-[#161616]" />
 
         <div className="absolute left-[10px] top-[10px] z-20 h-[12px] whitespace-nowrap font-highlight text-[15px]">
-          #{id ? id : 0 + 1}
+          #{id ? id + 1 : 0 + 1}
         </div>
         <div className="absolute left-0 top-0 z-20 flex h-full w-full flex-col items-center justify-center">
           <div className="flex h-[24.91px] w-full flex-nowrap items-center justify-center font-main text-[18.327px]">
