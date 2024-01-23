@@ -57,7 +57,7 @@ export default function STCLCalendar({ setDateSelected }: Props) {
     // console.log(productList);
     let updatepProductList = { ...productList };
     updatepProductList[type][0].date = formatDateToString(date);
-    updatepProductList[type][0].timeSlot = [];
+    updatepProductList[type][0].timeslots = [];
     setProductList(updatepProductList);
 
     setDate(date);
@@ -71,10 +71,16 @@ export default function STCLCalendar({ setDateSelected }: Props) {
         compareDatesByDay(date, new Date()) < 0 ? true : false;
       return view === "month" && returnValue;
     } else {
-      const standardDate = new Date(productList["how"][0].date);
-      const returnValue =
-        compareDatesByDay(date, standardDate) < 2 ? true : false;
-      return view === "month" && returnValue;
+      if (productList["how"][0].date) {
+        const standardDate = new Date(productList["how"][0].date);
+        const returnValue =
+          compareDatesByDay(date, standardDate) < 2 ? true : false;
+        return view === "month" && returnValue;
+      } else {
+        const returnValue =
+          compareDatesByDay(date, new Date()) < 0 ? true : false;
+        return view === "month" && returnValue;
+      }
     }
   };
   return (

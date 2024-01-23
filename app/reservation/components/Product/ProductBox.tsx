@@ -1,40 +1,73 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import {
-  ServiceType,
-  newProductData,
-  productData,
-} from "@/app/utils/atom/productData";
+import { ProductData, ServiceType } from "@/app/utils/atom/productData";
+import { useSearchParams } from "next/navigation";
 
 export default function ProductBox() {
   const order = ["consulting", "optional", "how", "shopping"];
+  const stylistKey = useSearchParams().get("stylistKey");
+  const [productList, setProductList] = useState<ServiceType[]>([]);
+
+  useEffect(() => {
+    fetch("/api/reservation/getServiceByStylistKey?stylist_key=" + stylistKey, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setProductList(data);
+      });
+  }, []);
+
   const typeList = [
-    ...new Set(newProductData.map((item: ServiceType) => item.product.type)),
+    ...new Set(ProductData.map((item: ServiceType) => item.product.type)),
   ].sort((a, b) => {
     return order.indexOf(a) - order.indexOf(b);
   });
 
-  // console.log(newProductData);
-  // console.log(typeList);
-
   return (
     <div className="flex h-fit w-full flex-col gap-[15px] pb-[50px]">
-      {/* {cardList.map((category: string, index: number) => {
+      {/* {typeList.map((type: string, idx: number) => {
+        const sortedProductList = ProductData
+          .filter((item: ServiceType) => item.product.type === type)
+          .sort((a, b) => {
+            return a.product.order - b.product.order;
+          });
+
         return (
-          <ProductCard
-            key={index}
-            title={category}
-            productList={productData[category].product}
-          />
+          <ProductCard key={idx} title={type} productList={sortedProductList} />
         );
       })} */}
-      {typeList.map((type: string, idx: number) => {
-        const productList = newProductData.filter(
-          (item: ServiceType) => item.product.type === type,
-        );
-        return <ProductCard key={idx} title={type} productList={productList} />;
-      })}
+      {productList.length > 0
+        ? [
+            ...new Set(
+              productList.map((item: ServiceType) => item.product.type),
+            ),
+          ]
+            .sort((a, b) => {
+              return order.indexOf(a) - order.indexOf(b);
+            })
+            .map((type: string, idx: number) => {
+              const sortedProductList = productList
+                .filter((item: ServiceType) => item.product.type === type)
+                .sort((a, b) => {
+                  return a.product.order - b.product.order;
+                });
+
+              return (
+                <ProductCard
+                  key={idx}
+                  title={type}
+                  productList={sortedProductList}
+                />
+              );
+            })
+        : null}
     </div>
   );
 }

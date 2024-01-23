@@ -7,10 +7,14 @@ import { formatMainText } from "@/app/utils/function/formatMainText";
 import STCLCalendar from "./STCLCalendar";
 import TimeSlot from "./TimeSlot";
 import { ReservationContext } from "../../context";
-import { useContext, useEffect, useRef, useState } from "react";
+import { use, useContext, useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
-import { stylistWorkingHours } from "@/app/utils/atom/stylistWorkingHours";
-import { useRouter } from "next/navigation";
+import {
+  AvailableHoursType,
+  ScheduleType,
+  stylistWorkingHours,
+} from "@/app/utils/atom/stylistWorkingHours";
+import { useSearchParams } from "next/navigation";
 
 interface Props {}
 
@@ -46,8 +50,27 @@ export default function CalendarBox({}: Props) {
     }
   }, [productList, step]);
 
-  const [workingHour, setWorkingHour] = useRecoilState(stylistWorkingHours);
-  const [getDay, setGetDay] = useState<number>(0);
+  const stylistKey = useSearchParams().get("stylistKey");
+  useEffect(() => {
+    fetch(
+      "/api/reservation/getTimeSlotsByStylistKey?stylist_key=" + stylistKey,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setWorkingHour(data);
+      });
+  }, []);
+
+  const [workingHour, setWorkingHour] =
+    useRecoilState<AvailableHoursType>(stylistWorkingHours);
+  const [getDay, setGetDay] = useState<string>("0");
   const [disabledTimeSlot, setDisabledTimeSlot] = useState<string[]>([]);
 
   const type = step.step === "Date1" ? "how" : "shopping";
@@ -55,36 +78,41 @@ export default function CalendarBox({}: Props) {
   useEffect(() => {
     setDateSelected(false);
     let updatepProductList = { ...productList };
-    updatepProductList[type][0].timeSlot = [];
+    updatepProductList[type][0].timeslots = [];
     setProductList(updatepProductList);
   }, [step]);
 
   useEffect(() => {
-    setGetDay(new Date(productList[type][0].date).getDay());
+    console.log(workingHour);
+  }, []);
 
+  useEffect(() => {
+    if (productList[type][0].date) {
+      setGetDay(new Date(productList[type][0].date).getDay()?.toString());
+    }
     let updateDisabledTimeSlot: string[] = [];
-    workingHour.disabled.forEach((item: any) => {
+    workingHour.disabled.forEach((item: ScheduleType) => {
       if (item.date === productList[type][0].date)
-        updateDisabledTimeSlot = [...item.timeSlots];
+        updateDisabledTimeSlot = [...item.timeslots];
     });
     setDisabledTimeSlot(updateDisabledTimeSlot);
   }, [productList]);
 
   useEffect(() => {
     if (type === "how") {
-      if (productList[type][0].timeSlot.length === 2) {
-        const updateDisabledTimeSlot = workingHour.working_hour[getDay].filter(
+      if (productList[type][0].timeslots.length === 2) {
+        const updateDisabledTimeSlot = workingHour.working_hours[getDay].filter(
           (item: string) => {
-            return !productList[type][0].timeSlot.includes(item);
+            return !productList[type][0].timeslots.includes(item);
           },
         );
         setDisabledTimeSlot(updateDisabledTimeSlot);
       }
     } else {
-      if (productList[type][0].timeSlot.length === 4) {
-        const updateDisabledTimeSlot = workingHour.working_hour[getDay].filter(
+      if (productList[type][0].timeslots.length === 4) {
+        const updateDisabledTimeSlot = workingHour.working_hours[getDay].filter(
           (item: string) => {
-            return !productList[type][0].timeSlot.includes(item);
+            return !productList[type][0].timeslots.includes(item);
           },
         );
         setDisabledTimeSlot(updateDisabledTimeSlot);
@@ -124,7 +152,7 @@ export default function CalendarBox({}: Props) {
             >
               {dateSelected ? (
                 <div className="flex h-full w-fit items-center gap-[15.12px] px-[10px]">
-                  {workingHour.working_hour[getDay].map(
+                  {workingHour.working_hours[getDay].map(
                     (time: string, idx: number) => {
                       return (
                         <TimeSlot

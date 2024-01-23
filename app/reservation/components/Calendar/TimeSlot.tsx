@@ -16,7 +16,7 @@ export default function TimeSlot({ time, disabled }: Props) {
   const type = step.step === "Date1" ? "how" : "shopping";
 
   useEffect(() => {
-    if (productList[type][0].timeSlot.includes(time)) setSelected(true);
+    if (productList[type][0].timeslots.includes(time)) setSelected(true);
     else setSelected(false);
   }, [productList]);
 
@@ -26,9 +26,9 @@ export default function TimeSlot({ time, disabled }: Props) {
 
     // 이미 선택된 slot 선택 시, 선택 해제
     if (selected) {
-      updatepProductList[type][0].timeSlot = updatepProductList[
+      updatepProductList[type][0].timeslots = updatepProductList[
         type
-      ][0].timeSlot.filter((item: string) => {
+      ][0].timeslots.filter((item: string) => {
         return item !== time;
       });
       setProductList(updatepProductList);
@@ -36,10 +36,10 @@ export default function TimeSlot({ time, disabled }: Props) {
 
     // 새로운 slot 선택 시, 선택
     else {
-      updatepProductList[type][0].timeSlot.push(time);
-      updatepProductList[type][0].timeSlot = updatepProductList[
+      updatepProductList[type][0].timeslots.push(time);
+      updatepProductList[type][0].timeslots = updatepProductList[
         type
-      ][0].timeSlot.sort((a: string, b: string) => {
+      ][0].timeslots.sort((a: string, b: string) => {
         const [a_num, a_rest] = a.split(":");
         const [b_num, b_rest] = b.split(":");
         return Number(a_num) - Number(b_num);

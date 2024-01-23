@@ -50,7 +50,7 @@ export default function ContinueButton({}: Props) {
 
         // 3) 필수 옵션 선택 O && (재시도 or 선택 옵션 O)
         else {
-          // 3-1) how == 비대면 or 대면 --> nextStep : Date1
+          // 3-1) how == 온라인 or 오프라인 --> nextStep : Date1
           if (productList["how"][0].title !== "설문지") {
             nextStep = "Date1";
             router.push(defaultURL + nextStep);
@@ -83,7 +83,7 @@ export default function ContinueButton({}: Props) {
       // 날짜와 타임슬롯을 선택해야만 넘어갈 수 있음.
       if (
         productList["how"][0].date &&
-        productList["how"][0].timeSlot.length > 0
+        productList["how"][0].timeslots.length > 0
       ) {
         // 1) shopping 상품 미선택 --> nextStep : Done
         if (!CardList.includes("shopping")) {
@@ -127,7 +127,7 @@ export default function ContinueButton({}: Props) {
     if (step.step === "Date1") {
       if (
         productList["how"][0].date &&
-        productList["how"][0].timeSlot.length > 0
+        productList["how"][0].timeslots.length > 0
       )
         setDisabled(false);
       else setDisabled(true);
@@ -135,7 +135,7 @@ export default function ContinueButton({}: Props) {
     if (step.step === "Date2") {
       if (
         productList["shopping"][0].date &&
-        productList["shopping"][0].timeSlot.length > 0
+        productList["shopping"][0].timeslots.length > 0
       )
         setDisabled(false);
       else setDisabled(true);

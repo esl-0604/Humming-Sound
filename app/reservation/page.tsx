@@ -38,8 +38,8 @@ export default function Reservation() {
         } else if (item.type === "byEA") {
           costs += item.price * item.count;
         } else {
-          if (item.timeSlot.length > 0)
-            costs += item.price * item.timeSlot.length;
+          if (item.timeslots.length > 0)
+            costs += item.price * item.timeslots.length;
           else costs += item.price;
         }
       });

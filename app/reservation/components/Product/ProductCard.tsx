@@ -4,7 +4,7 @@ import BLOCK from "@/public/images/stylistintroduce/block.svg";
 import DOT from "@/public/images/reservation/essential.svg";
 import Image from "next/image";
 import ProductRow from "./ProductRow";
-import { ProductType, ServiceType } from "@/app/utils/atom/productData";
+import { ServiceType } from "@/app/utils/atom/productData";
 import PERSON from "@/public/gif/reservation/what/person.json";
 import FLOWER from "@/public/gif/reservation/what/flower.json";
 import CYCLE from "@/public/gif/reservation/optional/cycle.json";
