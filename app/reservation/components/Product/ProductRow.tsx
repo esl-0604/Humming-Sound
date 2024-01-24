@@ -239,7 +239,7 @@ export default function ProductRow({
           ) : null}
         </div>
 
-        <div className="flex flex-1 flex-col justify-center font-default text-[10px] leading-[16.157px] opacity-75 ">
+        <div className="flex flex-1 flex-col justify-center font-default text-[11px] leading-[16.157px] opacity-75 ">
           {memoList.map((list: string, index: number) => {
             const formatText = formatMainText(list);
             return <span key={index}>{formatText}</span>;

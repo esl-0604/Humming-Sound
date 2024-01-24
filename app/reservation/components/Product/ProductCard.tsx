@@ -39,13 +39,13 @@ export default function ProductCard({ title, productList }: Props) {
 
     // optional
     else if (title === "optional") {
-      if (product.product.title === "옷장 정리") newProduct.gifURL = CYCLE;
+      if (product.product.title === "가진 옷 활용") newProduct.gifURL = CYCLE;
       else newProduct.gifURL = PUZZLE;
     }
 
     // how
     else if (title === "how") {
-      if (product.product.title === "설문지") newProduct.gifURL = CYCLE;
+      if (product.product.title === "설문지") newProduct.gifURL = REPORT;
       else if (product.product.title === "온라인") newProduct.gifURL = ONLINE;
       else newProduct.gifURL = OFFLINE;
     }

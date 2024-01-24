@@ -2,7 +2,7 @@
 
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import { useSearchParams } from "next/navigation";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 interface Props {
   viewType: string;
@@ -16,7 +16,7 @@ export default function StickyBar({
   stylistKey,
 }: Props) {
   const contentId = useSearchParams().get("contentId");
-  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+  const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
   return (
     <div className="sticky top-0 z-30 flex w-full flex-col whitespace-nowrap bg-[#161616]">
@@ -32,6 +32,9 @@ export default function StickyBar({
           </div>
           <div className="mt-[5px] flex h-[10px] items-center font-main text-[10px] ">
             {stylist.comment}
+          </div>
+          <div className="mt-[5px] flex h-[10px] items-center font-main text-[10px] ">
+            {"@eslee850"}
           </div>
         </div>
 
