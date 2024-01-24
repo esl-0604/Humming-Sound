@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },
     }).then((res) => res.json());
-    return getUserInfo(tokenResponse);
+    return tokenResponse;
   };
   const getUserInfo = async (tokenResponse: TokenResponse) => {
     const access_token = tokenResponse.access_token;
@@ -44,22 +44,29 @@ export async function GET(req: NextRequest) {
         Authorization: `Bearer ${access_token}`,
       },
     }).then((res) => res.json());
-    return findUser(userInfoResponse);
+    // console.log(userInfoResponse);
+    return userInfoResponse;
   };
-  const findUser = async (userInfoResponse: UserInfo) => {
+  const findUser = async () => {
+    const tokenResponse: TokenResponse = await getAccessToken();
+    const userInfoResponse: UserInfo = await getUserInfo(tokenResponse);
     const db = (await connectDB).db("stcl-dev");
     const findUserResponse = await db
       .collection("User")
       .findOne({ id: Number(userInfoResponse.id) });
+    // console.log(findUserResponse);
     if (findUserResponse == null) {
-      await db.collection("User").insertOne({
+      const insertUserResponse = await db.collection("User").insertOne({
         id: Number(userInfoResponse.id),
         email: userInfoResponse.kakao_account.email,
         nickname: userInfoResponse.kakao_account.profile.nickname,
       });
+      return String(insertUserResponse.insertedId);
     }
-    return findUserResponse;
+    // console.log(findUserResponse._id);
+    return String(findUserResponse._id);
   };
 
-  return NextResponse.json(getAccessToken(), { status: 200 });
+  const result = await findUser();
+  return NextResponse.json(result, { status: 200 });
 }
