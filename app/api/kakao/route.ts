@@ -16,6 +16,9 @@ interface UserInfo {
   connected_at: string;
   kakao_account: {
     email: string;
+    profile: {
+      nickname: string;
+    };
   };
 }
 
@@ -46,12 +49,13 @@ export async function GET(req: NextRequest) {
   const findUser = async (userInfoResponse: UserInfo) => {
     const db = (await connectDB).db("stcl-dev");
     const findUserResponse = await db
-      .collection("users")
+      .collection("User")
       .findOne({ id: Number(userInfoResponse.id) });
     if (findUserResponse == null) {
-      await db.collection("users").insertOne({
+      await db.collection("User").insertOne({
         id: Number(userInfoResponse.id),
         email: userInfoResponse.kakao_account.email,
+        nickname: userInfoResponse.kakao_account.profile.nickname,
       });
     }
     return findUserResponse;
