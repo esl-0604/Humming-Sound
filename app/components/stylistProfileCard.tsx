@@ -1,4 +1,6 @@
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 
 interface StylistProfileCardProps {
   stylistKey: string;
@@ -11,13 +13,42 @@ export default function StylistProfileCard({
   stylistComment,
 }: StylistProfileCardProps) {
   const router = useRouter();
+
+  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+  const stylist = stylists[stylistKey];
+
+  const previewImages =
+    stylist.personalImageList.length >= 3
+      ? stylist.personalImageList.slice(0, 3)
+      : stylist.personalImageList.length == 2
+        ? [
+            stylist.personalImageList[0],
+            stylist.personalImageList[1],
+            stylist.personalImageList[0],
+          ]
+        : [
+            stylist.personalImageList[0],
+            stylist.personalImageList[0],
+            stylist.personalImageList[0],
+          ];
+
   return (
     <div
       onClick={() => router.push(`/stylist?stylistKey=${stylistKey}`)}
       className="relative z-0 mb-[10px] flex h-fit w-full cursor-pointer flex-col bg-[#161616] px-[21.5px]"
     >
-      <div className="relative flex h-full w-full flex-row items-center justify-between">
-        <div className="mr-[2.5%] flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">
+      <div className="relative flex h-full w-full flex-row justify-between gap-[2.5%]">
+        {previewImages.map((current, index) => {
+          return (
+            <div
+              key={index}
+              className="relative flex h-[250px] w-full flex-col items-start overflow-hidden rounded-[5px]"
+            >
+              <img className="h-[250px] w-full object-cover" src={current} />
+            </div>
+          );
+        })}
+        {/* <div className="mr-[2.5%] flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">
           <img
             className="h-full w-full object-cover"
             src="/images/stylistImage.svg"
@@ -34,7 +65,7 @@ export default function StylistProfileCard({
             className="h-full w-full object-cover"
             src="/images/stylistImage.svg"
           />
-        </div>
+        </div> */}
 
         <div className="absolute bottom-[20px] left-[10px] z-30">
           <p className="text-start font-highlight text-[15px] text-white">

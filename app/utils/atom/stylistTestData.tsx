@@ -5,6 +5,7 @@ export interface stylistType {
   [stylistId: string]: {
     thumbnail: string;
     profile: string;
+    styleTags: string[];
     name: string;
     comment: string;
     avgGrade: string;
@@ -32,6 +33,12 @@ export interface contentsType {
   type: string;
   image: string;
   link: string;
+  content?: contentType[];
+}
+export interface contentType {
+  subTitle: string;
+  images: string[];
+  content: string;
 }
 
 export const stylistData = atom<stylistType>({
