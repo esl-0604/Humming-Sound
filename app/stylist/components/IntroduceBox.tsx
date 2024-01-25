@@ -46,7 +46,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
   }, [open]);
 
   return (
-    <div className="flex w-full flex-col pb-[50px]">
+    <div className="flex w-full flex-col pb-[60px]">
       <div className="flex w-full flex-col px-[30px]">
         <div className="relative flex w-full justify-center pt-[39px]">
           <div className="relative h-[143px] w-[143px] overflow-hidden rounded-full bg-[#222222] shadow-lg">
