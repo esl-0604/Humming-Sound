@@ -33,16 +33,6 @@ export default function CalendarBox({}: Props) {
   const [dateOfWhat, setDateOfWhat] = useState<string>("");
   const [dateSelected, setDateSelected] = useState<boolean>(false);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (dateSelected)
-      ref.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-  }, [productList]);
-
   useEffect(() => {
     // step == Date1
     if (step.step === "Date1") {
@@ -91,6 +81,17 @@ export default function CalendarBox({}: Props) {
 
   const [availableTimeSlot, setAvailableTimeSlot] = useState<string[]>([]);
   const [disabledTimeSlot, setDisabledTimeSlot] = useState<string[]>([]);
+  const [focusSlot, setFocusSlot] = useState<number>(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const slotRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (dateSelected)
+      ref.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+  }, [productList]);
 
   const type = step.step === "Date1" ? "how" : "shopping";
 
@@ -101,22 +102,39 @@ export default function CalendarBox({}: Props) {
     setProductList(updatepProductList);
   }, [step]);
 
-  // useEffect(() => {
-  //   // console.log(availableTimeSlot);
-  //   console.log(getWorkingHours(availableTimeSlot));
-  //   // console.log(
-  //   //   getWorkingHours([
-  //   //     "09:00",
-  //   //     "11:00",
-  //   //     "12:00",
-  //   //     "13:00",
-  //   //     "15:00",
-  //   //     "16:00",
-  //   //     "19:00",
-  //   //     "23:00",
-  //   //   ]),
-  //   // );
-  // }, [availableTimeSlot]);
+  useEffect(() => {
+    if (availableTimeSlot.length > 0) {
+      const focus = Number(availableTimeSlot[0].split(":")[0]);
+      // console.log(focus);
+      // console.log(availableTimeSlot);
+      setFocusSlot((prev) => focus);
+    }
+    // console.log(getWorkingHours(availableTimeSlot));
+    // console.log(
+    //   getWorkingHours([
+    //     "09:00",
+    //     "11:00",
+    //     "12:00",
+    //     "13:00",
+    //     "15:00",
+    //     "16:00",
+    //     "19:00",
+    //     "23:00",
+    //   ]),
+    // );
+  }, [availableTimeSlot]);
+
+  useEffect(() => {
+    const targetElement = slotRef.current?.children[focusSlot];
+    // console.log(targetElement);
+    // console.log(focusSlot);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+        inline: "start",
+      });
+    }
+  }, [focusSlot, productList]);
 
   // 근무가능시간, 불가능시간, 선택요일을 전부 고려하여 근무할 수 있는 시간 업데이트
   useEffect(() => {
@@ -267,7 +285,10 @@ export default function CalendarBox({}: Props) {
               className="h-[78px] w-full overflow-x-auto py-[20px]"
             >
               {dateSelected ? (
-                <div className="flex h-full w-fit items-center px-[10px]">
+                <div
+                  ref={slotRef}
+                  className="flex h-full w-fit items-center px-[10px]"
+                >
                   {/* {workingHour.working_hours[getDay].map(
                     (time: string, idx: number) => {
                       return (
