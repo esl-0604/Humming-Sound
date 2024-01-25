@@ -56,7 +56,7 @@ export default function CompleteBox({}: Props) {
 
         <div className="flex w-full flex-col items-center justify-center pb-[74px] font-default text-[13px]">
           <span className="flex h-[15px] w-full items-center justify-center font-main">
-            고려은행 123-456-7890 박진수
+            기업은행 97302133301011 안수영
           </span>
           <span className="flex h-[15px] w-full items-center justify-center">
             24시간 시간 내에 입금 확인이 되지 않으면

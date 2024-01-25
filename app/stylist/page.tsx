@@ -49,11 +49,9 @@ export default function StylistDetail() {
         </>
       )}
 
-      {viewType !== "후기" ? (
-        <ReservationButton
-          stylistKey={stylistKey ? stylistKey : "testStylist"}
-        />
-      ) : null}
+      {/* {viewType !== "후기" ? ( */}
+      <ReservationButton stylistKey={stylistKey ? stylistKey : "testStylist"} />
+      {/* ) : null} */}
     </main>
   );
 }
