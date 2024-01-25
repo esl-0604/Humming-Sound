@@ -42,10 +42,17 @@ const suyeongStylistPersonalContext = require.context(
   false,
   /\.png$/,
 );
+const suyeongStylistContentContext = require.context(
+  "./stylist_suyeong/content_images",
+  false,
+  /\.png$/,
+);
 // context.keys()는 해당 폴더 내의 모든 파일 경로를 배열로 반환합니다.
 const suyeongStylistPngFiles = suyeongStylistContext.keys();
 const suyeongStylistReviewPngFiles = suyeongStylistReviewContext.keys();
 const suyeongStylistPersonalPngFiles = suyeongStylistPersonalContext.keys();
+const suyeongStylistContentPngFiles = suyeongStylistContentContext.keys();
+
 // pngFiles 배열을 사용하여 각 이미지를 import
 const suyeongStylistImages = suyeongStylistPngFiles.map(suyeongStylistContext);
 const suyeongStylistReviewImages = suyeongStylistReviewPngFiles.map(
@@ -53,6 +60,9 @@ const suyeongStylistReviewImages = suyeongStylistReviewPngFiles.map(
 );
 const suyeongStylistPersonalImages = suyeongStylistPersonalPngFiles.map(
   suyeongStylistPersonalContext,
+);
+const suyeongStylistContentImages = suyeongStylistContentPngFiles.map(
+  suyeongStylistContentContext,
 );
 // -------------------------------------------------------------------------
 
@@ -465,7 +475,7 @@ export const stylistDB = {
         date: "23.12.23",
         grade: "5.0",
         comment:
-          "스타일링 최고 스타일링 더 받을래요 스타일링 어쩌구저쩌구 후기는 2줄만 보이는거로 더 넘어가면 일단 말줄임표로 마무리 합시다 이정도로 글은 어느정도까지 보여줄까요? 글자수 제한을 두기는 해야할 것 같은데 사실 펼쳤을때 이정도면 충분히 리뷰하기에는 부족하지 않을 것 같은데요 음 더 들어가야하나 모르겠는데 좌우로 늘리고 5줄이면 솔직히 이거보다 더 적을 사람 있을까 싶긴 합니다 충분한 리뷰가 될 듯 사진도 충분해이.",
+          "단 시간 내에 다양한 옷들을 입어볼 수 있어서 너무 좋았습니다. 혼자 쇼핑했다면 입어볼 생각 조차 못 했을 옷들도 입어보고 또 서로 다른 스타일들의 옷들을 입어봤더니, 아예 새로운 쇼핑을 혼자서 할 수 있게 되었다고 생각합니다. 물론 이번 쇼핑 다음으로 혼자서 바로 잘 쇼핑하기는 어렵겠지만, 이렇게 조금씩 좋아지는거라고 생각합니다.",
         imageList: [
           suyeongStylistReviewImages[0].default.src,
           suyeongStylistReviewImages[1].default.src,
@@ -488,7 +498,7 @@ export const stylistDB = {
         date: "23.11.21",
         grade: "5.0",
         comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
+          "안녕하세요 23학번 새내기입니다.. 학창시절 내내 공부만 하느라 옷에 관심이라곤 1도 없었어요. 대학교 오니 다양한 친구들, 선배님들을 만나게 되었는데, 저도 저만의 스타일로 쇼핑하고 싶더라구요.. 평생을 엄마가 사주시는 옷들만 입었다 보니 어디서부터 어떻게 옷을 사야하는지 감이 안왔어요. 덕분에 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어서 쇼핑에 대한 두려움이 사라졌어요. 학교가는 길이 괜히 설레더라구요. 옷이 주는 제 내면의 자신감을 체감하고 있어요 :) 저만의 스타일을 만들어가는 것이 마치 저를 찾아가는 여정 것 같아요.",
         imageList: [
           suyeongStylistReviewImages[8].default.src,
           suyeongStylistReviewImages[9].default.src,
@@ -499,7 +509,7 @@ export const stylistDB = {
         date: "23.10.31",
         grade: "5.0",
         comment:
-          "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
+          "8월 전역해서 이번학기에 복학한 대학생입니다. 원래 옷에 큰 관심이 있었던 것은 아니지만, 이번에 전역을 기점으로 스타일링을 개선해보고 싶었습니다. 그래서 군적금 중 일부를 스타일링 목적으로 반드시 써보고싶다는 버킷리스트(?) 같은 것도 적어뒀어요ㅋㅋ 군 복학생에 대한 이미지가 있다보니 전역 후 복학이 많이 걱정이 됐었는데, 스타일링 클라우드가 그런 걱정을 아예 없애줬어요ㅎㅎ 2년간 옷을 사본 적이 없어서 뭐부터 사야할지 감이 전혀 오지 않았는데, 저의 취향과 제가 어울릴 법한 스타일들을 체계적으로 분석한 결과로 옷과 브랜드를 추천해줘서 그대로 믿고 사입을 수 있었어요! 1회성으로 끝내는게 아니라, 중요한 일정이 있거나, 계절 바뀔때 마다 내내 이용하고 싶어요!",
         imageList: [
           suyeongStylistReviewImages[5].default.src,
           suyeongStylistReviewImages[6].default.src,
@@ -510,19 +520,49 @@ export const stylistDB = {
     contentsList: [
       {
         id: 0,
-        title: "<b>후드티를 더 멋있게 입는 방법</b>",
-        text: "박진수 스타일리스트님의 스타일링 팁",
+        title: "<b>Brand Rec. #1 <VDR></b>",
+        text: "Permanent Clothing",
         type: "image",
-        image: suyeongStylistImages[1].default.src,
+        image: suyeongStylistContentImages[0].default.src,
         link: "",
-      },
-      {
-        id: 1,
-        title: "<b>잠깐</b>, 아직 스타일링을 안받아봤다면?",
-        text: "00 님을 위한 추천 컨텐츠를 확인해보세요!",
-        type: "image",
-        image: suyeongStylistImages[1].default.src,
-        link: "",
+        content: [
+          {
+            subTitle: "VDR은",
+            images: [suyeongStylistContentImages[1].default.src],
+            content:
+              "워크웨어, 밀리터리, 아웃도어 등을 포함하여 아메리칸캐주얼이라는 장르안에서 구와 현대를 적절히 재해석한 디자인을 선보이는 브랜드이다. 'Permanent Clothing'을 지향하여 독창적이고 새로운 디자인을 선보일 뿐 아니라, 튼튼한 원단과 재봉법 그리고 클래식함을 잃지 않고 담아내는 브랜드이다.",
+          },
+          {
+            subTitle: "Permanent Clothing",
+            images: [suyeongStylistContentImages[2].default.src],
+            content:
+              "직역하자면 '영구적인 옷' 이라는 말의 뜻은 직역 그대로 이해하면 될 정도로 단순하다. 지금 내가 입게될 이 옷이 수 십년 뒤 할아버지가 된 나에게도 어색하지 않으며, 나의 손자에게도 어색하지 않을 옷을 말한다. 그것을 가능케 하는 것은 한 세대의 유행을 타지 않는 클래식하고 일관된 멋의 디자인 뿐 아니라, 튼튼하고 단단한 옷의 마감일 것이다. VDR은 그것을 정말 잘 해내고 있는 듯 하다. 튼튼한 청바지 봉제법으로 말해지는 쌈솔로 봉제등의 마감을 보이는 VDR의 데님들만 봐도 디자이너분들의 그러한 철학이 느껴지는 듯하다.",
+          },
+          {
+            subTitle: "소비자가 만들어가는 경험",
+            images: [suyeongStylistContentImages[3].default.src],
+            content:
+              "사실 이러한 브랜드의 철학이 의미를 가지기 위해서는 해당 브랜드의 소비자의 경험이 브랜드의 의도를 이해하고 공감해야만 할 것이다. 그런 의미에서 이미 VDR의 지속적인 소비자인 나에게는 VDR의 옷들을 소비하고 장시간 입어본 경험이 그들의 브랜드 철학에 고개를 끄덕이게 만들었다. 그 경험을 기반으로 아주 주관적인 기준에서 VDR을 장식하는 몇 가지 제품들을 추천하고자 한다.",
+          },
+          {
+            subTitle: "FIVE-PCKET CHORE JACKET",
+            images: [suyeongStylistContentImages[4].default.src],
+            content:
+              "초어 자켓은 작업복을 뜻한다. 우리가 흔히 알고 있는 워크웨어를 구성하고 연출할 수 있는 제품 카테고리 중 하나이다. 워크웨어를 구성하는 데님 자켓, 트러커 자켓, 피셔맨 자켓 등 어떠한 워크웨어 자켓들도 초어 자켓으로 말할 수 있지만 특히나 20세기 공장에서 일하는 사람들이 입던 작업복을 주로 초어자켓이라 표현한다. 13oz 데님으로 빳빳하고 묵직하며 독특한 페인팅 및 워싱으로 현대적인 느낌을 주는 멋드러진 초어자켓이다.",
+          },
+          {
+            subTitle: "TANKER JUMPER [Black Night]",
+            images: [suyeongStylistContentImages[5].default.src],
+            content:
+              "VDR의 Best seller 중에서도 Best seller인 Tanker Jumper이다. Restock이 될 때마다 빠른 품절으로 그 인기를 다시금 실감하게 만들어주는 옷이다. 미군 탱크 운전수들의 자켓을 모티브로 하여 보온성을 높이면서도 남성스러운 멋을 잔뜩 살려낸 옷이다. 그럼에도 불구하고 짙은 검정 색감과 크롭한 기장, 포켓의 모양새 그리고 클래식한 버클이 역설적이게 트렌디한 느낌을 준다.",
+          },
+          {
+            subTitle: "122 Wide Straight (Washed Black) sanforized",
+            images: [suyeongStylistContentImages[6].default.src],
+            content:
+              "질 좋은 13oz 데님 원단에 Stone Damage 가공으로 부드러우면서도 질긴 텍스쳐를 주는 청바지이다. 나는 이 바지를 굉장히 좋아한다. 할아버지가 되어서도 입을 수 있는 클래식함을 추구하면서도 현대적인 멋, 트렌디한 멋을 잃지 않는 감각이 그대로 드러난 VDR의 역작이라고 생각한다. 원단이나 제품 마감 그리고 포켓 커버 디테일등에서 클래식함을 충분히 느낄 수 있으면서도 전체적인 실루엣, 기장감, 핏 그리고 톤은 그 어떤 현대적인 무드의 스타일에도 잘 묻어날 수 있는 범용성 높은 바지라고 생각한다.",
+          },
+        ],
       },
     ],
   },
