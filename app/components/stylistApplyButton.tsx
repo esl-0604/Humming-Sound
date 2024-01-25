@@ -1,12 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { ScrolledButton } from "../utils/atom/scrolledButton";
 
-interface StylistApplyButtonProps {}
-export default function StylistApplyButton({}: StylistApplyButtonProps) {
+export default function StylistApplyButton() {
   const router = useRouter();
-  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
+  const isScrolled = useRecoilValue<boolean>(ScrolledButton);
   return (
     <div className="fixed bottom-[94px] z-10 h-[30px] w-full max-w-[480px]">
       <div
