@@ -22,9 +22,8 @@ export default function LoginPage() {
             },
           });
           const data = await loginResponse.json();
-
           if (data) {
-            LocalStorage.setItem("userId", data.userId);
+            LocalStorage.setItem("userId", data);
             router.replace("/");
           }
         } catch (error) {

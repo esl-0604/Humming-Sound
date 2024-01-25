@@ -36,6 +36,7 @@ export default function Home() {
           stylistKey={key}
           stylistName={stylists[key].name}
           stylistComment={stylists[key].comment}
+          stylistStyleTags={stylists[key].styleTags}
         />
       ))}
       <ContentBox />
