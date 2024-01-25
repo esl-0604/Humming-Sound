@@ -70,7 +70,9 @@ export default function CheckRow({
             </div>
           ) : type === "byHour" ? (
             <div className="mr-[10px] flex h-full items-center justify-center rounded-[5px] bg-[rgba(255,255,255,0.01)] font-main shadow-button3">
-              {date.slice(2) + " " + getWorkingHours(timeslots)}
+              {date.slice(2) +
+                " " +
+                getWorkingHours(timeslots)[0].replace(/ ~ /g, "~")}
             </div>
           ) : null}
         </div>
