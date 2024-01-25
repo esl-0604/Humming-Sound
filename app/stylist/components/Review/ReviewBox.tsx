@@ -49,13 +49,13 @@ export default function ReviewBox({ stylistKey }: Props) {
         stylist.reviewList.map((review: reviewType, idx: number) => {
           return (
             <div
+              key={idx}
               onClick={() => {
                 if (openCard === idx) setOpenCard(-1);
                 else setOpenCard(idx);
               }}
             >
               <ReviewCard
-                key={idx}
                 open={openCard === idx}
                 reviewer={review.reviewer}
                 date={review.date}
