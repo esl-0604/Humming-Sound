@@ -228,6 +228,10 @@ export default function CalendarBox({}: Props) {
     }
   }, [selectedTime]);
 
+  const refreshTimeSlots = () => {
+    if (selectedTime.length === 2) setSelectedTime([]);
+  };
+
   // 타임슬롯을 max까지 선택하였을 때, 나머지 disabled 처리
   // useEffect(() => {
   //   if (type === "how") {
@@ -288,6 +292,7 @@ export default function CalendarBox({}: Props) {
                 <div
                   ref={slotRef}
                   className="flex h-full w-fit items-center px-[10px]"
+                  onClick={refreshTimeSlots}
                 >
                   {/* {workingHour.working_hours[getDay].map(
                     (time: string, idx: number) => {
