@@ -12,6 +12,7 @@ import CompleteBox from "./components/Complete/CompleteBox";
 import { stylistData, stylistType } from "../utils/atom/stylistTestData";
 import PopUp from "./components/PopUp";
 import { PopUpType, popUp } from "../utils/atom/popUp";
+import CheckBox from "./components/Complete/CheckBox";
 
 export default function Reservation() {
   const stylistKey = useSearchParams().get("stylistKey");
@@ -22,6 +23,7 @@ export default function Reservation() {
   const [totalCost, setTotalCost] = useState<number>(0);
 
   const [isPopUp, setIsPopUp] = useRecoilState<PopUpType>(popUp);
+  const [firstClick, setFirstClick] = useState<boolean>(false);
 
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
@@ -59,10 +61,14 @@ export default function Reservation() {
         setProductList,
         totalCost,
         setTotalCost,
+        firstClick,
+        setFirstClick,
       }}
     >
       <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
-        {isPopUp.pop ? <PopUp type={isPopUp.type} /> : null}
+        {isPopUp.pop && isPopUp.type === "필수" ? (
+          <PopUp type={isPopUp.type} />
+        ) : null}
         <div className="relative flex h-full w-full flex-col px-[30px]">
           <div className="sticky top-0 z-30 h-fit w-full bg-[#161616]">
             <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">
@@ -74,20 +80,40 @@ export default function Reservation() {
               <div className="flex min-h-[60px] w-full flex-col font-default text-[30px] leading-[100%]">
                 <div className="flex min-h-[30px] flex-wrap items-center">
                   <span className="flex h-full items-center whitespace-pre font-highlight">
-                    {stylist.name}{" "}
+                    {step.step === "Check" || step.step === "Done"
+                      ? "OOO"
+                      : stylist.name}{" "}
                   </span>
                   <span className="flex h-full items-center whitespace-nowrap">
-                    스타일리스트
+                    {step.step === "Check" || step.step === "Done"
+                      ? "고객님의"
+                      : "스타일리스트"}
                   </span>
                 </div>
                 <span className="flex min-h-[30px] items-center">
-                  예약을 도와드릴게요.
+                  {step.step === "Check"
+                    ? "예약을 확인해주세요!"
+                    : step.step === "Done"
+                      ? "예약이 확정되었어요!"
+                      : "예약을 도와드릴게요."}
                 </span>
               </div>
 
               <div className="flex min-h-[45px] w-full flex-col font-default text-[15px] leading-[20px]">
-                <span>무엇을 원하시든 맞춰드릴게요.</span>
-                <span>자유롭게 골라주세요!</span>
+                <span>
+                  {step.step === "Check"
+                    ? "고객님만의 멋있는 분위기를 만들어줄 더 다양한"
+                    : step.step === "Done"
+                      ? "아래 버튼을 누르고 진행중인 과정을 확인해보세요."
+                      : "무엇을 원하시든 맞춰드릴게요."}
+                </span>
+                <span>
+                  {step.step === "Check"
+                    ? "컨설팅이 준비되어 있어요. 빠진게 없는지 확인해주세요!"
+                    : step.step === "Done"
+                      ? "입금 확인 후 최종 일정이 확정됩니다!"
+                      : "자유롭게 골라주세요!"}
+                </span>
               </div>
             </div>
           </div>
@@ -97,6 +123,8 @@ export default function Reservation() {
               <ProductBox />
             ) : step.step === "Date1" || step.step === "Date2" ? (
               <CalendarBox />
+            ) : step.step === "Check" ? (
+              <CheckBox />
             ) : (
               <CompleteBox />
             )}
