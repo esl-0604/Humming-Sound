@@ -12,7 +12,7 @@ export default function ThumbnailBox({ stylistKey }: Props) {
   const stylist = stylists[stylistKey];
 
   return (
-    <div className="relative flex max-h-[450px] w-full items-start overflow-hidden">
+    <div className="relative flex max-h-[450px] w-full items-start overflow-hidden bg-[#222222]">
       <div className="to-[#161616]-0% absolute top-0 z-10 h-full w-full bg-gradient-to-t from-[#161616]" />
       <Image
         src={stylist.thumbnail}

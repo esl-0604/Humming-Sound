@@ -1,7 +1,7 @@
 "use client";
 
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useRecoilValue } from "recoil";
 
 interface Props {
@@ -16,6 +16,7 @@ export default function StickyBar({
   stylistKey,
 }: Props) {
   const contentId = useSearchParams().get("contentId");
+  const router = useRouter();
   const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
   return (
@@ -33,8 +34,13 @@ export default function StickyBar({
           <div className="mt-[5px] flex h-[10px] items-center font-main text-[10px] ">
             {stylist.comment}
           </div>
-          <div className="mt-[5px] flex h-[10px] items-center font-main text-[10px] ">
-            {"@eslee850"}
+          <div
+            className="mt-[5px] flex h-[10px] cursor-pointer items-center font-main text-[10px] "
+            onClick={() =>
+              router.push(`https://www.instagram.com/${stylist.instagramId}`)
+            }
+          >
+            {"@" + stylist.instagramId}
           </div>
         </div>
 

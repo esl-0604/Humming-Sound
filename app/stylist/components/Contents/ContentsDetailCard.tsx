@@ -18,16 +18,8 @@ export default function ContentsDetailCard({
   content,
   images,
 }: Props) {
-  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
-  const stylistKey = useSearchParams().get("stylistKey");
-  const contentId = useSearchParams().get("contentId");
-  const StylistContent = stylists[
-    stylistKey ? stylistKey : "testStylist"
-  ].contentsList.find((content) => content.id === Number(contentId));
-  // console.log(stylists);
-
   return (
-    <div className="mt-[10px] flex w-full min-w-[280px] flex-col gap-[10px]">
+    <div className="mt-[100px] flex w-full min-w-[280px] flex-col gap-[10px]">
       <Image src={BLOCK} alt="block" />
 
       <div className="flex w-full flex-col gap-[5px]">
