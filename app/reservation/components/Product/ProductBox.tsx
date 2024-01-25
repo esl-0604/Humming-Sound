@@ -6,7 +6,7 @@ import { ProductData, ServiceType } from "@/app/utils/atom/productData";
 import { useSearchParams } from "next/navigation";
 
 export default function ProductBox() {
-  const order = ["consulting", "optional", "how", "shopping"];
+  const order = ["consulting", "how", "optional", "shopping"];
   const stylistKey = useSearchParams().get("stylistKey");
   const [productList, setProductList] = useState<ServiceType[]>([]);
 
@@ -19,7 +19,7 @@ export default function ProductBox() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setProductList(data);
       });
   }, []);

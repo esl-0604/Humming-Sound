@@ -1,15 +1,7 @@
 import Image from "next/image";
 import BLOCK from "@/public/images/stylistintroduce/block.svg";
-import { useRecoilState } from "recoil";
 
-import {
-  contentType,
-  contentsType,
-  stylistData,
-  stylistType,
-} from "@/app/utils/atom/stylistTestData";
-import { formatHilightText } from "@/app/utils/function/formatHilightText";
-import { useSearchParams } from "next/navigation";
+import { contentType } from "@/app/utils/atom/stylistTestData";
 
 interface Props extends contentType {}
 
@@ -27,11 +19,13 @@ export default function ContentsDetailCard({
         <div className=" w-full text-[12px] font-extralight ">{content}</div>
       </div>
 
-      <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">
-        <img
+      <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px] bg-[#222222]">
+        <Image
           src={images[0]}
           alt="image"
           className="h-full w-full object-cover"
+          width={480}
+          height={1500}
         />
       </div>
     </div>

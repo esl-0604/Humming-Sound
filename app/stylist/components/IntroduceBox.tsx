@@ -23,6 +23,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
   const stylist = stylists[stylistKey];
   const [open, setOpen] = useState<boolean>(false);
   const [focusedDiv, setFocusedDiv] = useState<number>(0);
+  const [overFlowed, setOverFlowed] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,6 +35,13 @@ export default function IntroduceBox({ stylistKey }: Props) {
           block: "center",
         });
       }
+    } else {
+      // console.log(ref.current?.offsetWidth);
+      // console.log(ref.current?.scrollWidth);
+      if (ref.current?.offsetWidth && ref.current?.scrollWidth)
+        if (ref.current?.offsetWidth < ref.current?.scrollWidth)
+          setOverFlowed(true);
+        else setOverFlowed(false);
     }
   }, [open]);
 
@@ -41,11 +49,13 @@ export default function IntroduceBox({ stylistKey }: Props) {
     <div className="flex w-full flex-col pb-[60px]">
       <div className="flex w-full flex-col px-[30px]">
         <div className="relative flex w-full justify-center pt-[39px]">
-          <div className="relative h-[143px] w-[143px] overflow-hidden rounded-full shadow-lg">
-            <img
+          <div className="relative h-[143px] w-[143px] overflow-hidden rounded-full bg-[#222222] shadow-lg">
+            <Image
               src={stylist.profile}
               alt="profile"
               className="h-full w-full object-cover"
+              width={143}
+              height={143}
             />
             <Image
               src={DONUT}
@@ -143,8 +153,14 @@ export default function IntroduceBox({ stylistKey }: Props) {
 
         <div
           ref={ref}
-          className={`relative flex w-full gap-[10px] ${
-            open ? "flex-col items-center" : "h-[200px] overflow-x-scroll"
+          className={`relative flex w-full items-center gap-[10px] ${
+            open
+              ? "flex-col"
+              : `h-[200px]  ${
+                  overFlowed
+                    ? "justify-start overflow-x-scroll"
+                    : "justify-center"
+                }`
           }`}
         >
           {stylist.personalImageList.map((list: string, idx: number) => {
@@ -152,7 +168,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
               <div
                 key={idx}
                 onClick={() => setFocusedDiv(idx)}
-                className={`relative flex-none overflow-hidden rounded-[5px] ${
+                className={`relative flex-none overflow-hidden rounded-[5px] bg-[#222222]  ${
                   open ? "w-full" : "h-full w-[110px]"
                 }`}
               >
@@ -160,10 +176,12 @@ export default function IntroduceBox({ stylistKey }: Props) {
                   <div className="to-[#161616]-0% absolute top-0 z-10 h-full w-full bg-gradient-to-t from-[#161616]" />
                 )}
 
-                <img
+                <Image
                   src={list}
                   alt="image"
                   className="h-full w-full object-cover"
+                  width={480}
+                  height={800}
                 />
               </div>
             );

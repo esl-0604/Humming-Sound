@@ -3,6 +3,7 @@
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import Image from "next/image";
 import { useRecoilValue } from "recoil";
+import StyleTag from "./StyleTag";
 
 interface Props {
   stylistKey: string;
@@ -10,6 +11,7 @@ interface Props {
 export default function ThumbnailBox({ stylistKey }: Props) {
   const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
+  // console.log(stylist.styleTags);
 
   return (
     <div className="relative flex max-h-[450px] w-full items-start overflow-hidden bg-[#222222]">
@@ -21,6 +23,11 @@ export default function ThumbnailBox({ stylistKey }: Props) {
         width={480}
         height={450}
       />
+      <div className="absolute bottom-0 right-0 z-10 flex h-[27px] gap-[5px] pb-[10px] pr-[10px]">
+        {stylist.styleTags.map((tag: string, index: number) => {
+          return <StyleTag key={index} tagTitle={tag} />;
+        })}
+      </div>
     </div>
   );
 }

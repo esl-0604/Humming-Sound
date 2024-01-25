@@ -1,12 +1,7 @@
 import Image from "next/image";
-import BLOCK from "@/public/images/stylistintroduce/block.svg";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
-import {
-  contentsType,
-  stylistData,
-  stylistType,
-} from "@/app/utils/atom/stylistTestData";
+import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import { formatHilightText } from "@/app/utils/function/formatHilightText";
 import { useSearchParams } from "next/navigation";
 
@@ -25,19 +20,17 @@ export default function ContentsDetailTitleCard({
   text,
   type,
 }: Props) {
-  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
-  const stylistKey = useSearchParams().get("stylistKey");
-  const contentId = useSearchParams().get("contentId");
-  const StylistContent = stylists[
-    stylistKey ? stylistKey : "testStylist"
-  ].contentsList.find((content) => content.id === Number(contentId));
-  // console.log(stylists);
-
   return (
     <div className="mt-[10px] flex w-full min-w-[280px] flex-col gap-[10px]">
       <div className="relative h-[200px] w-full cursor-pointer">
-        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px]">
-          <img src={image} alt="image" className="h-full w-full object-cover" />
+        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px] bg-[#222222]">
+          <Image
+            src={image ? image : ""}
+            alt="image"
+            className="h-full w-full object-cover"
+            width={480}
+            height={200}
+          />
         </div>
 
         <div className="to-[#161616]-0% absolute top-0 z-10 h-full w-full bg-gradient-to-b from-[#161616]" />

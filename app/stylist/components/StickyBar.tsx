@@ -57,38 +57,45 @@ export default function StickyBar({
       </div>
 
       {contentId ? null : (
-        <div className="flex h-[46px] w-full items-center">
-          <div
-            className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
-              viewType === "소개"
-                ? "font-highlight"
-                : "border-opacity-30 font-extralight "
-            }`}
-            onClick={() => setViewType("소개")}
-          >
-            소개
+        <>
+          <div className="flex h-[46px] w-full items-center text-[16px]">
+            <div
+              className={`flex h-full flex-1 cursor-pointer items-center justify-center  ${
+                viewType === "소개" ? "font-highlight" : "font-extralight "
+              }`}
+              onClick={() => setViewType("소개")}
+            >
+              소개
+            </div>
+            <div
+              className={`flex h-full flex-1 cursor-pointer items-center justify-center ${
+                viewType === "후기" ? "font-highlight" : "font-extralight "
+              }`}
+              onClick={() => setViewType("후기")}
+            >
+              후기
+            </div>
+            <div
+              className={`flex h-full flex-1 cursor-pointer items-center justify-center ${
+                viewType === "컨텐츠" ? "font-highlight" : "font-extralight "
+              }`}
+              onClick={() => setViewType("컨텐츠")}
+            >
+              컨텐츠
+            </div>
           </div>
-          <div
-            className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
-              viewType === "후기"
-                ? "font-highlight"
-                : "border-opacity-30 font-extralight "
-            }`}
-            onClick={() => setViewType("후기")}
-          >
-            후기
-          </div>{" "}
-          <div
-            className={`flex h-full flex-1 cursor-pointer items-center justify-center border-b border-[#E8E8E8] text-[16px]  ${
-              viewType === "컨텐츠"
-                ? "font-highlight"
-                : "border-opacity-30 font-extralight "
-            }`}
-            onClick={() => setViewType("컨텐츠")}
-          >
-            컨텐츠
+          <div className="relative flex h-[1px] w-full bg-[rgba(232,232,232,0.3)]">
+            <div
+              className={`absolute h-full w-1/3 bg-[#E8E8E8] transition-all duration-300 ease-in-out ${
+                viewType === "소개"
+                  ? "left-0"
+                  : viewType === "후기"
+                    ? "left-1/3"
+                    : "left-2/3"
+              }`}
+            />
           </div>
-        </div>
+        </>
       )}
     </div>
   );

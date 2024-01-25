@@ -3,21 +3,20 @@ import { useState } from "react";
 import OpenedReviewCard from "./OpenedReviewCard";
 import { reviewType } from "@/app/utils/atom/stylistTestData";
 
+interface Props extends reviewType {
+  open: boolean;
+}
+
 export default function ReviewCard({
+  open,
   reviewer,
   date,
   grade,
   comment,
   imageList,
-}: reviewType) {
-  const [open, setOpen] = useState(false);
-
+}: Props) {
   return (
-    <div
-      onClick={() => {
-        setOpen(!open);
-      }}
-    >
+    <div>
       {open ? (
         <OpenedReviewCard
           reviewer={reviewer}
@@ -55,13 +54,17 @@ export default function ReviewCard({
               <span className="whitespace-pre font-main ">{grade} 점 </span>/
               5.0 점
             </div>
-            <div className="flex h-[60px] w-full items-center justify-center overflow-hidden rounded-[5px] bg-transparent">
+            <div className="flex h-[60px] w-full items-center justify-center overflow-hidden rounded-[5px]">
               {imageList[0] ? (
-                <img
-                  className="h-full w-full object-cover"
-                  src={imageList[0]}
-                  alt="image"
-                />
+                <div className="flex h-full w-full items-center justify-center bg-[#222222]">
+                  <Image
+                    className="h-full w-full object-cover"
+                    src={imageList[0]}
+                    alt="image"
+                    width={60}
+                    height={60}
+                  />
+                </div>
               ) : null}
             </div>
           </div>

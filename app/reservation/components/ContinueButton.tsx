@@ -16,8 +16,7 @@ export default function ContinueButton({}: Props) {
 
   const [isPopUp, setIsPopUp] = useRecoilState(popUp);
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
-  const { step, totalCost, productList, firstClick, setFirstClick } =
-    useContext(ReservationContext);
+  const { step, totalCost, productList } = useContext(ReservationContext);
 
   const ContinueClick = () => {
     window.scrollTo({
@@ -38,14 +37,9 @@ export default function ContinueButton({}: Props) {
         setIsPopUp({ pop: true, type: "필수" });
       } else {
         // 2) 필수 옵션 선택 O && 선택 옵션 하나도 안함 최초 시도 --> 팝업창 : 옵션
-        if (
-          !CardList.includes("optional") &&
-          !CardList.includes("shopping") &&
-          firstClick
-        ) {
+        if (!CardList.includes("optional") && !CardList.includes("shopping")) {
           console.log("옵션 상품들을 다시 한번 살펴봐주세요!");
           setIsPopUp({ pop: true, type: "옵션" });
-          setFirstClick(false);
         }
 
         // 3) 필수 옵션 선택 O && (재시도 or 선택 옵션 O)

@@ -7,7 +7,7 @@ import ContinueButton from "./components/ContinueButton";
 import { ReservationContext } from "./context";
 import { useEffect, useState } from "react";
 import ProductBox from "./components/Product/ProductBox";
-import CalendarBox from "./components/Calendar/CalendarBox";
+import CalendarBox from "./components/Date/CalendarBox";
 import CompleteBox from "./components/Complete/CompleteBox";
 import { stylistData, stylistType } from "../utils/atom/stylistTestData";
 import PopUp from "./components/PopUp";
@@ -22,7 +22,6 @@ export default function Reservation() {
   const [totalCost, setTotalCost] = useState<number>(0);
 
   const [isPopUp, setIsPopUp] = useRecoilState<PopUpType>(popUp);
-  const [firstClick, setFirstClick] = useState<boolean>(true);
 
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
@@ -60,8 +59,6 @@ export default function Reservation() {
         setProductList,
         totalCost,
         setTotalCost,
-        firstClick,
-        setFirstClick,
       }}
     >
       <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
