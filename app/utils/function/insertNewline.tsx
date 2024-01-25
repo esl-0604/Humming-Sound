@@ -1,5 +1,5 @@
 export function insertNewline(str: string) {
-  if (str.length >= 8) {
+  if (str.length >= 7) {
     const firstSpaceIndex = str.indexOf(" ");
 
     if (firstSpaceIndex !== -1) {

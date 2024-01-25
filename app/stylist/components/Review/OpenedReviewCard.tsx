@@ -1,4 +1,5 @@
 import { reviewType } from "@/app/utils/atom/stylistTestData";
+import Image from "next/image";
 
 export default function OpenedReviewCard({
   reviewer,
@@ -33,12 +34,14 @@ export default function OpenedReviewCard({
           return (
             <div
               key={idx}
-              className="flex w-full items-center justify-center overflow-hidden rounded-[5px]"
+              className="flex w-full items-center justify-center overflow-hidden rounded-[5px] bg-[#222222]"
             >
-              <img
+              <Image
                 src={list}
                 alt="image"
                 className="h-full w-full object-cover"
+                width={480}
+                height={1500}
               />
             </div>
           );

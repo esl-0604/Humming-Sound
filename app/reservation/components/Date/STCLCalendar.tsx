@@ -9,9 +9,13 @@ import { compareDatesByDay } from "@/app/utils/function/compareDatesByDay";
 
 interface Props {
   setDateSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedTime: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function STCLCalendar({ setDateSelected }: Props) {
+export default function STCLCalendar({
+  setDateSelected,
+  setSelectedTime,
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,6 +66,7 @@ export default function STCLCalendar({ setDateSelected }: Props) {
 
     setDate(date);
     setDateSelected(true);
+    setSelectedTime([]);
   };
 
   const tileDisabled = ({ date, view }: any) => {

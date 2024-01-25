@@ -8,7 +8,7 @@ import {
   stylistData,
   stylistType,
 } from "@/app/utils/atom/stylistTestData";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import ContentsDetailTitleCard from "./ContentsDetailTitle.Card";
 import { ContentId } from "@/app/utils/atom/contentId";
 import { useEffect } from "react";
@@ -18,16 +18,16 @@ interface Props extends contentsType {}
 export default function ContentsDetail() {
   const stylistKey = useSearchParams().get("stylistKey");
   const contentId = useSearchParams().get("contentId");
-  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+  const stylists = useRecoilValue<stylistType>(stylistData);
   const [focusContentId, setFocusContentId] = useRecoilState(ContentId);
 
   const StylistContent = stylists[
     stylistKey ? stylistKey : "testStylist"
   ].contentsList.find((contents) => contents.id === Number(contentId));
 
-  useEffect(() => {
-    setFocusContentId(Number(contentId));
-  }, []);
+  // useEffect(() => {
+  //   setFocusContentId(Number(contentId));
+  // }, []);
 
   return (
     <div className="relative flex h-full w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">

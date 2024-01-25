@@ -82,6 +82,8 @@ export default function ProductRow({
               type: product.cost_type,
               price: price,
               count: optionNum,
+              memo: product.memo,
+              gifURL: gifURL,
             },
           ];
         } else if (product.cost_type === "byHour") {
@@ -93,6 +95,8 @@ export default function ProductRow({
               price: price,
               date: null,
               timeslots: [],
+              memo: product.memo,
+              gifURL: gifURL,
             },
           ];
         } else {
@@ -102,6 +106,8 @@ export default function ProductRow({
               title: product.title,
               type: product.cost_type,
               price: price,
+              memo: product.memo,
+              gifURL: gifURL,
             },
           ];
         }
@@ -125,6 +131,8 @@ export default function ProductRow({
             type: product.cost_type,
             price: price,
             count: optionNum,
+            memo: product.memo,
+            gifURL: gifURL,
           });
           temp[card] = updateCard;
           setProductList(temp);
@@ -136,6 +144,8 @@ export default function ProductRow({
             type: product.cost_type,
             price: price,
             count: optionNum,
+            memo: product.memo,
+            gifURL: gifURL,
           });
           // console.log(temp);
           setProductList(temp);
@@ -171,11 +181,11 @@ export default function ProductRow({
 
   return (
     <div
-      className={`flex h-fit w-full gap-[30px] ${select ? "" : "opacity-50"}`}
+      className={`flex h-fit w-full cursor-pointer gap-[30px] ${select ? "" : "opacity-50"}`}
       onClick={SetProductList}
     >
       <div className="ml-[4px] flex w-[50px] flex-col gap-[10px] text-[#E8E8E8] ">
-        <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden">
+        <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[10px]">
           <Lottie animationData={gifURL} lottieRef={lottieRef} />
         </div>
         <div
@@ -201,11 +211,13 @@ export default function ProductRow({
                 ₩
               </span>
               <span className="flex h-full items-center justify-end">
-                {product.cost_type === "byHour" ? "+" : null}
+                {product.cost_type !== "total" ? "+" : null}
                 {addCommasToNumber(price)}
               </span>
               {product.cost_type === "byHour" ? (
                 <span className="font-default">/h</span>
+              ) : product.cost_type === "byEA" ? (
+                <span className="font-default">/개</span>
               ) : null}
             </div>
           ) : (
@@ -224,7 +236,7 @@ export default function ProductRow({
               >
                 -
               </div>
-              <div className="shadow-button3 flex h-full w-[20px] items-center justify-center rounded-[5px] bg-[rgba(255,255,255,0.01)] font-main">
+              <div className="flex h-full w-[20px] items-center justify-center rounded-[5px] bg-[rgba(255,255,255,0.01)] font-main shadow-button3">
                 {optionNum}
               </div>
               <div
