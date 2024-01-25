@@ -8,6 +8,7 @@ export interface stylistType {
     styleTags: string[];
     name: string;
     comment: string;
+    instagramId: string;
     avgGrade: string;
     consultingAmount: string;
     aboutMe: string[];

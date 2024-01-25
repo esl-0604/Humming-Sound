@@ -36,6 +36,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
       }
     }
   }, [open]);
+
   return (
     <div className="flex w-full flex-col pb-[60px]">
       <div className="flex w-full flex-col px-[30px]">
