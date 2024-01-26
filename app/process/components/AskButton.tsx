@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 interface AskButtonProps {
   status: number;
 }
@@ -22,7 +22,7 @@ export default function AskButton({ status }: AskButtonProps) {
         </Link>
       ) : status == 2 ? (
         <Link
-          href="http://pf.kakao.com/_nLIiG/chat"
+          href="reportdownload"
           className={`flex h-[50px] w-full items-center justify-center rounded-[48px] bg-[rgba(0,0,0,0.10)] shadow-button2 
           backdrop-blur-[7.5px]`}
         >
