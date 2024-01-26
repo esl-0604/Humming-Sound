@@ -25,7 +25,6 @@ export default function ContinueButton({}: Props) {
     productList,
     firstClick,
     setFirstClick,
-    inputPhoneNum,
     setInputPhoneNum,
   } = useContext(ReservationContext);
 
@@ -159,7 +158,7 @@ export default function ContinueButton({}: Props) {
     // 현재 == Check 일 경우,
     else if (step.step === "Check") {
       // 로그아웃 상태라면, nextStep : Login
-      console.log(user);
+      // console.log(user);
       if (!user) {
         nextStep = "Login";
         router.push(defaultURL + nextStep);

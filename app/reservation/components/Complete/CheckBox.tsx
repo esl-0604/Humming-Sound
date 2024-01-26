@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { ReservationContext } from "../../context";
 import CheckRow from "./CheckRow";
+import PhoneInput from "./PhoneInput";
 
 interface Props {}
 
@@ -50,6 +51,7 @@ export default function CheckBox({}: Props) {
 
   return (
     <div className="flex h-fit w-full flex-col pb-[50px] text-[#E8E8E8]">
+      {inputPhoneNum ? <PhoneInput /> : null}
       <Image src={BLOCK} alt="block" />
 
       <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px] font-branding text-[30px] font-normal">

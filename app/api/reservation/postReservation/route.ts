@@ -42,8 +42,9 @@ interface Shopping {
   title: string;
   type: string;
   price: number;
-  date: string;
-  timeslot: string[];
+  date?: string;
+  timeslot?: string[];
+  count?: number;
 }
 
 export async function POST(req: NextRequest) {

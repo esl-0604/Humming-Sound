@@ -16,8 +16,8 @@ export default function ReservationLayout({
   const [user, setUser] = useRecoilState(userData);
 
   useEffect(() => {
-    console.log(userId);
-    if (userId) {
+    // console.log(userId);
+    if (userId && !user) {
       fetch("/api/user/getUserByUserId?user_id=" + userId, {
         method: "GET",
         headers: {
@@ -26,7 +26,7 @@ export default function ReservationLayout({
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setUser(data);
         })
         .catch((error) => {
@@ -43,37 +43,38 @@ export default function ReservationLayout({
   // 2. 카카오 로그인 --------------------------------------------------
   const param = useSearchParams();
   const kakaoCode = param.get("code");
-  console.log(kakaoCode);
+  // console.log(kakaoCode);
   const router = useRouter();
   // console.log(LocalStorage.getItem("reservationData"));
 
-  useEffect(() => {
-    if (kakaoCode) {
-      fetch("/api/kakao", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authCode: kakaoCode,
-        },
-      })
-        .then((res) => console.log(res))
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Error fetching data:", error));
+  // useEffect(() => {
+  //   if (kakaoCode) {
+  //     fetch("/api/kakao", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         authCode: kakaoCode,
 
-      // LocalStorage.setItem("userId", data);
-      // const redirectURL =
-      //   window.location.origin + window.location.pathname;
+  //       },
+  //     })
+  //       .then((res) => console.log(res))
+  //       .then((data) => console.log(data))
+  //       .catch((error) => console.error("Error fetching data:", error));
 
-      // if (LocalStorage.getItem("reservationData")) {
-      //   const { step, stylistKey, productList } = JSON.parse(
-      //     LocalStorage.getItem("reservationData"),
+  //     // LocalStorage.setItem("userId", data);
+  //     // const redirectURL =
+  //     //   window.location.origin + window.location.pathname;
 
-      //   );
-      // }
+  //     // if (LocalStorage.getItem("reservationData")) {
+  //     //   const { step, stylistKey, productList } = JSON.parse(
+  //     //     LocalStorage.getItem("reservationData"),
 
-      // router.replace(redirectURL + "?stylist");
-    }
-  }, [kakaoCode]);
+  //     //   );
+  //     // }
+
+  //     // router.replace(redirectURL + "?stylist");
+  //   }
+  // }, [kakaoCode]);
   // 2. 카카오 로그인 --------------------------------------------------
 
   return <>{children}</>;

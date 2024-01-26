@@ -15,6 +15,7 @@ import { PopUpType, popUp } from "../utils/atom/popUp";
 import CheckBox from "./components/Complete/CheckBox";
 import { formatMainText } from "../utils/function/formatMainText";
 import LoginBox from "./components/Complete/LoginBox";
+import { userData } from "../utils/atom/userData";
 
 export default function Reservation() {
   const stylistKey = useSearchParams().get("stylistKey");
@@ -28,11 +29,13 @@ export default function Reservation() {
   const [firstClick, setFirstClick] = useState<boolean>(false);
   const [inputPhoneNum, setInputPhoneNum] = useState<boolean>(false);
 
+  const [user, setUser] = useRecoilState(userData);
+
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
 
   useEffect(() => {
-    console.log(productList);
+    // console.log(productList);
     const typeList = Object.keys(productList);
     let costs = 0;
     typeList.forEach((card: any) => {
@@ -95,7 +98,9 @@ export default function Reservation() {
                 <div className="flex min-h-[30px] flex-wrap items-center">
                   <span className="flex h-full items-center whitespace-pre font-highlight">
                     {step.step === "Check" || step.step === "Done"
-                      ? "OOO"
+                      ? user
+                        ? user.nickname
+                        : "멋진 수달"
                       : stylist.name}{" "}
                   </span>
                   <span className="flex h-full items-center whitespace-nowrap">
