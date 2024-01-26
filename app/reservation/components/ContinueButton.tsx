@@ -8,6 +8,7 @@ import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
 import PopUp from "./PopUp";
 import { popUp } from "@/app/utils/atom/popUp";
 import { formatMainText } from "@/app/utils/function/formatMainText";
+import { userData } from "@/app/utils/atom/userData";
 
 interface Props {}
 
@@ -17,8 +18,16 @@ export default function ContinueButton({}: Props) {
 
   const [isPopUp, setIsPopUp] = useRecoilState(popUp);
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
-  const { step, totalCost, productList, firstClick, setFirstClick } =
-    useContext(ReservationContext);
+  const [user, setUser] = useRecoilState(userData);
+  const {
+    step,
+    totalCost,
+    productList,
+    firstClick,
+    setFirstClick,
+    inputPhoneNum,
+    setInputPhoneNum,
+  } = useContext(ReservationContext);
 
   useEffect(() => {
     window.scrollTo({
@@ -147,10 +156,21 @@ export default function ContinueButton({}: Props) {
       }
     }
 
-    // 현재 == Check 일 경우, nextStep : Done
+    // 현재 == Check 일 경우,
     else if (step.step === "Check") {
-      nextStep = "Done";
-      router.push(defaultURL + nextStep);
+      // 로그아웃 상태라면, nextStep : Login
+      console.log(user);
+      if (!user) {
+        nextStep = "Login";
+        router.push(defaultURL + nextStep);
+      }
+
+      // 로그인 상태라면, 전화번호 입력 창 open
+      else {
+        // nextStep = "Done";
+        // router.push(defaultURL + nextStep);
+        setInputPhoneNum(true);
+      }
     }
 
     // 현재 == Done 일 경우, main 으로 라우팅
@@ -225,7 +245,7 @@ export default function ContinueButton({}: Props) {
                 isScrolled ? "font-main" : "font-default"
               }`}
             >
-              계속
+              {step.step === "Check" && !user ? "로그인 후" : "계속"}
               <span
                 className={`whitespace-pre ${
                   isScrolled ? "font-highlight" : "font-main"

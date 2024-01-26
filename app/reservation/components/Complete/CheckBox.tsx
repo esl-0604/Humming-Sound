@@ -21,7 +21,8 @@ export interface CheckRowType {
 }
 
 export default function CheckBox({}: Props) {
-  const { productList } = useContext(ReservationContext);
+  const { productList, inputPhoneNum, setInputPhoneNum } =
+    useContext(ReservationContext);
   const [checkList, setCheckList] = useState<CheckRowType[]>([]);
 
   useEffect(() => {

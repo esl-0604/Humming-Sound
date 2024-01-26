@@ -13,6 +13,8 @@ import { stylistData, stylistType } from "../utils/atom/stylistTestData";
 import PopUp from "./components/PopUp";
 import { PopUpType, popUp } from "../utils/atom/popUp";
 import CheckBox from "./components/Complete/CheckBox";
+import { formatMainText } from "../utils/function/formatMainText";
+import LoginBox from "./components/Complete/LoginBox";
 
 export default function Reservation() {
   const stylistKey = useSearchParams().get("stylistKey");
@@ -24,6 +26,7 @@ export default function Reservation() {
 
   const [isPopUp, setIsPopUp] = useRecoilState<PopUpType>(popUp);
   const [firstClick, setFirstClick] = useState<boolean>(false);
+  const [inputPhoneNum, setInputPhoneNum] = useState<boolean>(false);
 
   const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
@@ -71,12 +74,15 @@ export default function Reservation() {
         setTotalCost,
         firstClick,
         setFirstClick,
+        inputPhoneNum,
+        setInputPhoneNum,
       }}
     >
-      <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
+      <main className="relative flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
         {isPopUp.pop && isPopUp.type === "필수" ? (
           <PopUp type={isPopUp.type} />
         ) : null}
+        {step.step === "Login" ? <LoginBox /> : null}
         <div className="relative flex h-full w-full flex-col px-[30px]">
           <div className="sticky top-0 z-30 h-fit w-full bg-[#161616]">
             <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">
@@ -112,7 +118,9 @@ export default function Reservation() {
                   {step.step === "Check"
                     ? "고객님만의 멋있는 분위기를 만들어줄 더 다양한"
                     : step.step === "Done"
-                      ? "아래 버튼을 누르고 진행중인 과정을 확인해보세요."
+                      ? formatMainText(
+                          "아래 버튼을 누르고 <b>진행중인 과정을 확인해보세요.</b>",
+                        )
                       : "무엇을 원하시든 맞춰드릴게요."}
                 </span>
                 <span>
@@ -133,9 +141,9 @@ export default function Reservation() {
               <CalendarBox />
             ) : step.step === "Check" ? (
               <CheckBox />
-            ) : (
+            ) : step.step === "Done" ? (
               <CompleteBox />
-            )}
+            ) : null}
           </div>
         </div>
         <ContinueButton />
