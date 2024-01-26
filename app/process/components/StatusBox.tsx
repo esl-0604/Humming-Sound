@@ -9,10 +9,24 @@ import PendingMessage from "./PendingMessage";
 import ProcessingMessage from "./ProcessingMessage";
 import PublishingMessage from "./PublishingMessage";
 import NonAppliedMessage from "./NonAppliedMessage";
+import { useEffect, useRef } from "react";
 interface StatusBoxProps {
   status: number;
 }
 export default function StatusBox({ status }: StatusBoxProps) {
+  const lottieRef1 = useRef<any>();
+  const lottieRef2 = useRef<any>();
+  const lottieRef3 = useRef<any>();
+
+  useEffect(() => {
+    if (status != 0) lottieRef1.current.stop();
+    else lottieRef1.current.play();
+    if (status != 1) lottieRef2.current.stop();
+    else lottieRef2.current.play();
+    if (status != 2) lottieRef3.current.stop();
+    else lottieRef3.current.play();
+  }, [status]);
+
   return (
     <div className="flex w-full flex-col gap-[10px]">
       <Block />
@@ -26,9 +40,11 @@ export default function StatusBox({ status }: StatusBoxProps) {
               : "non applied"}
       </div>
       <div className="flex w-full flex-row items-center justify-between">
-        <div className="flex w-[50px] flex-col gap-[10px]">
+        <div
+          className={`flex w-[50px] flex-col gap-[10px] ${status == 0 ? "" : "opacity-50"}`}
+        >
           <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[10px]">
-            <Lottie animationData={CHECK} />
+            <Lottie animationData={CHECK} lottieRef={lottieRef1} />
           </div>
           <div
             className={`flex h-[16px] w-full  flex-col items-center justify-center font-branding text-[13.15px] leading-[100%]`}
@@ -44,9 +60,11 @@ export default function StatusBox({ status }: StatusBoxProps) {
             height={10}
           />
         </div>
-        <div className="flex w-[50px] flex-col gap-[10px]">
+        <div
+          className={`flex w-[50px] flex-col gap-[10px] ${status == 1 ? "" : "opacity-50"}`}
+        >
           <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[10px]">
-            <Lottie animationData={DOCS} />
+            <Lottie animationData={DOCS} lottieRef={lottieRef2} />
           </div>
           <div
             className={`flex h-[16px] w-full  flex-col items-center justify-center font-branding text-[13.15px] leading-[100%]`}
@@ -62,9 +80,11 @@ export default function StatusBox({ status }: StatusBoxProps) {
             height={10}
           />
         </div>
-        <div className="flex w-[50px] flex-col gap-[10px]">
+        <div
+          className={`flex w-[50px] flex-col gap-[10px] ${status == 2 ? "" : "opacity-50"}`}
+        >
           <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[10px]">
-            <Lottie animationData={CLOCK} />
+            <Lottie animationData={CLOCK} lottieRef={lottieRef3} />
           </div>
           <div
             className={`flex h-[16px] w-full  flex-col items-center justify-center font-branding text-[13.15px] leading-[100%]`}

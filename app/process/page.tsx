@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 export default function Process() {
   const userId = LocalStorage.getItem("userId");
   const [userNickname, setUserNickname] = useState<string>("고객");
+  const status = -1;
   useEffect(() => {
     fetch(`/api/user/getUserByUserId?user_id=${userId}`).then((res) =>
       res.json().then((data) => setUserNickname(data.nickname)),
     );
   }, []);
+
   return (
     <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
       <div className="relative flex h-full w-full flex-col px-[30px]">
@@ -45,10 +47,10 @@ export default function Process() {
             </div>
           </div>
         </div>
-        <StatusBox status={3} />
+        <StatusBox status={status} />
       </div>
-      <CancelButton />
-      <AskButton status={3} />
+      {status != -1 ? <CancelButton /> : null}
+      <AskButton status={status} />
     </main>
   );
 }
