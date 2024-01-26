@@ -25,7 +25,8 @@ interface UserInfo {
 export async function GET(req: NextRequest) {
   const getAccessToken = async () => {
     const authcode = req.headers.get("authCode");
-    const tokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&code=${authcode}`;
+    const redirect_uri_path = req.headers.get("redirectUriPath");
+    const tokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}/${redirect_uri_path}&code=${authcode}`;
     const tokenResponse: TokenResponse = await fetch(tokenUrl, {
       method: "POST",
       headers: {
