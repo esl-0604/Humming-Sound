@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 interface Reservation {
   stylist_id: string;
   user_id: string;
+  user_phone_number: string;
   services: {
     consulting: Consulting[];
     optional: Optional[];
@@ -53,16 +54,19 @@ export async function POST(req: NextRequest) {
   if (
     !reservation.stylist_id ||
     !reservation.user_id ||
+    !reservation.user_phone_number ||
     !reservation.services ||
     !validateServices(reservation.services)
   ) {
     return NextResponse.json("fail", { status: 400 });
   }
 
-  console.log(reservation);
-  const postReservation = await db
-    .collection("Reservation")
-    .insertOne(reservation);
+  // insertOne 메서드를 사용하여 예약을 MongoDB에 삽입하기 전에
+  // created_at 필드를 추가하고 서버 삽입 시점의 시간을 설정
+  const postReservation = await db.collection("Reservation").insertOne({
+    ...reservation,
+    created_at: new Date().toLocaleString("kr-KO"), // 서버 삽입 시점의 시간
+  });
 
   if (!postReservation.insertedId) {
     return NextResponse.json("fail", { status: 400 });
