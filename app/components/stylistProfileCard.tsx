@@ -84,14 +84,14 @@ export default function StylistProfileCard({
             {stylistComment}
           </p>
         </div>
-        <div className="absolute bottom-[10px] right-[10px] z-30 flex h-[15px] w-fit flex-row items-center justify-between rounded-[15px]">
-          <p className="right-[20px] z-20 mr-[5px] flex h-[15px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[8px] font-main text-[5px] text-[#E8E8E8]">
+        <div className="absolute bottom-[10px] right-[10px] z-30 flex h-[20px] w-fit flex-row items-center justify-between rounded-[15px]">
+          <p className="right-[20px] z-20 mr-[5px] flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
             {stylistStyleTags[0]}
           </p>
-          <p className="right-[20px] z-20 mr-[5px] flex h-[15px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[8px] font-main text-[5px] text-[#E8E8E8]">
+          <p className="right-[20px] z-20 mr-[5px] flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
             {stylistStyleTags[1]}
           </p>
-          <p className="right-[20px] z-20 flex h-[15px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[8px] font-main text-[5px] text-[#E8E8E8]">
+          <p className="right-[20px] z-20 flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
             {stylistStyleTags[2]}
           </p>
         </div>
