@@ -47,34 +47,35 @@ export default function ReservationLayout({
   const router = useRouter();
   // console.log(LocalStorage.getItem("reservationData"));
 
-  // useEffect(() => {
-  //   if (kakaoCode) {
-  //     fetch("/api/kakao", {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         authCode: kakaoCode,
+  useEffect(() => {
+    if (kakaoCode) {
+      fetch("/api/kakao", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authCode: kakaoCode,
+          redirectUriPath: "reservation",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          LocalStorage.setItem("userId", data);
+          const redirectURL = window.location.origin + window.location.pathname;
 
-  //       },
-  //     })
-  //       .then((res) => console.log(res))
-  //       .then((data) => console.log(data))
-  //       .catch((error) => console.error("Error fetching data:", error));
+          // if (LocalStorage.getItem("reservationData")) {
+          //   const { step, stylistKey, productList } = JSON.parse(
+          //     LocalStorage.getItem("reservationData")
+          //       ? LocalStorage.getItem("reservationData")
+          //       : "",
+          //   );
+          // }
 
-  //     // LocalStorage.setItem("userId", data);
-  //     // const redirectURL =
-  //     //   window.location.origin + window.location.pathname;
-
-  //     // if (LocalStorage.getItem("reservationData")) {
-  //     //   const { step, stylistKey, productList } = JSON.parse(
-  //     //     LocalStorage.getItem("reservationData"),
-
-  //     //   );
-  //     // }
-
-  //     // router.replace(redirectURL + "?stylist");
-  //   }
-  // }, [kakaoCode]);
+          router.replace(redirectURL + "?stylist");
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [kakaoCode]);
   // 2. 카카오 로그인 --------------------------------------------------
 
   return <>{children}</>;
