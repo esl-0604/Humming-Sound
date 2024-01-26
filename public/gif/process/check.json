@@ -65,7 +65,7 @@
                   "ty": "st",
                   "c": {
                     "a": 0,
-                    "k": [0.071, 0.075, 0.192, 1],
+                    "k": [0.91, 0.91, 0.91, 1],
                     "ix": 3,
                     "x": "var $bm_rt;\n$bm_rt = comp('37-approve-checked-simple-outline').layer('control').effect('primary')('Color');"
                   },
@@ -210,7 +210,7 @@
                   "ty": "st",
                   "c": {
                     "a": 0,
-                    "k": [0.071, 0.075, 0.192, 1],
+                    "k": [0.91, 0.91, 0.91, 1],
                     "ix": 3,
                     "x": "var $bm_rt;\n$bm_rt = comp('37-approve-checked-simple-outline').layer('control').effect('primary')('Color');"
                   },
@@ -428,7 +428,7 @@
                   "ty": "st",
                   "c": {
                     "a": 0,
-                    "k": [0.071, 0.075, 0.192, 1],
+                    "k": [0.91, 0.91, 0.91, 1],
                     "ix": 3,
                     "x": "var $bm_rt;\n$bm_rt = comp('37-approve-checked-simple-outline').layer('control').effect('primary')('Color');"
                   },
@@ -592,7 +592,7 @@
                   "ty": "st",
                   "c": {
                     "a": 0,
-                    "k": [0.071, 0.075, 0.192, 1],
+                    "k": [0.91, 0.91, 0.91, 1],
                     "ix": 3,
                     "x": "var $bm_rt;\n$bm_rt = comp('37-approve-checked-simple-outline').layer('control').effect('primary')('Color');"
                   },
@@ -687,7 +687,7 @@
                   "ty": "st",
                   "c": {
                     "a": 0,
-                    "k": [0.071, 0.075, 0.192, 1],
+                    "k": [0.91, 0.91, 0.91, 1],
                     "ix": 3,
                     "x": "var $bm_rt;\n$bm_rt = comp('37-approve-checked-simple-outline').layer('control').effect('primary')('Color');"
                   },
@@ -972,7 +972,7 @@
                   "ty": "st",
                   "c": {
                     "a": 0,
-                    "k": [0.071, 0.075, 0.192, 1],
+                    "k": [0.91, 0.91, 0.91, 1],
                     "ix": 3,
                     "x": "var $bm_rt;\n$bm_rt = comp('37-approve-checked-simple-outline').layer('control').effect('primary')('Color');"
                   },
@@ -1066,7 +1066,7 @@
               "nm": "Color",
               "mn": "ADBE Color Control-0001",
               "ix": 1,
-              "v": { "a": 0, "k": [0.071, 0.075, 0.192], "ix": 1 }
+              "v": { "a": 0, "k": [0.91, 0.91, 0.91], "ix": 1 }
             }
           ]
         }
