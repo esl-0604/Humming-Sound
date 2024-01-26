@@ -5,6 +5,8 @@ import ProductCard from "./ProductCard";
 import { ProductData, ServiceType } from "@/app/utils/atom/productData";
 import { useSearchParams } from "next/navigation";
 import { ReservationContext } from "../../context";
+import { useRecoilState } from "recoil";
+import { stylistIdData } from "@/app/utils/atom/userData";
 
 export default function ProductBox() {
   const order = ["consulting", "how", "optional", "shopping"];
@@ -12,6 +14,7 @@ export default function ProductBox() {
   const { productList, firstClick } = useContext(ReservationContext);
   const [serviceList, setServiceList] = useState<ServiceType[]>([]);
   const [essentialOn, setEssentialOn] = useState<boolean>(false);
+  const [stylistId, setStylistId] = useRecoilState(stylistIdData);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -26,6 +29,10 @@ export default function ProductBox() {
       .then((data) => {
         // console.log(data);
         setServiceList(data);
+        if (data.length > 0) {
+          const stylistID = data[0].stylist_id;
+          setStylistId(stylistID);
+        }
       });
   }, []);
 

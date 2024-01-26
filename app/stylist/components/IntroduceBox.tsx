@@ -140,16 +140,20 @@ export default function IntroduceBox({ stylistKey }: Props) {
         }}
       >
         <div className="mb-[10px] h-[1px] w-[100px] bg-[#E8E8E8]" />
-        {/* <Image
-          src={ARROW}
-          alt="leftarrow"
-          className="absolute left-[30px] top-[106.5px] z-20 cursor-pointer"
-        />
-        <Image
-          src={ARROW}
-          alt="rightarrow"
-          className="absolute right-[30px] top-[106.5px] z-20 rotate-180 cursor-pointer"
-        /> */}
+        {open ? null : (
+          <>
+            <Image
+              src={ARROW}
+              alt="leftarrow"
+              className="absolute left-[30px] top-[106.5px] z-20 cursor-pointer"
+            />
+            <Image
+              src={ARROW}
+              alt="rightarrow"
+              className="absolute right-[30px] top-[106.5px] z-20 rotate-180 cursor-pointer"
+            />
+          </>
+        )}
 
         <div
           ref={ref}

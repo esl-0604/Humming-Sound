@@ -28,33 +28,17 @@ export default function CompleteBox({}: Props) {
           <Image src={UPQUOTES} alt="upquotes" />
         </div>
 
-        <div className="flex w-full flex-col items-center justify-center font-default text-[13px]">
+        <div className="flex w-full flex-col items-center justify-center gap-[1.5px] py-[5px] font-default text-[13px]">
           <span className="flex h-[15px] w-full items-center justify-center">
             스타일링이 성공적으로 신청되었어요!
           </span>
-          <span className="flex h-[15px] w-full items-center justify-center">
-            아래 버튼을 누르고
-            <span className="font-main">진행중인 과정을 확인해보세요.</span>
+          <span className="flex h-[15px] w-full items-center justify-center font-main">
+            <span className="whitespace-pre font-branding">STCL </span>
+            리포트로 금방 찾아올게요.
           </span>
           <span className="flex h-[15px] w-full items-center justify-center">
             -
           </span>
-          <span className="flex h-[15px] w-full items-center justify-center">
-            최대 24시간 내에 입금 확인 후 최종 일정이 확정됩니다!
-          </span>
-          <span className="flex h-[15px] w-full items-center justify-center font-main">
-            맞춤형 리포트로 금방 찾아올게요.
-          </span>
-          <span className="flex h-[15px] w-full items-center justify-center">
-            감사합니다!
-          </span>
-        </div>
-
-        <div className="mb-[100px] flex h-[15px] w-full justify-center opacity-30">
-          <Image src={DOWNQUOTES} alt="downquotes" />
-        </div>
-
-        <div className="flex w-full flex-col items-center justify-center pb-[74px] font-default text-[13px]">
           <span className="flex h-[15px] w-full items-center justify-center font-main">
             기업은행 97302133301011 안수영
           </span>
@@ -64,6 +48,10 @@ export default function CompleteBox({}: Props) {
           <span className="flex h-[15px] w-full items-center justify-center font-main">
             예약이 취소됩니다.
           </span>
+        </div>
+
+        <div className="mb-[100px] flex h-[15px] w-full justify-center opacity-30">
+          <Image src={DOWNQUOTES} alt="downquotes" />
         </div>
       </div>
     </div>
