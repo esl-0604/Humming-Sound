@@ -32,12 +32,12 @@ export default function StatusBox({ status }: StatusBoxProps) {
       <Block />
       <div className="flex w-full flex-col font-branding text-[30px] leading-[100%]">
         {status == 0
-          ? "pending"
+          ? "pending!"
           : status == 1
-            ? "processing"
+            ? "processing!"
             : status == 2
-              ? "publishing"
-              : "non applied"}
+              ? "publishing!"
+              : "non applied!"}
       </div>
       <div className="flex w-full flex-row items-center justify-between">
         <div
@@ -52,13 +52,8 @@ export default function StatusBox({ status }: StatusBoxProps) {
             pending
           </div>
         </div>
-        <div className="flex h-[76px] flex-col justify-end pb-1">
-          <Image
-            src="/images/toggleClosed.svg"
-            alt="smallArrow"
-            width={7}
-            height={10}
-          />
+        <div className="flex h-[76px] flex-col justify-end">
+          <p className="font-branding text-[13.15px] leading-[100%]">&gt;</p>
         </div>
         <div
           className={`flex w-[50px] flex-col gap-[10px] ${status == 1 ? "" : "opacity-50"}`}
@@ -72,13 +67,8 @@ export default function StatusBox({ status }: StatusBoxProps) {
             processing
           </div>
         </div>
-        <div className="flex h-[76px] flex-col justify-end pb-1">
-          <Image
-            src="/images/toggleClosed.svg"
-            alt="smallArrow"
-            width={7}
-            height={10}
-          />
+        <div className="flex h-[76px] flex-col justify-end">
+          <p className="font-branding text-[13.15px] leading-[100%]">&gt;</p>
         </div>
         <div
           className={`flex w-[50px] flex-col gap-[10px] ${status == 2 ? "" : "opacity-50"}`}

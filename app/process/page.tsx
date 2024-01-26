@@ -49,7 +49,7 @@ export default function Process() {
         </div>
         <StatusBox status={status} />
       </div>
-      {status != -1 ? <CancelButton /> : null}
+      {/* {status != -1 ? <CancelButton /> : null} */}
       <AskButton status={status} />
     </main>
   );
