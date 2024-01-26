@@ -19,6 +19,7 @@ export default function LoginPage() {
             headers: {
               "Content-Type": "application/json",
               authCode: kakaoCode,
+              redirectUriPath: "login",
             },
           });
           const data = await loginResponse.json();
