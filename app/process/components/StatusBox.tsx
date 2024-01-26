@@ -17,7 +17,13 @@ export default function StatusBox({ status }: StatusBoxProps) {
     <div className="flex w-full flex-col gap-[10px]">
       <Block />
       <div className="flex w-full flex-col font-branding text-[30px] leading-[100%]">
-        pending
+        {status == 0
+          ? "pending"
+          : status == 1
+            ? "processing"
+            : status == 2
+              ? "publishing"
+              : "non applied"}
       </div>
       <div className="flex w-full flex-row items-center justify-between">
         <div className="flex w-[50px] flex-col gap-[10px]">
