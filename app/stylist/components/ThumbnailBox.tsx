@@ -23,7 +23,7 @@ export default function ThumbnailBox({ stylistKey }: Props) {
         width={480}
         height={450}
       />
-      <div className="absolute bottom-0 right-0 z-10 flex h-[27px] gap-[5px] pb-[10px] pr-[10px]">
+      <div className="absolute bottom-0 right-0 z-10 flex h-[27px] gap-[5px] bg-transparent pb-[10px] pr-[10px]">
         {stylist.styleTags.map((tag: string, index: number) => {
           return <StyleTag key={index} tagTitle={tag} />;
         })}

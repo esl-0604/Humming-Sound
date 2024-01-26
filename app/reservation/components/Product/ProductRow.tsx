@@ -22,7 +22,7 @@ export default function ProductRow({
 }: Props) {
   const memoList = product.memo.split("\n");
   const titleList = insertNewline(product.title).split("\n");
-  const lottieRef = useRef<any>();
+
   const [select, setSelected] = useState<boolean>(false);
   const [optionNum, setOptionNum] = useState<number>(1);
   const { productList, setProductList } = useContext(ReservationContext);
@@ -164,11 +164,6 @@ export default function ProductRow({
     }
   }, [select, optionNum]);
 
-  useEffect(() => {
-    if (!select) lottieRef.current.stop();
-    else lottieRef.current.play();
-  }, [select]);
-
   const SettingOptionNum = (type: string) => {
     if (type === "minus") {
       if (optionNum === 1) {
@@ -178,6 +173,13 @@ export default function ProductRow({
       setOptionNum((prev) => prev + 1);
     }
   };
+
+  const lottieRef = useRef<any>();
+
+  useEffect(() => {
+    if (!select) lottieRef.current.stop();
+    else lottieRef.current.play();
+  }, [select]);
 
   return (
     <div
@@ -217,7 +219,9 @@ export default function ProductRow({
               {product.cost_type === "byHour" ? (
                 <span className="font-default">/h</span>
               ) : product.cost_type === "byEA" ? (
-                <span className="font-default">/개</span>
+                <span className="font-default">
+                  /{card === "optional" ? "3" : "1"}개
+                </span>
               ) : null}
             </div>
           ) : (

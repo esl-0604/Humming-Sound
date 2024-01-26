@@ -35,13 +35,21 @@ export default function ContentsBox({ stylistKey }: Props) {
   return (
     <div
       ref={ref}
-      className="flex w-full flex-col items-center overflow-scroll px-[30px] pb-[60px] text-[#E8E8E8] "
+      className="flex w-full flex-col items-center overflow-scroll px-[30px] pb-[60px] pt-[10px] text-[#E8E8E8] "
     >
       {stylist?.contentsList.length === 0 ? (
-        <div className="relative flex h-[200px] w-full flex-col items-center justify-center px-[10px]">
-          <div className="absolute left-[10px] top-[10px] flex h-[12px] items-center justify-center whitespace-nowrap font-branding text-[15px] font-normal">
-            STCL
-          </div>
+        // <div className="relative flex h-[200px] w-full flex-col items-center justify-center px-[10px]">
+        //   <div className="absolute left-[10px] top-[10px] flex h-[12px] items-center justify-center whitespace-nowrap font-branding text-[15px] font-normal">
+        //     STCL
+        //   </div>
+        //   <span className="font-highlight text-[18.33px]">
+        //     이런! 아직 발행된 컨텐츠가 없어요.
+        //   </span>
+        //   <span className="font-default text-[12.22px]">
+        //     다른 컨텐츠에 더 좋은 정보가 있을지도 몰라요.
+        //   </span>
+        // </div>
+        <div className="flex w-full flex-col items-center justify-center py-[25px]">
           <span className="font-highlight text-[18.33px]">
             이런! 아직 발행된 컨텐츠가 없어요.
           </span>

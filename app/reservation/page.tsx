@@ -52,6 +52,14 @@ export default function Reservation() {
     if (stepKey) setStep({ step: stepKey });
   }, [stepKey]);
 
+  useEffect(() => {
+    if (isPopUp.pop && isPopUp.type === "필수") {
+      setTimeout(() => {
+        setIsPopUp({ pop: false, type: "필수" });
+      }, 1500);
+    }
+  }, [isPopUp]);
+
   return (
     <ReservationContext.Provider
       value={{
