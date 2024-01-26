@@ -114,10 +114,17 @@ const wooklasStylistPersonalContext = require.context(
   false,
   /\.png$/,
 );
+const wooklasStylistContentContext = require.context(
+  "./stylist_wooklas/content_images",
+  false,
+  /\.png$/,
+);
+
 // context.keys()는 해당 폴더 내의 모든 파일 경로를 배열로 반환합니다.
 const wooklasStylistPngFiles = wooklasStylistContext.keys();
 const wooklasStylistReviewPngFiles = wooklasStylistReviewContext.keys();
 const wooklasStylistPersonalPngFiles = wooklasStylistPersonalContext.keys();
+const wooklasStylistContentPngFiles = wooklasStylistContentContext.keys();
 // pngFiles 배열을 사용하여 각 이미지를 import
 const wooklasStylistImages = wooklasStylistPngFiles.map(wooklasStylistContext);
 const wooklasStylistReviewImages = wooklasStylistReviewPngFiles.map(
@@ -125,6 +132,9 @@ const wooklasStylistReviewImages = wooklasStylistReviewPngFiles.map(
 );
 const wooklasStylistPersonalImages = wooklasStylistPersonalPngFiles.map(
   wooklasStylistPersonalContext,
+);
+const wooklasStylistContentImages = wooklasStylistContentPngFiles.map(
+  wooklasStylistContentContext,
 );
 // -------------------------------------------------------------------------
 
@@ -440,6 +450,322 @@ export const stylistDB = {
       },
     ],
   },
+
+  wooklasStylist: {
+    profile: wooklasStylistImages[0].default.src,
+    thumbnail: wooklasStylistImages[1].default.src,
+    name: "현욱",
+    comment: "0부터 시작하는, 이성에게 사랑받는 스타일링",
+    instagramId: "wooklas",
+    avgGrade: "5.0",
+    consultingAmount: "6",
+    styleTags: ["무채색", "미니멀", "남친룩", "소프트", "악세사리"],
+    aboutMe: [
+      "(전) 연 매출 5억 원 쇼핑몰 CEO",
+      "20K 인스타그램 패션 인플루언서",
+      "1년 차 온라인 패션 컨설턴트",
+    ],
+    forWho: [
+      "나의 체형과 이미지에 맞는 스타일을 찾고싶은 분",
+      "소개팅/데이트 전 스타일 변화가 필요하신 분",
+      "요즘 트렌드에 맞는 스타일링을 원하시는 분",
+    ],
+    phillosophy: [
+      "단지, 몰라서 손해보고 사는 남성들이 너무 많습니다.",
+      "어떤 환경에서든 우리는 항상 선택에 놓이곤 하는데,",
+      "상향평준화 된 시대에 우리가 선택 받기 위해서는",
+      "사소한 1-2개의 디테일을 챙겨야만 하죠. ",
+      "패션이 바로 정답입니다.",
+      "또한, 좋은 첫 인상을 결정하는 요소가 외모가 아니라 옷차림과, 말투일 수도 있다는 사실을 알 수 있습니다.",
+      "충분히 누릴 자격 있는 당신이 변할 차례입니다.",
+    ],
+    personalImageList: wooklasStylistPersonalImages.map(
+      (curr) => curr.default.src,
+    ),
+    reviewList: [
+      {
+        reviewer: "궡**",
+        date: "23.03.04",
+        grade: "5.0",
+        comment:
+          "제가 워낙에 꾸밀줄을 몰랐어서 갑자기 스타일을 바꾸기에 겁이 났었는데 제 체형에 맞게 부담스럽지 않은 코디들로 추천해주시고 무엇보다도 저랑 잘 어울릴 수있게 고민을 많이 해주셨다는 느낌을 받아서 너무 만족했습니다. 너무 친절하게 이것저것 알려주시려고해서 상담 받는동안에도 기분이 좋았네요 :) 봄에 입을 옷들로 코디해달라고 요청드린것도 적극 반영해주시고 평소에 잘 몰랐던 브랜드들도 알게되어서 좋았습니당",
+        imageList: [],
+      },
+      {
+        reviewer: "김**",
+        date: "23.03.30",
+        grade: "5.0",
+        comment:
+          "저의 체형이 어떤지 잘 설명해 주시고 친절하게 설명해 주셔서 너무 좋았어요~! 스타일링 방법과 추천해 주신 코디들도 너무 마음이 들었어요 ㅎㅎ",
+        imageList: [],
+      },
+      {
+        reviewer: "검**",
+        date: "23.05.19",
+        grade: "5.0",
+        comment:
+          "전문가분께 객관적인 컨설팅을 받아보니 확실히 새로운 코디를 도전해볼수 있게끔 자신감이 생겼습니다 감사합니다!",
+        imageList: [],
+      },
+      {
+        reviewer: "검**",
+        date: "23.05.23",
+        grade: "5.0",
+        comment:
+          "수정 요청에도 흔쾌히 수락하시고, 제가 원하는 방향대로 코디해 주셔서 정말 좋았습니다! 컨설팅 내내 답변도 빨리 빨리 주시고, 친절하셔서 감사했어요. 믿고 맡겨보시길 추천합니다!!",
+        imageList: [],
+      },
+      {
+        reviewer: "루**",
+        date: "23.11.14",
+        grade: "5.0",
+        comment:
+          "정말 만족합니다! 제 지인이 스타일링 컨설팅 받는다면 여기 추천해줄거에요",
+        imageList: [],
+      },
+      {
+        reviewer: "유**",
+        date: "24.01.16",
+        grade: "5.0",
+        comment:
+          "정말 친절하시고 신속하게 맘에 쏙들게 패션을 분석해주셨어요. 다음에 또 이용할게요. 현생 일이 바빠서 미루다가 확인을 늦게 했네요.",
+        imageList: [],
+      },
+    ],
+    contentsList: [
+      {
+        id: 0,
+        title: "<b>마른 남자 성공 스타일링</b>",
+        text: "봉태규님 사복패션으로 보는 마른 남자 성공 스타일링",
+        type: "image",
+        image: wooklasStylistContentImages[1].default.src,
+        link: "",
+        content: [
+          {
+            subTitle: "멸치 탈출 이것만 시도해보세요.",
+            images: [wooklasStylistContentImages[0].default.src],
+            content:
+              "첫번째 칼럼으로 '마른 남자 스타일링'이라는 키워드를 선택한 이유는, 제가 몇 년 전까지만 해도 183cm/60kg 마른 남자 포지션을 담당해왔기에, 이 경험을 바탕으로 많은 분들에게 도움 될 수 있는 칼럼을 남길 수 있다고 생각했습니다. 이 글을 읽는 당신은 이미 주변에서 어좁이 프레임이 씌어져 있을지도 모릅니다. 결론부터 말씀드리자면 지금부터 나오는 딱 3가지만 명심하면, 마른 남자, 어좁이, 멸치 프레임에서 벗어나실 수 있습니다.",
+          },
+          {
+            subTitle: "첫째, 기억하세요! 세미오버핏 그리고 오버핏",
+            images: [wooklasStylistContentImages[1].default.src],
+            content:
+              "간혹 이런 질문을 주시는 분들이 계세요. '마른 모델들은 딱 맞는 옷 많이 입던데요?' 확실히 이야기하겠습니다. 여러분은 모델도 모델지망생도 아닙니다. 마른 남성 모델들은 직업의 특성상 몸이 길어보이고 말라보여야 하기에 딱 붙는 옷을 많이 착용합니다. 하지만 일반 마른 남자들은 그럴 필요가 전혀없죠. 오히려 더 말라보일 수록 '만나고 싶지 않은 남자 1순위' 에 오를지도 모르죠. 이처럼 레귤러핏,슬림핏 같이 몸에 딱 맞는 핏의 의류들은 왜소한 남자들에게 가장 치명적인 독이 됩니다.",
+          },
+          {
+            subTitle: "",
+            images: [
+              wooklasStylistContentImages[2].default.src,
+              wooklasStylistContentImages[3].default.src,
+            ],
+            content:
+              "앞서 배우 봉태규님을 예시로 들었는데, 봉태규님 최근 스타일에서 해당 사진을 제외한 대부분의 착장이 앞으로 설명해드릴 체형보완에 기반한 코디를 하고 계셨습니다. Q1. 레귤러핏과 슬림핏 금지X, 그럼 어떻게 해야될까요? 정답은 세미오버핏 그리고 오버핏입니다.",
+          },
+          {
+            subTitle: "",
+            images: [
+              wooklasStylistContentImages[4].default.src,
+              wooklasStylistContentImages[5].default.src,
+            ],
+            content:
+              "레귤러핏 스타일링과 확연히 달라져 넓어진 실루엣이 보이시나요? 네. 맞습니다. 100% 정답인 스타일링을 한 착장을 보고계세요. 레귤러핏은 왜소한 신체를 적나라하게 보여주지만, 오버핏은 착용하면 왜소한 어깨부터 허리까지 완벽하게 보완해주어 마른 체형을 보완해줍니다. 이처럼 옷을 선택할 때 나에게 어떤 핏이 될 지 고려하며, 세미오버핏/오버핏 의류를 착용한다면 어좁이 체형을 완벽히 보완하여 봉태규님처럼 멋있게 남성적이며 귀여운 코디 전부 연출하실 수 있습니다.",
+          },
+          {
+            subTitle: "둘째, 두꺼운 소재와 다양한 레이어드",
+            images: [wooklasStylistContentImages[6].default.src],
+            content:
+              "얇은 재질의 의류를 단독으로 착용하면 첫째로 설명드린 세미오버핏/오버핏 효과를 넣어도 마른 몸이 적나라하게 들어날 수 있습니다. 그 이유는 (세미오버핏/오버핏) 체형보완 , (얇은소재 착용) 체형악화로 장단점이 서로 상충되어 결국 마른 몸매가 드러나게 됩니다. 최대한 가리고 숨겨야 하는 시점에서 소재의 얇아짐과 단독 착용은 더욱 더 몸을 드러낼 수 밖에 없습니다.",
+          },
+          {
+            subTitle: "",
+            images: [
+              wooklasStylistContentImages[7].default.src,
+              wooklasStylistContentImages[8].default.src,
+            ],
+            content:
+              "따라서 마른 체형을 가진 사람은 반드시 두꺼운 소재와 레이어드를 통한 스타일링을 하셔야 합니다. 두꺼운 소재는 말 그대로 입체감 있는 의류를 선택하여 시각적으로 커보이고 넓어보이는 착시효과를 주어 우리의 마른 체형을 보완해줍니다. 레이어드는 여러겹 입을 수록 두꺼워 보이는 효과를 줄 수 있으며, 또한 시각적으로 품안에 비어있는 부분을 메워주는 덕분에 긍정적인 체형보완 효과를 낼 수 있어 마른 남자 스타일링으로 소개합니다.",
+          },
+          {
+            subTitle: "",
+            images: [
+              wooklasStylistContentImages[9].default.src,
+              wooklasStylistContentImages[10].default.src,
+            ],
+            content:
+              "이처럼 두꺼운 소재와 레이어드 뿐만 아니라, 첫째 솔루션 세미오버핏 그리고 오버핏을 함께 고려하여 코디를 한다면 훨씬 더 좋은 보완 효과를 누리실 수 있습니다. 이정도만 해도 충분히 어좁이 탈출이 가능하다는 생각이 들지 않으신가요? Q2.여름에는 레이어드도 못하고 두꺼운 소재도 못 입는데 어떻게 하나요? 물론 여름에도 보완할 수 있는 좋은 방법이 있습니다. 이에 대한 자세한 칼럼은 여름이 되기전 자세히 다뤄 작성하겠습니다.",
+          },
+          {
+            subTitle: "셋째, 어두운 색보다는 밝은 색이 답이다!",
+            images: [wooklasStylistContentImages[11].default.src],
+            content:
+              "검정색 계열의 어두운 의류는 시각적으로 피사체를 왜소해 보이게 만드는 색깔의 특성이 있습니다. 반대로 밝은 계열의 옷은 피사체를 더욱 크고 넓어보이는 색깔의 특성을 갖고 있습니다.",
+          },
+          {
+            subTitle: "",
+            images: [wooklasStylistContentImages[12].default.src],
+            content:
+              "이렇게 색깔의 디테일한 선택만으로 체형보완의 효과를 낼 수 있다는 사실을 알고 계셨나요? 진정으로 어좁이를 탈출하고 싶으시다면 앞으로 어두운 계열보다는 밝은 계열의 옷으로 옷장을 채워넣으셔야겠죠? 이처럼 오늘 소개해드린 3가지 기본적인 룰을 지키고, 그 안에서 긍정적인 효과끼리 조합하여 더욱 더 좋은 체형 보완 효과를 내실 수 있습니다.",
+          },
+          {
+            subTitle: "",
+            images: [],
+            content:
+              "90퍼센트 이상의 마른 남자들이 위 3가지의 기본적인 룰을 어기고 인생의 대부분을 '어좁이'로 살아왔습니다. 이번 칼럼을 통해 많은 분들이 마른 남자 스타일링의 대한 이해도가 높아졌기를 바라며, 왜소한 몸을 컴플렉스로 생각하시는 분들에게 작게나마 위로와 도움이 되었기를 바랍니다. 마른 남자를 위한 스타일링 방법은 위 3가지 뿐만 아니라 응용 버전으로 더 준비되어 있습니다. 여름이 오기전에 응용 버전 칼럼으로 다시 찾아뵙도록 하겠습니다. 제 칼럼이 많은 분들께 위로와 희망이 되었기를 바라며 세상의 마른 남자들이 당당히 어깨 펴고 살아가셨길 바랍니다. 프라브와 저 정현욱의 기업/개인 가치관입니다. 감사합니다 :)",
+          },
+        ],
+      },
+      {
+        id: 1,
+        title: "<b>22살 키작남 대학생 스타일 코치</b>",
+        text: "좋아하는 여자한테 잘 보이는 법",
+        type: "image",
+        image: wooklasStylistContentImages[13].default.src,
+        link: "",
+        content: [
+          {
+            subTitle: "22살 대학생 내담자님",
+            images: [wooklasStylistContentImages[13].default.src],
+            content:
+              "안녕하세요. 프라브 대표 정현욱입니다. 저는 5년 동안 패션 일을 하면서 500여건 넘는 스타일링과 1,000여건 넘는 CS를 해 왔습니다. 그런 제가 가장 의욕이 불타는 내담은 단연코 연애와 관련된 스토리가 엮여 있을 때입니다. 다음은 22살 대학생 내담자님이 직접 작성해 주신 사연입니다. 함께 읽어볼까요?",
+          },
+          {
+            subTitle: "",
+            images: [],
+            content:
+              "지하철에서 항상 보는 여성분이 계시는데, 이번에  스타일링을 받아서 번호 물어보는 것에 도전하고 싶습니다!",
+          },
+          {
+            subTitle: "",
+            images: [wooklasStylistContentImages[14].default.src],
+            content:
+              "20대 초반에 이성 교제 경험이 중요한 것을 경험을 통해 너무 잘 아는 저이기에 이 사연에 정말 공감이 되었습니다. 꼼꼼하게 체형을 분석해서 개선점을 말씀드리고 멋진 스타일링을 만들어 드리려고 합니다 :)",
+          },
+          {
+            subTitle:
+              "22세 / 키 168 / 몸무게 62 / 슬렌더 체형 / 무채색 선호 / 어깨 넓어 보이는, 다리 길어 보이는 스타일링",
+            images: [wooklasStylistContentImages[15].default.src],
+            content:
+              "내담자분은 직사각형 체형이셨습니다. 슬림 하게 일자로 떨어지는 직선형 체형이며 상체/하체 비율이 이상적인 체형입니다. 거기다가 슬렌더 체형이라 스타일링만 잘 해 주면 모델 핏, 못 입으면 왜소해 보여 볼품없어 보일 수 있는 체형입니다. 키가 큰 편은 아니기 때문에 다리 길이를 길어 보이게 하는 스타일링과 왜소해 보이는 체형을 커버할 수 있는 스타일링으로 진행할 예정입니다.",
+          },
+          {
+            subTitle: "슬렌더 체형 보완",
+            images: [wooklasStylistContentImages[16].default.src],
+            content: "슬렌더 체형 보완 솔루션 5가지 중에 2가지만 공개합니다!",
+          },
+          {
+            subTitle: "코디 1 - 깔끔하고 세련된 무채색 남친룩",
+            images: [wooklasStylistContentImages[17].default.src],
+            content:
+              "무채색을 선호하는 취향을 반영해서 검정색의 바지, 구두, 벨트로 무게감을 잡고 회색 니트, 네이비 골덴 패딩으로 색감 조합을 만들었습니다. 아우터와 니트 모두 크롭한 기장감으로 다리가 길어 보이는 효과가 있습니다. 이너로 있는 회색 니트는 래글런 디테일로 어깨선 구분이 없어 어깨가 더욱 넓어 보이는 효과를 줍니다. 골덴 팬츠는 보온성 뿐만 아니라 롱한 기장감을 다리가 길어 보이는 효과를 줍니다.",
+          },
+          {
+            subTitle: "코디 2 - 캐주얼한 감성 캠퍼스룩",
+            images: [wooklasStylistContentImages[18].default.src],
+            content:
+              '"대학생이라면 어떤 옷이 부담스럽지 않고 센스 있게 보일 수 있을까?" 라는 고민으로 코디 구성을 했습니다. 꾸안꾸 스타일링으로 대학생이라는 신분에 맞는 무드를 연출했습니다.',
+          },
+          {
+            subTitle: "180도 스타일 체인지 남성 전문 패션 컨설팅, 프라브",
+            images: [wooklasStylistContentImages[20].default.src],
+            content:
+              "프라브는 나이, 직업, 라이프 스타일을 고려하여 남성들에게 맞춤형 코디와 스타일 솔루션을 제공하고 있습니다. 많은 관심 부탁드립니다. 감사합니다 :D",
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "<b>여자친구 절대 안생기는 새내기 대학생 패션</b>",
+        text: "좋아하는 여자한테 잘 보이는 법",
+        type: "image",
+        image: wooklasStylistContentImages[21].default.src,
+        link: "",
+        content: [
+          {
+            subTitle: "",
+            images: [wooklasStylistContentImages[22].default.src],
+            content:
+              "남자 패션 컨설팅 대표 정현욱 입니다. 두번째 블로그 칼럼으로 인사드려요. 시작의 계절 3월에 많은 행사가 있습니다. 그 중 대학교입학은 빠질 수 없이 중요하죠. 이번 칼럼은 '새내기 남자대학생, 여자친구 생기는 패션' 이라는 주제를 갖고 있습니다. 설레는 마음으로 직접 구매한 새 옷을 입고 학교에 갔는데, 아직 고등학생 티를 벗지 못한 패션감각이 나를 기대와는 다른 캠퍼스 라이프(아싸)로 데려갑니다. 인간관계에서 첫 인상은 극적인 변화가 없다면 끝까지 갑니다. 5분의 투자가 아쉬워서 20대의 가장 소중한 기회를 포기하지 않으셨으면 좋겠네요. 앞으로 소개되는 3단계 룰을 지킨다면, 이 칼럼은 여러분을 '많은 친구를 사귀고, 예쁜 여학우들과 함께하는 풋풋하고 달달한 캠퍼스 라이프'로 데려가줄 수 있습니다. 차분히, 꼼꼼히 칼럼의 내용들을 흡수해서 성공적인 캠퍼스 라이프를 시작하시길 소망합니다.",
+          },
+          {
+            subTitle: "1단계, 뼈 좀 때리겠습니다. 제발 이것들만 하지마세요.",
+            images: [wooklasStylistContentImages[23].default.src],
+            content:
+              "현재 여러분의 패션 상태 진단을 위해 3가지를 소개해드리려고 합니다. 앞으로 나오는 키워드 중 하나라도 해당한다면, 장담하건데 '옷 못 입는 사람' 입니다. 부정하지않고 받아들인다면 오늘 이 글을 통해 '옷 잘 입는 사람'으로 바뀌실 수 있습니다.",
+          },
+          {
+            subTitle: "키워드1. 자기 체형에 안맞는 옷을 입는다.",
+            images: [wooklasStylistContentImages[24].default.src],
+            content:
+              "어깨가 좁고 마른 체형, 전체적으로 살집이 있는 체형, 운동으로 인해 덩치가 큰 체형, 다리가 유독 짧은 체형 등.. 살아온 라이프 스타일에 따라 모든 남자들의 체형은 각자 다릅니다. 따라서, 자신의 체형의 특징과 부족한 점을 파악하고 이를 보완해줄 핏과 컬러를 선택하여 스타일링을 하는 것이 가장 기초이며 중요합니다.",
+          },
+          {
+            subTitle: "",
+            images: [],
+            content:
+              "살집이 있는 체형의 개그맨 조세호씨 스타일 <왼쪽 - 뚱뚱한 체형을 가려주는 오버핏 착장 / 오른쪽 - 체형을 고스란히 보여주는 레귤러핏 착장> 꽉끼는 옷으로 보는 사람에게 부담스럽고 불편함을 느끼게 하는 오른쪽 스타일과 달리 여유있는 오버핏 스타일로 보는 사람을 편하게하고 자연스러운 모습을 볼 수 있습니다. 사진만 봐도 느끼시겠지만 오른쪽처럼 입으시는게 아싸의 지름길이라는게 확 체감되지 않나요? 이렇게 별 것 아닌 사소한 핏의 차이로 보는 사람에게 편안하게 다가갈 수 있고, 반대로 불편하게 다가갈 수 도 있다는 것을 꼭 알아야합니다. 각 체형에 따라오는 보완 솔루션을 앞으로 칼럼을 통해 많이 소개해드릴 예정입니다.",
+          },
+          {
+            subTitle: "키워드2. 이상한 프린팅이 들어간 옷, 이상한 패턴의 양말",
+            images: [wooklasStylistContentImages[25].default.src],
+            content:
+              "혹시 옷장에 각종 동양화가 그려진 화려한 프린팅 상의와 형광색, 하트무늬, 스마일 무늬 양말이 있지 않으신가요? 심지어 그런 옷을 좋아하거나 자주 착용하시나요?",
+          },
+          {
+            subTitle: "",
+            images: [
+              wooklasStylistContentImages[26].default.src,
+              wooklasStylistContentImages[27].default.src,
+            ],
+            content:
+              "예쁜 프린팅이 있는 옷, 패턴 있는 옷.. 물론 예쁜 프린팅, 부담없는 패턴이라면 물론 너무 좋습니다. 그러나 프린팅이 화려해질 수록 프린팅 안에 들어있는 색이 많아지고, 전체적인 밸런스를 맞추는 감각이 없는 상태에서 입으면 자칫 너무 과해질 우려가 분명히 있습니다. 패션에도 명백히 순서가 존재합니다. 기본템과 스몰로고를 고르는 안목으로 시작해서 차근차근 예쁜 패턴과 로고를 찾아가는 것이 좋은 방법입니다.",
+          },
+          {
+            subTitle: "키워드3. 계획없이 유행하는 아이템 따라사기",
+            images: [wooklasStylistContentImages[28].default.src],
+            content:
+              "요즘 유행하는 밈인 '무신사 냄새'를 아시나요? 무신사는 충분히 남성들에게 가치있고, 많은 분들께서 의류를 살 때 애용하는 플랫폼 입니다. 그러나 이런 밈으로 봤을 때 비판적인 부분이 분명 존재합니다. 이런 밈은 결국 클론룩에 대한 비판이라고 생각합니다. 클론룩이란 복제된 것 같은 룩을 의미하는데, 무신사에서 랭킹 1-10위 하는 옷은 상품성이 좋아 많은 남자들이 소비합니다. 이로인해 자연스럽게 대중교통이나 핫플에 갔을 때 무신사 옷으로 겹치는 코디들이 많이 존재하고 (유행하는 제품을 사는 사람 -> 힙하지 않다 -> 무신사 냄새난다) 라는 논리에 빠져 좋은 인상을 주지 못합니다.",
+          },
+          {
+            subTitle: "",
+            images: [wooklasStylistContentImages[29].default.src],
+            content:
+              "또한, 막상 유행하는 아이템을 사면 '도대체 어떤 바지랑 입어야 잘 어울리지?'라는 질문을 스스로하고 계획없이 즉흥적으로 소비한 아이템은 결국 잠옷 또는 장롱행으로 가곤 합니다. 억지로 있는 옷과 맞춰서 입으려고 하다보면 분명히 조화롭지 않은 코디가 나오게 되죠. 이렇게 첫단계로 '이것만 하지마세요'를 소개해드렸습니다. 이중에 해당하는게 있나요? 아니면 애써 외면하지는 않았나요? 여기에 해당하지 않는다면 다행이고, 만약 해당한다고 하더라도 오늘을 시점으로 바뀌면 됩니다. 아직 글을 차분히 읽고 있다면, 당신은 충분히 멋있어질 수 있습니다.",
+          },
+          {
+            subTitle: "2단계, 호불호없고 깔끔한 옷으로 시작해보세요.",
+            images: [
+              wooklasStylistContentImages[30].default.src,
+              wooklasStylistContentImages[31].default.src,
+            ],
+            content:
+              "여자들이 좋아하는 남자 스타일의 대표 키워드는 깔끔함과 꾸안꾸입니다. 실제로 유튜브에 '여자들이 좋아하는 남자패션'이라는 키워드로 검색만 하면 여자들이 좋아하는 블레이져, 깔끔한 자켓, 트렌치 코트, 미니멀한 니트 등 과하지 않고 남친스러운 남친룩 기반의 깔끔한 아이템들을 선호하는 것을 볼 수 있습니다.",
+          },
+          {
+            subTitle: "",
+            images: [
+              wooklasStylistContentImages[32].default.src,
+              wooklasStylistContentImages[33].default.src,
+            ],
+            content:
+              "하트시그널1에 출연하여 남심/여심 전부 흔들며 큰 화제가 된 김현우님의 사복패션에서 볼 수 있듯이 기본에 충실하여 꾸민듯 안꾸민듯한 착장을 보여주었습니다. 남자,여자 전부에게 사랑받을 수 있는 이유는 잘생김 뿐만아니라 호불호 없는 코디에도 있습니다. 이렇듯 여자들이 좋아하는 패션과 누구에게나 사랑받을 수 있는 호불호 없는 코디는 분명히 존재합니다. 이런 정답에 가까운 코디는 여러분의 인간관계와 첫 인상에 긍정적인 효과를 가져다 줍니다. 정확한 방법이 있고 따라만 하면 되는데 이 기회를 외면하실건가요?",
+          },
+          {
+            subTitle: "3단계, 그래서 무슨 옷을 입어야 되는데?",
+            images: [wooklasStylistContentImages[34].default.src],
+            content:
+              "이렇게까지 자세하게 설명을 드려도 초심자에게는 어떤 브랜드와 어떤 쇼핑몰을 이용해야하는지 또다른 벽에 부딪힐 수도 있습니다. 그래서 요리하고 밥상까지 차리고 떠먹여 드리겠습니다. 대학생들을 타겟으로 직접 고민하고 연구한 무신사 냄새 나지 않는 브랜드 리스트 몇 가지를 소개해드립니다. 한번 사서 오래 입을 수 있는 예쁘고,퀄리티 높은 옷을 구매해 나가는 것이 정말 중요합니다! 브랜드 분석과 연구를 통해 핏,퀄리티,가격 3박자 어우러지는 좋은 브랜드로 선정하여 소개해드리니 부디 도움이 되셨길 바랍니다 :)",
+          },
+          {
+            subTitle: "",
+            images: [wooklasStylistContentImages[35].default.src],
+            content:
+              "너무나도 많은 젊은 남성분들이 귀찮고 어렵다는 이유만으로 패션의 변화로 얻을 수 있는 사회적인 효과를 외면한 채 살아갑니다. 칼럼 내용처럼 단지 몇 가지의 변화만으로도 극적인 변화를 이루어 더욱 더 재미있는 캠퍼스 라이프와 사회경험을 할 수 있음을 소개해드렸습니다. 요리해서, 밥상차리고, 밥까지 떠먹여드리는데.. 이래도 귀찮고 어렵다는 핑계로 패션의 변화를 무시한 채 살아가시겠습니까? 제 칼럼이 많은 남성분들의 인생의 좋은 변화와 영향으로 다가가길 바라며, 새로이 대학에 들어가 제2의 인생을 시작하는 새내기 대학생분들을 응원하며 도움이 되었길 진심으로 소망합니다. 프라브와 저 정현욱의 기업/개인의 가치관입니다. 감사합니다 :)",
+          },
+        ],
+      },
+    ],
+  },
   suyeongStylist: {
     profile: suyeongStylistImages[0].default.src,
     thumbnail: suyeongStylistImages[1].default.src,
@@ -566,82 +892,6 @@ export const stylistDB = {
       },
     ],
   },
-
-  // wooklasStylist: {
-  //   profile: wooklasStylistImages[0].default.src,
-  //   thumbnail: wooklasStylistImages[1].default.src,
-  //   name: "현욱",
-  //   comment: "미니멀하게 만드는 넘치는 이성적 매력",
-  //   instagramId: "wooklas",
-  //   avgGrade: "5.0",
-  //   consultingAmount: "4",
-  //   styleTags: ["미니멀", "클래식", "지적인"],
-  //   aboutMe: [
-  //     "(전) 연 매출 5억원 남성 쇼핑몰 CEO",
-  //     "(현) 20K 인스타그램 패션 인플루언서",
-  //     "(현) 패션 크리에이터 및 블로거",
-  //   ],
-  //   forWho: [
-  //     "나의 체형에 딱 맞는 스타일링을 하는데 어려움이 있는 남성",
-  //     "바뀌는 계절마다 직접 옷을 찾아 다닐 시간이 없는 남성",
-  //     "요즘 트렌드에 맞는 스타일링을 원하는 남성",
-  //     "중요한 자리 (소개팅, 비즈니스 미팅, 여행)를 앞에 두고 스타일링을 고민하고 있는 남성",
-  //   ],
-  //   phillosophy: [
-  //     "<b>첫 인상에서 옷 차림이 중요한 이유</b>",
-  //     "",
-  //     "혹시.. 매번 실패하고 걱정되는 인간관계, 이성관계, 비즈니스 자리가 있지는 않으신가요?",
-  //     "소개팅에서 좋은 첫 인상의 결정은 29.3%로 외모가 1순위를 차지하고 있습니다.",
-  //     "그러나 외모보다 높은 비율 56.5%로 옷차림, 말투, 헤어스타일이 첫 인상 결정에 더욱 높은 비중을 차 지하고 있습니다. 이는 인생에서 수백만원이상의 잠재가치를 의미합니다.",
-  //     "또한, 좋은 첫 인상을 결정하는 요소가 외모가 아니라 옷차림과, 말투일 수도 있다는 사실을 알 수 있습니다.",
-  //     "커피 한 잔 마실 시간을 투자 하여 대인관계, 연애, 사회생활에서 남들보다 한 발 앞서 나갈 수 있다면 어떻게 하시겠습니까?",
-  //     "",
-  //     '<b>썸녀에게 "나 만날 때는 그 옷 안 입고 왔으면 좋겠어"라고 듣던 남자에서 [자랑하고 싶은 스타일 좋은 남자친구]가 되었다.</b>',
-  //     "",
-  //     "좋아하는 사람에게 비난을 받는 것은 언제나 기쁘지 못합니다. 물론 저의 경우도 그랬어요. 다행히 비난의 대상이 '바꿀 수 있는' 부분이라는 점에서 다행이었습니다.",
-  //     "스스로 체형에 대해 분석하고, 패션 분야에 대해 공부하고, 쇼핑의 시행착오를 겪어 가다보니 어느새 저는 21K 패션 인플루언서, 패션 크리에이터 및 블로거, 연 매출 5억 쇼핑몰 CEO 말 그대로 옷 잘 입는 남자가 되어 있었죠.",
-  //     "스타일의 변화는 제 인생에 많은 것은 바꿔주었습니다. 이 좋은 경험을 혼자 누리고 싶지 않았고, 많은 남성들에게 희망이 되었으면 좋겠습니다 :D",
-  //   ],
-  //   personalImageList: wooklasStylistPersonalImages.map(
-  //     (curr) => curr.default.src,
-  //   ),
-  //   reviewList: [
-  //     {
-  //       reviewer: "양**",
-  //       date: "23.12.23",
-  //       grade: "5.0",
-  //       comment:
-  //         "스타일링 최고 스타일링 더 받을래요 스타일링 어쩌구저쩌구 후기는 2줄만 보이는거로 더 넘어가면 일단 말줄임표로 마무리 합시다 이정도로 글은 어느정도까지 보여줄까요? 글자수 제한을 두기는 해야할 것 같은데 사실 펼쳤을때 이정도면 충분히 리뷰하기에는 부족하지 않을 것 같은데요 음 더 들어가야하나 모르겠는데 좌우로 늘리고 5줄이면 솔직히 이거보다 더 적을 사람 있을까 싶긴 합니다 충분한 리뷰가 될 듯 사진도 충분해이.",
-  //       imageList: [],
-  //     },
-  //     {
-  //       reviewer: "허**",
-  //       date: "23.10.25",
-  //       grade: "5.0",
-  //       comment:
-  //         "개인적인 패션 취향은 있으나 그런 옷들을 어디서 사는 지 몰랐고 유명한 브랜드 외에는 쇼핑 경험이 없어 실제로 사는게 부담스러웠습니다. 내셔널 지오그래픽처럼 라이선스만 가져와 가격이 뛰는 옷 대신 퀄리티 있으면서 가격은 비싸지 않은 브랜드들을 접할 수 있어 쇼핑 폭이 훨씬 넓어졌습니다. 당연히 1회로 끝나지 않고 4계절 내내 이용하고 싶습니다. 코디를 추천해주는 일방향성 소통이 아니라 왜 이렇게 입어야하는지 이유를 알려주기 때문입니다.",
-  //       imageList: [],
-  //     },
-  //   ],
-  //   contentsList: [
-  //     {
-  //       id: 0,
-  //       title: "<b>후드티를 더 멋있게 입는 방법</b>",
-  //       text: "박진수 스타일리스트님의 스타일링 팁",
-  //       type: "image",
-  //       image: jenfloxStylistImages[1].default.src,
-  //       link: "",
-  //     },
-  //     {
-  //       id: 1,
-  //       title: "<b>잠깐</b>, 아직 스타일링을 안받아봤다면?",
-  //       text: "00 님을 위한 추천 컨텐츠를 확인해보세요!",
-  //       type: "image",
-  //       image: jenfloxStylistImages[1].default.src,
-  //       link: "",
-  //     },
-  //   ],
-  // },
   // josknStylist: {
   //   profile: josknStylistImages[0].default.src,
   //   thumbnail: josknStylistImages[1].default.src,
