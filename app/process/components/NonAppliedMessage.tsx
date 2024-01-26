@@ -10,22 +10,24 @@ export default function NonAppliedMessage() {
         height={7}
       />
       <p className="mt-[8px] font-default text-[13px] leading-[15px]">
-        아직 입금 전이거나, 입금 확인 중입니다.
+        아직 신청된 스타일링이 없어요 :&#40;
       </p>
       <p className="font-default text-[13px] leading-[15px]">
-        <span className="font-main">입금 후 24시간 이내</span> 결제 완료 상태로
-        변하지 않는 경우,
-      </p>
-      <p className="font-main text-[13px] leading-[15px]">
-        문의하기를 통해 연락 남겨주시면 도와드릴게요!
+        아래 버튼을 누르고
+        <span className="font-main">마음에 드는 스타일리스트를</span>{" "}
+        찾아보세요!
       </p>
       <p className="font-default text-[13px] leading-[15px]">-</p>
-      <p className="font-main text-[13px] leading-[15px]">
-        곧 여러분을 바꿔줄 <span className="font-branding">STCL</span>리포트를
-        가져올게요.
+      <p className="font-default text-[13px] leading-[15px]">
+        객관적인 <span className="font-main">분석과</span> 주관적인{" "}
+        <span className="font-main">추천이</span> 담긴
+      </p>
+      <p className="font-default text-[13px] leading-[15px]">
+        <span className="font-main">맞춤형 리포트가</span> 여러분을 기다리고
+        있습니다.
       </p>
       <p className="mb-[8px] font-default text-[13px] leading-[15px]">
-        감사합니다
+        지금 바로 신청해볼까요?
       </p>
       <Image src="/images/quoteEnd.svg" alt="quoteEnd" width={11} height={7} />
     </div>

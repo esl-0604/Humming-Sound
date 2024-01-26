@@ -45,10 +45,10 @@ export default function Process() {
             </div>
           </div>
         </div>
-        <StatusBox status={0} />
+        <StatusBox status={3} />
       </div>
       <CancelButton />
-      <AskButton />
+      <AskButton status={3} />
     </main>
   );
 }
