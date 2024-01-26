@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center bg-[#161616] ">
       <IntroBox />
-      <FilterBox />
+      {/* <FilterBox /> */}
       {Object.keys(stylists).map((key) => (
         <StylistProfileCard
           key={key}
