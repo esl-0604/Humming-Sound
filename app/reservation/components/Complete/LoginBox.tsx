@@ -12,18 +12,15 @@ export default function LoginBox() {
 
   const { productList } = useContext(ReservationContext);
   const stylistKey = param.get("stylistKey");
-  const step = param.get("step");
 
-  console.log({
-    stylistKey: stylistKey,
-    step: step,
-    productList: productList,
-  });
+  // console.log({
+  //   stylistKey: stylistKey,
+  //   productListCache: productList,
+  // });
 
   const reservationData = JSON.stringify({
     stylistKey: stylistKey,
-    step: step,
-    productList: productList,
+    productListCache: productList,
   });
 
   LocalStorage.setItem("reservationData", reservationData);

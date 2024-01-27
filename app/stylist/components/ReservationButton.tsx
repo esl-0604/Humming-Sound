@@ -29,13 +29,13 @@ export default function ReservationButton({ stylistKey }: Props) {
   }, []);
 
   return (
-    <div className="sticky bottom-[30px] z-20 h-[50px] w-full px-[55px]">
+    <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
       <div
         onClick={() => {
           if (!disabled)
             router.push(`/reservation?stylistKey=${stylistKey}&step=Product`);
         }}
-        className={`flex h-[50px] w-full items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out ${
+        className={`flex h-[50px] w-full cursor-pointer items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out ${
           isScrolled
             ? "bg-[#E8E8E8] text-[#161617]"
             : "bg-[rgba(0,0,0,0.10)] text-[#E8E8E8]"

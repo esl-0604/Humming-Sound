@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { ReservationContext } from "../../context";
 import CheckRow from "./CheckRow";
 import PhoneInput from "./PhoneInput";
+import LocalStorage from "@/app/utils/localstorage";
 
 interface Props {}
 
@@ -22,31 +23,63 @@ export interface CheckRowType {
 }
 
 export default function CheckBox({}: Props) {
-  const { productList, inputPhoneNum, setInputPhoneNum } =
+  const { setProductList, productList, inputPhoneNum, setInputPhoneNum } =
     useContext(ReservationContext);
   const [checkList, setCheckList] = useState<CheckRowType[]>([]);
+  const [spinner, setSpinner] = useState<boolean>(false);
 
   useEffect(() => {
     const keys = Object.keys(productList);
-    const resultList: CheckRowType[] = [];
-    for (const key of keys) {
-      productList[key].forEach((item: any) => {
-        const itemElement = {
-          title: item.title,
-          type: item.type,
-          gif: item.gifURL,
-          price: item.price,
-          memo: item.memo,
-          count: item.count ? item.count : 0,
-          date: item.date ? item.date : "",
-          timeslots: item.timeslots ? item.timeslots : [],
-        };
+    if (keys.length > 0) {
+      const resultList: CheckRowType[] = [];
+      for (const key of keys) {
+        productList[key].forEach((item: any) => {
+          const itemElement = {
+            title: item.title,
+            type: item.type,
+            gif: item.gifURL,
+            price: item.price,
+            memo: item.memo,
+            count: item.count ? item.count : 0,
+            date: item.date ? item.date : "",
+            timeslots: item.timeslots ? item.timeslots : [],
+          };
 
-        resultList.push(itemElement);
-      });
+          resultList.push(itemElement);
+        });
+      }
+      setCheckList(resultList);
+    } else {
+      const reservationData = LocalStorage.getItem("reservationData");
+      if (reservationData !== null) {
+        const { stylistKey, productListCache } = JSON.parse(reservationData);
+        console.log({
+          stylistKey: stylistKey,
+          productListCache: productListCache,
+        });
+        setProductList(productListCache);
+        LocalStorage.removeItem("reservationData");
+        const keys = Object.keys(productListCache);
+        const resultList: CheckRowType[] = [];
+        for (const key of keys) {
+          productListCache[key].forEach((item: any) => {
+            const itemElement = {
+              title: item.title,
+              type: item.type,
+              gif: item.gifURL,
+              price: item.price,
+              memo: item.memo,
+              count: item.count ? item.count : 0,
+              date: item.date ? item.date : "",
+              timeslots: item.timeslots ? item.timeslots : [],
+            };
+
+            resultList.push(itemElement);
+          });
+        }
+        setCheckList(resultList);
+      }
     }
-    // console.log(resultList);
-    setCheckList(resultList);
   }, []);
 
   return (

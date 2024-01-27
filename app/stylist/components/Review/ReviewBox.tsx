@@ -34,7 +34,7 @@ export default function ReviewBox({ stylistKey }: Props) {
   return (
     <div
       ref={ref}
-      className="flex w-full flex-col px-[30px] pb-[60px] pt-[10px] text-[#E8E8E8] "
+      className="flex w-full flex-col px-[30px] pb-[110px] pt-[10px] text-[#E8E8E8] "
     >
       {stylist.reviewList.length === 0 ? (
         <div className="flex w-full flex-col items-center justify-center py-[25px]">
