@@ -30,7 +30,7 @@ export default function ContentsDetail() {
   // }, []);
 
   return (
-    <div className="relative flex h-full w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
+    <div className="relative flex h-full w-full flex-col bg-[#161616] pb-[110px] text-[#E8E8E8]">
       <div className="flex flex-1 flex-col px-[30px]">
         <ContentsDetailTitleCard
           id={StylistContent?.id}
