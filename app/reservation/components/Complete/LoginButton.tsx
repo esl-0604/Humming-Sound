@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
 
 export default function ReservationLoginButton() {
   const redirectURL = window.location.origin + window.location.pathname;
-  console.log(redirectURL);
+  // console.log(redirectURL);
 
   return (
     <div className="itmes-center absolute bottom-[30px] z-10 flex h-fit w-full justify-center px-[55px]">

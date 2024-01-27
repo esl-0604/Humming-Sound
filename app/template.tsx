@@ -6,7 +6,7 @@ import {
   ScrolledStylistButton,
 } from "./utils/atom/scrolledButton";
 import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import ARROW from "@/public/images/toggleClosed.svg";
 
@@ -52,16 +52,29 @@ export default function RootTemplate({
 
   const router = useRouter();
   const path = usePathname();
+  const params = useSearchParams();
 
+  // console.log(window.location.href);
+  // const currentURL =
+
+  const Back = () => {
+    if (
+      window.location.pathname === "/reservation" &&
+      params.get("step") === "Check"
+    ) {
+      let updateURL = window.location.href.replace(/Check/g, "Product");
+      router.push(updateURL);
+    } else {
+      router.back();
+    }
+  };
   return (
     <>
       {children}
       {path !== "/" ? (
         <div
           className="fixed top-[13px] z-30 cursor-pointer px-[13px]"
-          onClick={() => {
-            router.back();
-          }}
+          onClick={Back}
         >
           <Image src={ARROW} alt="arrow" className="rotate-180" />
         </div>

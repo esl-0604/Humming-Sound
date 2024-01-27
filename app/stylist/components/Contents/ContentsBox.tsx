@@ -35,7 +35,7 @@ export default function ContentsBox({ stylistKey }: Props) {
   return (
     <div
       ref={ref}
-      className="flex w-full flex-col items-center overflow-scroll px-[30px] pb-[60px] pt-[10px] text-[#E8E8E8] "
+      className="flex w-full flex-col items-center overflow-scroll px-[30px] pb-[110px] pt-[10px] text-[#E8E8E8] "
     >
       {stylist?.contentsList.length === 0 ? (
         // <div className="relative flex h-[200px] w-full flex-col items-center justify-center px-[10px]">

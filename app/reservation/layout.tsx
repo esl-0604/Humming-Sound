@@ -36,7 +36,7 @@ export default function ReservationLayout({
     } else {
       setUser(null);
     }
-  }, []);
+  }, [userId]);
 
   // 1. user 정보 fetch ----------------------------------------------
 
@@ -62,16 +62,19 @@ export default function ReservationLayout({
           console.log(data);
           LocalStorage.setItem("userId", data);
           const redirectURL = window.location.origin + window.location.pathname;
+          const reservationData = LocalStorage.getItem("reservationData");
 
-          // if (LocalStorage.getItem("reservationData")) {
-          //   const { step, stylistKey, productList } = JSON.parse(
-          //     LocalStorage.getItem("reservationData")
-          //       ? LocalStorage.getItem("reservationData")
-          //       : "",
-          //   );
-          // }
-
-          router.replace(redirectURL + "?stylist");
+          if (reservationData !== null) {
+            const { stylistKey, productListCache } =
+              JSON.parse(reservationData);
+            // console.log({
+            //   stylistKey: stylistKey,
+            //   productListCache: productList,
+            // });
+            router.replace(
+              `${redirectURL}?stylistKey=${stylistKey}&step=Check`,
+            );
+          }
         })
         .catch((error) => console.error("Error fetching data:", error));
     }

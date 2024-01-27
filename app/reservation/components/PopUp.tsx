@@ -32,10 +32,10 @@ export default function PopUp({ type }: Props) {
   return (
     <>
       <div
-        className="fixed bottom-0 left-0 right-0 top-0 z-40 bg-black opacity-20"
+        className="fixed left-1/2 top-0 z-40 h-full w-full max-w-[480px] -translate-x-1/2 transform bg-black opacity-20"
         onClick={() => setIsPopUp({ pop: false, type: "필수" })}
       />
-      <div className="fixed left-1/2 top-1/2 z-50 flex h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-[48px] bg-[rgba(0,0,0,0.10)] text-[#E8E8E8] shadow-button2 backdrop-blur-[7.5px]">
+      <div className="fixed left-1/2 top-1/2 z-40 flex h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-[48px] bg-[rgba(0,0,0,0.10)] text-[#E8E8E8] shadow-button2 backdrop-blur-[7.5px]">
         <div className="flex h-[140px] w-full items-center justify-center px-[50px] pb-[12px] pt-[28px]">
           <Lottie
             animationData={
