@@ -1,22 +1,35 @@
 "use client";
 
 import Block from "./components/Block";
-import StatusBox from "./components/StatusBox";
+import ProgressBox from "./components/ProgressBox";
 import CancelButton from "./components/CancelButton";
 import AskButton from "./components/AskButton";
 import LocalStorage from "../utils/localstorage";
 import { useEffect, useState } from "react";
+import StylistCard from "./components/StylistCard";
 
 export default function Process() {
   const userId = LocalStorage.getItem("userId");
   const [userNickname, setUserNickname] = useState<string>("고객");
-  const status = -1;
+  const [progress, setProgress] = useState<number>(-1);
+  const [stylistKey, setStylistKey] = useState<string>("");
   useEffect(() => {
     fetch(`/api/user/getUserByUserId?user_id=${userId}`).then((res) =>
       res.json().then((data) => setUserNickname(data.nickname)),
     );
   }, []);
 
+  useEffect(() => {
+    fetch(
+      `/api/reservation/getStylistKeyByReservedUserId?user_id=${userId}`,
+    ).then((res) => res.json().then((data) => setStylistKey(data)));
+  }, []);
+
+  useEffect(() => {
+    fetch(
+      `/api/reservation/getProgressByReservedUserId?user_id=${userId}`,
+    ).then((res) => res.json().then((data) => setProgress(data)));
+  }, []);
   return (
     <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
       <div className="relative flex h-full w-full flex-col px-[30px]">
@@ -24,8 +37,7 @@ export default function Process() {
           <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">
             마이페이지
           </div>
-
-          <div className="flex w-full flex-col gap-[10px] pb-[10px]">
+          <div className="flex w-full flex-col gap-[10px]">
             <Block />
             <div className="flex min-h-[60px] w-full flex-col font-default text-[30px] leading-[100%]">
               <div className="flex min-h-[30px] flex-wrap items-center">
@@ -46,11 +58,12 @@ export default function Process() {
               <span>아래에서 확인해보세요!</span>
             </div>
           </div>
+          {progress == -1 ? null : <StylistCard stylistKey={stylistKey} />}
         </div>
-        <StatusBox status={status} />
+        <ProgressBox progress={progress} />
       </div>
-      {/* {status != -1 ? <CancelButton /> : null} */}
-      <AskButton status={status} />
+      {/* {progress != -1 ? <CancelButton /> : null} */}
+      <AskButton progress={progress} />
     </main>
   );
 }

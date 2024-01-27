@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function PublishingMessage() {
+export default function DoneMessage() {
   return (
     <div className="mt-[50px] flex flex-col items-center justify-center">
       <Image
@@ -10,20 +10,22 @@ export default function PublishingMessage() {
         height={7}
       />
       <p className="mt-[8px] font-default text-[13px] leading-[15px]">
-        스타일리스트가 고객님을 위한{" "}
-        <span className="font-main">맞춤형 리포트를</span> 발행하였습니다!
+        컨설팅의 모든 과정이
+        <span className="font-main">완료되었습니다.</span>
       </p>
       <p className="font-default text-[13px] leading-[15px]">
-        아래 버튼을 통해 내려받고,{" "}
-        <span className="font-main">코디를 시작해보세요.</span>
-      </p>
-      <p className="font-default text-[13px] leading-[15px]">-</p>
-      <p className="font-default text-[13px] leading-[15px]">
-        마음에 들었다면, 사진과 함께{" "}
-        <span className="font-main">간단한 리뷰를</span> 남겨주세요.
+        <span className="font-branding">STCL</span>과 함께 해주셔서
+        <span className="font-main">다시 한번 감사드리며,</span>
       </p>
       <p className="font-main text-[13px] leading-[15px]">
-        더 나은 서비스 제공에 도움 됩니다.
+        고객님의 스타일을 찾아가는 여정을
+      </p>
+      <p className="font-default text-[13px] leading-[15px]">
+        앞으로도 응원하겠습니다.
+      </p>
+      <p className="font-default text-[13px] leading-[15px]">
+        <span className="font-main">스타일링 컨텐츠도</span> 많은 이용
+        부탁드립니다.
       </p>
       <p className="mb-[8px] font-default text-[13px] leading-[15px]">
         감사합니다!
