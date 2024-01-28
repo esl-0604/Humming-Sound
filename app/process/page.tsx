@@ -32,8 +32,8 @@ export default function Process() {
   }, []);
   return (
     <main className="flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
-      <div className="relative flex h-full w-full flex-col px-[30px]">
-        <div className="sticky top-0 z-30 h-fit w-full bg-[#161616]">
+      <div className="relative flex h-full w-full flex-col">
+        <div className="sticky top-0 z-30 h-fit w-full bg-[#161616] px-[30px]">
           <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">
             마이페이지
           </div>
