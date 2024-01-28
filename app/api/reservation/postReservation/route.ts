@@ -61,7 +61,10 @@ export async function POST(req: NextRequest) {
     !reservation.services ||
     !validateServices(reservation.services)
   ) {
-    return NextResponse.json("fail", { status: 400 });
+    return NextResponse.json("fail", {
+      status: 400,
+      statusText: "Bad Request",
+    });
   }
 
   // insertOne 메서드를 사용하여 예약을 MongoDB에 삽입하기 전에
@@ -71,7 +74,10 @@ export async function POST(req: NextRequest) {
     created_at: new Date().toLocaleString("kr-KO"), // 서버 삽입 시점의 시간
   });
   if (!postReservation.insertedId) {
-    return NextResponse.json("fail", { status: 400 });
+    return NextResponse.json("fail", {
+      status: 400,
+      statusText: "Reservation Insertion Fail",
+    });
   }
   db.collection("StylingProgress").insertOne({
     progress: 0,
