@@ -68,10 +68,15 @@ export async function POST(req: NextRequest) {
     ...reservation,
     created_at: new Date().toLocaleString("kr-KO"), // 서버 삽입 시점의 시간
   });
-
   if (!postReservation.insertedId) {
     return NextResponse.json("fail", { status: 400 });
   }
+  db.collection("StylingProgress").insertOne({
+    progress: 0,
+    reservation_id: String(postReservation.insertedId),
+    created_at: new Date().toLocaleString("kr-KO"),
+    updated_at: new Date().toLocaleString("kr-KO"),
+  });
   return NextResponse.json("success", { status: 200 });
 }
 
