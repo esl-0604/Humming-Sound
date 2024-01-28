@@ -5,6 +5,7 @@ interface Reservation {
   stylist_id: string;
   user_id: string;
   user_phone_number: string;
+  user_name: string;
   services: {
     consulting: Consulting[];
     optional: Optional[];
@@ -56,6 +57,7 @@ export async function POST(req: NextRequest) {
     !reservation.stylist_id ||
     !reservation.user_id ||
     !reservation.user_phone_number ||
+    !reservation.user_name ||
     !reservation.services ||
     !validateServices(reservation.services)
   ) {
