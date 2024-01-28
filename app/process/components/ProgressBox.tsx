@@ -38,7 +38,7 @@ export default function ProgressBox({ progress }: ProgressBoxProps) {
   }, [progress]);
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col px-[30px]">
       <Block />
       <div className="mt-[10px] flex w-full flex-col font-branding text-[30px] leading-[100%]">
         {progress == 0

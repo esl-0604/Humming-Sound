@@ -19,6 +19,7 @@ export default function PhoneInput({}: Props) {
   const user = useRecoilValue(userData);
   const stylistId = useRecoilValue(stylistIdData);
   const [phoneNum, setPhoneNum] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [noValidation, setNoValidation] = useState<boolean>(false);
 
   const router = useRouter();
@@ -43,8 +44,8 @@ export default function PhoneInput({}: Props) {
   };
 
   const PostReservation = async () => {
-    setSpinner(true);
-    if (phoneNum.length === 13) {
+    if (phoneNum.length === 13 && name.length > 0) {
+      setSpinner(true);
       const updateProductList: any = {
         consulting: [],
         how: [],
@@ -67,6 +68,7 @@ export default function PhoneInput({}: Props) {
       const body = {
         stylist_id: stylistId,
         user_id: user?.user_id,
+        user_name: name,
         user_phone_number: phoneNum,
         services: updateProductList,
       };
@@ -80,12 +82,12 @@ export default function PhoneInput({}: Props) {
       })
         .then((res) => res.json())
         .then((data) => {
-          setSpinner(false);
           console.log(data);
           if (data === "success") {
             const defaultURL = `/reservation?stylistKey=${stylistKey}&step=`;
             router.push(defaultURL + "Done");
           }
+          setSpinner(false);
         });
     } else {
       setNoValidation(true);
@@ -93,7 +95,7 @@ export default function PhoneInput({}: Props) {
   };
 
   useEffect(() => {
-    if (phoneNum.length === 13) setNoValidation(false);
+    if (phoneNum.length === 13 && name.length > 0) setNoValidation(false);
   }, [phoneNum]);
 
   return (
@@ -107,10 +109,23 @@ export default function PhoneInput({}: Props) {
           <div className="flex h-[40px] w-full flex-col items-center justify-center font-default text-[12px]">
             <span className="flex w-full justify-center">예약 진행을 위해</span>
             <span className="flex w-full justify-center whitespace-pre">
-              {formatMainText("<b>전화번호 입력이 </b>필요합니다!")}
+              {formatMainText("<b>이름, 전화번호</b>를 입력해주세요!")}
             </span>
           </div>
 
+          <div className="relative flex h-[33px] w-full items-center bg-[rgba(255,255,255,0.01)] pl-[17px] shadow-button3">
+            <input
+              className="mr-[33px] h-full w-full border-none bg-transparent px-[2px] text-[12px] outline-none"
+              placeholder="이름 입력"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+            {noValidation && name.length === 0 ? (
+              <div className="absolute left-[20px] top-[27px] font-default text-[8px] text-[#D99BFF]">
+                이름을 확인해주세요!
+              </div>
+            ) : null}
+          </div>
           <div className="relative flex h-[33px] w-full items-center bg-[rgba(255,255,255,0.01)] pl-[17px] shadow-button3">
             <input
               className="mr-[33px] h-full w-full border-none bg-transparent px-[2px] text-[12px] outline-none"
@@ -118,7 +133,7 @@ export default function PhoneInput({}: Props) {
               onChange={handleInputChange}
               value={phoneNum}
             />
-            {noValidation ? (
+            {noValidation && phoneNum.length < 13 ? (
               <div className="absolute left-[20px] top-[27px] font-default text-[8px] text-[#D99BFF]">
                 전화번호를 확인해주세요!
               </div>
