@@ -11,6 +11,7 @@ export default function IntroBox() {
         alt="mainImage"
         width={1000}
         height={1000}
+        priority={true}
       />
 
       <Image
@@ -19,6 +20,7 @@ export default function IntroBox() {
         alt="mainLogo"
         width={121}
         height={35}
+        priority={true}
       />
 
       <div className="to-[#161616]-0% absolute top-0 z-10 h-full w-full bg-gradient-to-t from-[#161616]" />

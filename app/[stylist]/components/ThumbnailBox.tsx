@@ -23,6 +23,7 @@ export default function ThumbnailBox({ stylistKey }: Props) {
         className="h-full w-full object-cover"
         width={480}
         height={450}
+        priority={true}
       />
       <div className="absolute bottom-0 right-0 z-10 flex h-[27px] gap-[5px] bg-transparent pb-[10px] pr-[10px]">
         {stylist.styleTags.map((tag: string, index: number) => {

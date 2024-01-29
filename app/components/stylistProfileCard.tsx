@@ -57,6 +57,7 @@ export default function StylistProfileCard({
                 alt="스타일리스트 이미지"
                 width={500}
                 height={250}
+                priority={true}
               />
             </div>
           );

@@ -21,6 +21,7 @@ export default function StylistCard({ stylistKey }: StylistCardProps) {
           className="h-full w-full object-cover"
           width={60}
           height={60}
+          priority={true}
         />
       </div>
       <div className="ml-[20px] flex flex-col items-start justify-center">

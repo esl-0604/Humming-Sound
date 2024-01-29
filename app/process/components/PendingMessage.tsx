@@ -8,6 +8,7 @@ export default function PendingMessage() {
         alt="quoteStart"
         width={11}
         height={7}
+        priority={true}
       />
       <p className="mt-[8px] font-default text-[13px] leading-[15px]">
         아직 입금 전이거나, 입금 확인 중입니다.
@@ -27,7 +28,13 @@ export default function PendingMessage() {
       <p className="mb-[8px] font-default text-[13px] leading-[15px]">
         감사합니다!
       </p>
-      <Image src="/images/quoteEnd.svg" alt="quoteEnd" width={11} height={7} />
+      <Image
+        src="/images/quoteEnd.svg"
+        alt="quoteEnd"
+        width={11}
+        height={7}
+        priority={true}
+      />
     </div>
   );
 }

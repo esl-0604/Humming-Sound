@@ -13,10 +13,10 @@ interface Props {}
 export default function CompleteBox({}: Props) {
   return (
     <div className="flex h-fit w-full flex-col text-[#E8E8E8]">
-      <Image src={BLOCK} alt="block" />
+      <Image src={BLOCK} alt="block" priority={true} />
 
       <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px] font-branding text-[30px] font-normal">
-        <Image src={DONE} alt="done" />
+        <Image src={DONE} alt="done" priority={true} />
       </div>
 
       <div className="flex w-full flex-1 flex-col items-center">
@@ -25,7 +25,7 @@ export default function CompleteBox({}: Props) {
         </div>
 
         <div className="flex h-[15px] w-full justify-center opacity-30">
-          <Image src={UPQUOTES} alt="upquotes" />
+          <Image src={UPQUOTES} alt="upquotes" priority={true} />
         </div>
 
         <div className="flex w-full flex-col items-center justify-center gap-[1.5px] py-[5px] font-default text-[13px]">
@@ -51,7 +51,7 @@ export default function CompleteBox({}: Props) {
         </div>
 
         <div className="mb-[100px] flex h-[15px] w-full justify-center opacity-30">
-          <Image src={DOWNQUOTES} alt="downquotes" />
+          <Image src={DOWNQUOTES} alt="downquotes" priority={true} />
         </div>
       </div>
     </div>

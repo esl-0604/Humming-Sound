@@ -170,6 +170,7 @@ export default function Reservation() {
           alt="mainLogo"
           width={121}
           height={35}
+          priority={true}
         />
       </main>
     );

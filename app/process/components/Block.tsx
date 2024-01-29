@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function Block() {
   return (
     <div className="h-fit w-fit">
-      <Image src={BLOCK} alt="block" />
+      <Image src={BLOCK} alt="block" priority={true} />
     </div>
   );
 }

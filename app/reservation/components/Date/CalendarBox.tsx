@@ -257,10 +257,10 @@ export default function CalendarBox({}: Props) {
 
   return (
     <div className="flex h-fit w-full flex-col pb-[160px] text-[#E8E8E8]">
-      <Image src={BLOCK} alt="block" />
+      <Image src={BLOCK} alt="block" priority={true} />
 
       <div className="mb-[15px] mt-[10px] flex h-[30px] w-full items-center px-[10px] ">
-        <Image src={WHEN} alt="when" />
+        <Image src={WHEN} alt="when" priority={true} />
       </div>
 
       <div className="flex min-h-[45px] w-full flex-col font-default text-[15px] leading-[20px]">

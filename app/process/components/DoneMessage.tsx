@@ -8,6 +8,7 @@ export default function DoneMessage() {
         alt="quoteStart"
         width={11}
         height={7}
+        priority={true}
       />
       <p className="mt-[8px] font-default text-[13px] leading-[15px]">
         컨설팅의 모든 과정이
@@ -30,7 +31,13 @@ export default function DoneMessage() {
       <p className="mb-[8px] font-default text-[13px] leading-[15px]">
         감사합니다!
       </p>
-      <Image src="/images/quoteEnd.svg" alt="quoteEnd" width={11} height={7} />
+      <Image
+        src="/images/quoteEnd.svg"
+        alt="quoteEnd"
+        width={11}
+        height={7}
+        priority={true}
+      />
     </div>
   );
 }

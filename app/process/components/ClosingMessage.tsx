@@ -8,6 +8,7 @@ export default function ClosingMessage() {
         alt="quoteStart"
         width={11}
         height={7}
+        priority={true}
       />
       <p className="mt-[8px] font-default text-[13px] leading-[15px]">
         담당 스타일리스트 분과 자유롭게 소통할 수 있는 시간입니다.
@@ -25,7 +26,13 @@ export default function ClosingMessage() {
       <p className="mb-[8px] font-default text-[13px] leading-[15px]">
         감사합니다!
       </p>
-      <Image src="/images/quoteEnd.svg" alt="quoteEnd" width={11} height={7} />
+      <Image
+        src="/images/quoteEnd.svg"
+        alt="quoteEnd"
+        width={11}
+        height={7}
+        priority={true}
+      />
     </div>
   );
 }

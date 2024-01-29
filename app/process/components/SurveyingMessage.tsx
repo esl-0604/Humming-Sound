@@ -8,6 +8,7 @@ export default function SurveyingMessage() {
         alt="quoteStart"
         width={11}
         height={7}
+        priority={true}
       />
       <p className="mt-[8px] font-default text-[13px] leading-[15px]">
         고객님께서 입력해주신 연락처로{" "}
@@ -28,7 +29,13 @@ export default function SurveyingMessage() {
       <p className="mb-[8px] font-default text-[13px] leading-[15px]">
         감사합니다!
       </p>
-      <Image src="/images/quoteEnd.svg" alt="quoteEnd" width={11} height={7} />
+      <Image
+        src="/images/quoteEnd.svg"
+        alt="quoteEnd"
+        width={11}
+        height={7}
+        priority={true}
+      />
     </div>
   );
 }

@@ -42,6 +42,7 @@ export default function OpenedReviewCard({
                 className="h-full w-full object-cover"
                 width={480}
                 height={1500}
+                priority={true}
               />
             </div>
           );

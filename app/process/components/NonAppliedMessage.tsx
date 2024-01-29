@@ -8,6 +8,7 @@ export default function NonAppliedMessage() {
         alt="quoteStart"
         width={11}
         height={7}
+        priority={true}
       />
       <p className="mt-[8px] font-default text-[13px] leading-[15px]">
         아직 신청된 스타일링이 없어요 :&#40;
@@ -29,7 +30,13 @@ export default function NonAppliedMessage() {
       <p className="mb-[8px] font-default text-[13px] leading-[15px]">
         지금 바로 신청해볼까요?
       </p>
-      <Image src="/images/quoteEnd.svg" alt="quoteEnd" width={11} height={7} />
+      <Image
+        src="/images/quoteEnd.svg"
+        alt="quoteEnd"
+        width={11}
+        height={7}
+        priority={true}
+      />
     </div>
   );
 }

@@ -30,6 +30,7 @@ export default function ContentsDetailTitleCard({
             className="h-full w-full object-cover"
             width={480}
             height={200}
+            priority={true}
           />
         </div>
 
