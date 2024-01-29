@@ -1,10 +1,9 @@
 "use client";
 import { ScrolledButton } from "@/app/utils/atom/scrolledButton";
-import { userData } from "@/app/utils/atom/userData";
 import LocalStorage from "@/app/utils/localstorage";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 interface Props {
   stylistKey: string;
@@ -31,7 +30,6 @@ export default function ReservationButton({ stylistKey }: Props) {
   }, []);
 
   const userId = LocalStorage.getItem("userId");
-  const [user, setUser] = useRecoilState(userData);
 
   useEffect(() => {
     fetch("/api/user/getUserByUserId?user_id=" + userId, {
@@ -42,7 +40,7 @@ export default function ReservationButton({ stylistKey }: Props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.is_reserved) setDisabled(true);
         // setUser(data);
       })

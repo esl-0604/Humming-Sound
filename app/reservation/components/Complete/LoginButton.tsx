@@ -18,6 +18,7 @@ export default function ReservationLoginButton() {
           className="object-fit h-full w-full"
           width={480}
           height={50}
+          priority={true}
         />
       </Link>
     </div>

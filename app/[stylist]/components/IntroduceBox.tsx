@@ -56,20 +56,27 @@ export default function IntroduceBox({ stylistKey }: Props) {
               className="h-full w-full object-cover"
               width={143}
               height={143}
+              priority={true}
             />
             <Image
               src={DONUT}
               alt="donut"
               className="absolute left-[0px] top-[0px]"
+              priority={true}
             />
           </div>
 
-          <Image src={BLOCK} alt="block" className="absolute bottom-0 left-0" />
+          <Image
+            src={BLOCK}
+            alt="block"
+            className="absolute bottom-0 left-0"
+            priority={true}
+          />
         </div>
 
         <div className="flex w-full flex-col pb-[15px] pt-[10px]">
           <div className="flex h-[60px] items-center pb-[5px]">
-            <Image src={ABOUTME} alt="aboutme" />
+            <Image src={ABOUTME} alt="aboutme" priority={true} />
           </div>
 
           {stylist.aboutMe.map((list: string, idx: number) => {
@@ -84,11 +91,11 @@ export default function IntroduceBox({ stylistKey }: Props) {
           })}
         </div>
 
-        <Image src={BLOCK} alt="block" />
+        <Image src={BLOCK} alt="block" priority={true} />
 
         <div className="flex w-full flex-col pb-[15px] pt-[10px]">
           <div className="flex h-[60px] items-center pb-[5px]">
-            <Image src={FORWHO} alt="forwho" />
+            <Image src={FORWHO} alt="forwho" priority={true} />
           </div>
 
           {stylist.forWho.map((list: string, idx: number) => {
@@ -103,15 +110,15 @@ export default function IntroduceBox({ stylistKey }: Props) {
           })}
         </div>
 
-        <Image src={BLOCK} alt="block" />
+        <Image src={BLOCK} alt="block" priority={true} />
 
         <div className="flex w-full flex-col pb-[15px] pt-[10px]">
           <div className="flex h-[60px] items-center">
-            <Image src={PHILLOSOPHY} alt="phillosophy" />
+            <Image src={PHILLOSOPHY} alt="phillosophy" priority={true} />
           </div>
           <div className="flex w-full flex-col items-center py-[15px]">
             <div className="flex h-[15px] items-end pb-[5px]">
-              <Image src={UPQUOTES} alt="upquotes" />
+              <Image src={UPQUOTES} alt="upquotes" priority={true} />
             </div>
 
             {stylist.phillosophy.map((list: string, idx: number) => {
@@ -127,7 +134,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
             })}
 
             <div className="flex h-[15px] items-end pb-[5px]">
-              <Image src={DOWNQUOTES} alt="downquotes" />
+              <Image src={DOWNQUOTES} alt="downquotes" priority={true} />
             </div>
           </div>
         </div>
@@ -146,11 +153,13 @@ export default function IntroduceBox({ stylistKey }: Props) {
               src={ARROW}
               alt="leftarrow"
               className="absolute left-[30px] top-[106.5px] z-20 cursor-pointer"
+              priority={true}
             />
             <Image
               src={ARROW}
               alt="rightarrow"
               className="absolute right-[30px] top-[106.5px] z-20 rotate-180 cursor-pointer"
+              priority={true}
             />
           </>
         )}
@@ -186,6 +195,7 @@ export default function IntroduceBox({ stylistKey }: Props) {
                   className="h-full w-full object-cover"
                   width={480}
                   height={800}
+                  priority={true}
                 />
               </div>
             );

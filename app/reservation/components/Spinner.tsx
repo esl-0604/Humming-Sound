@@ -12,7 +12,7 @@ export default function Spinner({ type }: SpinnerBoxProps) {
         type === "half" ? "opacity-50" : "opacity-100"
       }`}
     >
-      <Image src={SPINNER} alt="spinner" className="z-50" />
+      <Image src={SPINNER} alt="spinner" className="z-50" priority={true} />
     </div>
   );
 }

@@ -63,6 +63,7 @@ export default function ReviewCard({
                     alt="image"
                     width={60}
                     height={60}
+                    priority={true}
                   />
                 </div>
               ) : null}

@@ -72,13 +72,13 @@ export default function ProductCard({ title, productList }: Props) {
   // console.log(newProductList);
   return (
     <div className="mt-[5px] flex h-fit w-full flex-col text-[#e8e8e8]">
-      <Image src={BLOCK} alt="block" />
+      <Image src={BLOCK} alt="block" priority={true} />
 
       <div className="relative  mt-[10px] flex h-[30px] w-fit items-center pl-[10px] font-branding text-[30px] font-normal">
         {title}
         {title === "consulting" || title === "how" ? (
           <div className="flex h-full items-start">
-            <Image src={DOT} alt="dot" />
+            <Image src={DOT} alt="dot" priority={true} />
           </div>
         ) : null}
       </div>

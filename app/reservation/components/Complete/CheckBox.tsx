@@ -26,7 +26,6 @@ export default function CheckBox({}: Props) {
   const { setProductList, productList, inputPhoneNum, setInputPhoneNum } =
     useContext(ReservationContext);
   const [checkList, setCheckList] = useState<CheckRowType[]>([]);
-  const [spinner, setSpinner] = useState<boolean>(false);
 
   useEffect(() => {
     const keys = Object.keys(productList);
@@ -85,10 +84,10 @@ export default function CheckBox({}: Props) {
   return (
     <div className="flex h-fit w-full flex-col pb-[50px] text-[#E8E8E8]">
       {inputPhoneNum ? <PhoneInput /> : null}
-      <Image src={BLOCK} alt="block" />
+      <Image src={BLOCK} alt="block" priority={true} />
 
       <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px] font-branding text-[30px] font-normal">
-        <Image src={CHECK} alt="check" />
+        <Image src={CHECK} alt="check" priority={true} />
       </div>
 
       <div className="flex w-full flex-1 flex-col items-center gap-[15px]">

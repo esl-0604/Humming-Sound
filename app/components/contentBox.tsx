@@ -46,6 +46,7 @@ export default function ContentBox() {
         alt="컨텐츠 이미지"
         width={500}
         height={200}
+        priority={true}
       />
       <div className="to-[#161616]-0% absolute left-[21.5px] right-[21.5px] top-0 z-20 h-full w-[full] bg-gradient-to-t from-[#151515]" />
       <div className="to-[#161616]-0% absolute left-[21.5px] right-[21.5px] top-0 z-20 h-full w-[full] bg-gradient-to-b from-[#151515]" />

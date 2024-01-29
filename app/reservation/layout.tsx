@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import LocalStorage from "../utils/localstorage";
 import { useRecoilState } from "recoil";
 import { userData } from "../utils/atom/userData";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function ReservationLayout({
   children,
@@ -14,6 +14,7 @@ export default function ReservationLayout({
   // 1. user 정보 fetch ----------------------------------------------
   const userId = LocalStorage.getItem("userId");
   const [user, setUser] = useRecoilState(userData);
+  const path = usePathname();
 
   useEffect(() => {
     // console.log(userId);
@@ -28,6 +29,10 @@ export default function ReservationLayout({
         .then((data) => {
           // console.log(data);
           setUser(data);
+          // console.log(path);
+          if (data.is_reserved && path === "/reservation") {
+            router.replace(`/process`);
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -59,8 +64,9 @@ export default function ReservationLayout({
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           LocalStorage.setItem("userId", data);
+
           const redirectURL = window.location.origin + window.location.pathname;
           const reservationData = LocalStorage.getItem("reservationData");
 

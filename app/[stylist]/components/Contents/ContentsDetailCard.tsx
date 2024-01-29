@@ -16,7 +16,7 @@ export default function ContentsDetailCard({
         subTitle ? "mt-[70px]" : "mt-[20px]"
       }`}
     >
-      {subTitle ? <Image src={BLOCK} alt="block" /> : null}
+      {subTitle ? <Image src={BLOCK} alt="block" priority={true} /> : null}
 
       <div className="flex w-full flex-col gap-[5px]">
         <div className="mb-[5px] font-highlight text-[24px]">{subTitle}</div>
@@ -40,6 +40,7 @@ export default function ContentsDetailCard({
                     className="h-full w-full object-cover"
                     width={480}
                     height={1500}
+                    priority={true}
                   />
                 </div>
               );

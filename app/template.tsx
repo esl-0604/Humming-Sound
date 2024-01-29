@@ -54,25 +54,38 @@ export default function RootTemplate({
   const path = usePathname();
   const params = useSearchParams();
   const stylistKey = params.get("stylistKey");
-  // console.log(window.location.href);
-  // const currentURL =
+  const step = params.get("step");
+  const contentsId = params.get("contentId");
 
   const Back = () => {
-    if (
-      window.location.pathname === "/reservation" &&
-      params.get("step") === "Check"
-    ) {
-      let updateURL = window.location.href.replace(/Check/g, "Product");
-      router.push(updateURL);
-    } else if (
-      window.location.pathname === "/reservation" &&
-      params.get("step") === "Product"
-    ) {
-      router.push(`/${stylistKey}`);
-    } else {
-      router.back();
+    // 로그인 페이지 -> 메인 페이지
+    if (path === "login") {
+      router.replace(`/`);
+    }
+
+    // 스타일링 현황 페이지 -> 메인 페이지
+    else if (path === "/process") {
+      router.replace(`/`);
+    }
+
+    // 예약 페이지
+    else if (path === "/reservation") {
+      // 예약페이지/Check -> 예약페이지/Product
+      if (step === "Check")
+        router.replace(`/reservation?stylistKey=${stylistKey}&step=Product`);
+      // 예약페이지 나머지 -> router.back()
+      else router.back();
+    }
+
+    // 스타일리스트 상세 페이지
+    else {
+      // 스타일리스트 상세 페이지/컨텐츠 상세 페이지 -> 스타일리스트 상세 페이지(컨텐츠탭)
+      if (contentsId) router.replace(`${path}`);
+      // 스타일리스트 상세페이지 -> 메인 페이지
+      else router.replace(`/`);
     }
   };
+
   return (
     <>
       {children}
@@ -81,7 +94,12 @@ export default function RootTemplate({
           className="fixed top-[13px] z-30 cursor-pointer px-[13px]"
           onClick={Back}
         >
-          <Image src={ARROW} alt="arrow" className="rotate-180" />
+          <Image
+            src={ARROW}
+            alt="arrow"
+            className="rotate-180"
+            priority={true}
+          />
         </div>
       ) : null}
     </>

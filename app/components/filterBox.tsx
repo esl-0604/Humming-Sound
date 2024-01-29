@@ -15,6 +15,7 @@ export default function FilterBox() {
           alt="toggleClosed"
           width={7}
           height={10}
+          priority={true}
         />
       </div>
       {/* <div className="absolute right-[20px] z-10 flex h-[30px] w-[185px] flex-row items-center justify-between rounded-[15px] bg-[#161616] px-[10px] shadow-button1">
