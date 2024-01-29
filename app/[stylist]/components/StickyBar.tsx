@@ -1,7 +1,7 @@
 "use client";
 
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRecoilValue } from "recoil";
 
 interface Props {

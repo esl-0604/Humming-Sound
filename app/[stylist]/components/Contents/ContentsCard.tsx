@@ -3,16 +3,24 @@ import { contentsType } from "@/app/utils/atom/stylistTestData";
 import { formatHilightText } from "@/app/utils/function/formatHilightText";
 import Image from "next/image";
 
-interface Props extends contentsType {}
+interface Props extends contentsType {
+  stylistKey: string;
+}
 
-export default function ContentsCard({ id, title, text, image }: Props) {
+export default function ContentsCard({
+  id,
+  stylistKey,
+  title,
+  text,
+  image,
+}: Props) {
   const router = useRouter();
-  const stylistKey = useSearchParams().get("stylistKey");
+
   return (
     <div
       className="relative mt-[20px] h-[200px] w-full min-w-[280px] cursor-pointer"
       onClick={() => {
-        router.push(`/stylist?stylistKey=${stylistKey}&contentId=${id}`);
+        router.push(`/${stylistKey}?contentId=${id}`);
       }}
     >
       <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px] bg-[#222222]">

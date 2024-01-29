@@ -1,6 +1,6 @@
 "use client";
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Block from "./components/Block";
 import { useSearchParams } from "next/navigation";
 import ContinueButton from "./components/ContinueButton";
@@ -32,8 +32,8 @@ export default function Reservation() {
   const [inputPhoneNum, setInputPhoneNum] = useState<boolean>(false);
   const [spinner, setSpinner] = useState<boolean>(false);
 
-  const [user, setUser] = useRecoilState(userData);
-  const [stylists, setStylists] = useRecoilState<stylistType>(stylistData);
+  const user = useRecoilValue(userData);
+  const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
 
   useEffect(() => {

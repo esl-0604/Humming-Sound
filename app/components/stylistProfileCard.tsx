@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import Image from "next/image";
+import { stylistViewType } from "../utils/atom/stylistViewType";
 
 interface StylistProfileCardProps {
   stylistKey: string;
@@ -16,7 +17,7 @@ export default function StylistProfileCard({
   stylistStyleTags,
 }: StylistProfileCardProps) {
   const router = useRouter();
-
+  const [viewType, setViewType] = useRecoilState<string>(stylistViewType);
   const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
 
@@ -37,7 +38,10 @@ export default function StylistProfileCard({
 
   return (
     <div
-      onClick={() => router.push(`/stylist?stylistKey=${stylistKey}`)}
+      onClick={() => {
+        router.push(`/${stylistKey}`);
+        setViewType("소개");
+      }}
       className="relative z-0 mb-[10px] flex h-fit w-full cursor-pointer flex-col bg-[#161616] px-[21.5px]"
     >
       <div className="relative flex h-full w-full flex-row justify-between gap-[2.5%]">

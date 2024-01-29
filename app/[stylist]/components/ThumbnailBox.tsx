@@ -4,6 +4,7 @@ import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import Image from "next/image";
 import { useRecoilValue } from "recoil";
 import StyleTag from "./StyleTag";
+import { usePathname } from "next/navigation";
 
 interface Props {
   stylistKey: string;

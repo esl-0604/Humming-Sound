@@ -2,9 +2,16 @@
 import Image from "next/image";
 import LocalStorage from "../utils/localstorage";
 import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { stylistData, stylistType } from "../utils/atom/stylistTestData";
+import { useRouter } from "next/navigation";
+import { stylistViewType } from "../utils/atom/stylistViewType";
 export default function ContentBox() {
   const userId = LocalStorage.getItem("userId");
   const [nickname, setNickname] = useState<string>("고객");
+  const stylists = useRecoilValue<stylistType>(stylistData);
+  const router = useRouter();
+  const [viewType, setViewType] = useRecoilState<string>(stylistViewType);
   useEffect(() => {
     fetch("/api/user/getUserByUserId?user_id=" + userId, {
       method: "GET",
@@ -20,8 +27,19 @@ export default function ContentBox() {
       });
   }, [userId]);
 
+  const RandomContentsLink = () => {
+    const Keys = Object.keys(stylists);
+    const randomIndex = Math.floor(Math.random() * Keys.length);
+    console.log(Keys[randomIndex]);
+    router.push(`/${Keys[randomIndex]}`);
+    setViewType("컨텐츠");
+  };
+
   return (
-    <div className="relative z-0 mb-[110px] flex h-[200px] w-full flex-col items-center justify-center bg-[#161616] px-[21.5px]">
+    <div
+      className="relative z-0 mb-[110px] flex h-[200px] w-full cursor-pointer flex-col items-center justify-center bg-[#161616] px-[21.5px]"
+      onClick={RandomContentsLink}
+    >
       <Image
         className="z-10 h-[200px] w-[full]"
         src="/images/contentImage.svg"

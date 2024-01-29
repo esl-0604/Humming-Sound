@@ -19,21 +19,26 @@ export default function ProductBox() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/api/reservation/getServiceByStylistKey?stylist_key=" + stylistKey, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        setServiceList(data);
-        if (data.length > 0) {
-          const stylistID = data[0].stylist_id;
-          setStylistId(stylistID);
-        }
-      });
+    if (serviceList.length === 0) {
+      fetch(
+        "/api/reservation/getServiceByStylistKey?stylist_key=" + stylistKey,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          setServiceList(data);
+          if (data.length > 0) {
+            const stylistID = data[0].stylist_id;
+            setStylistId(stylistID);
+          }
+        });
+    }
   }, []);
 
   useEffect(() => {
