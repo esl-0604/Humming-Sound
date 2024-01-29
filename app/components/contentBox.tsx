@@ -28,9 +28,12 @@ export default function ContentBox() {
   }, [userId]);
 
   const RandomContentsLink = () => {
-    const Keys = Object.keys(stylists);
+    const Keys = Object.keys(stylists).filter(
+      (key) => key !== "jenfloxStylist",
+    );
+    // console.log(Keys);
     const randomIndex = Math.floor(Math.random() * Keys.length);
-    console.log(Keys[randomIndex]);
+    // console.log(Keys[randomIndex]);
     router.push(`/${Keys[randomIndex]}`);
     setViewType("컨텐츠");
   };
