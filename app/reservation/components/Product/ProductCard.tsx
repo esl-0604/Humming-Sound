@@ -82,7 +82,7 @@ export default function ProductCard({ title, productList }: Props) {
           </div>
         ) : null}
       </div>
-      <div className="mb-[15px] flex h-[15px] w-full items-center pl-[10px] font-default text-[11px]">
+      <div className="mb-[15px] mt-[3px] flex h-[15px] w-full items-center pl-[10px] font-default text-[11px]">
         {comment}
       </div>
 

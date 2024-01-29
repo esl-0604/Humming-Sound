@@ -53,7 +53,7 @@ export default function RootTemplate({
   const router = useRouter();
   const path = usePathname();
   const params = useSearchParams();
-
+  const stylistKey = params.get("stylistKey");
   // console.log(window.location.href);
   // const currentURL =
 
@@ -64,6 +64,11 @@ export default function RootTemplate({
     ) {
       let updateURL = window.location.href.replace(/Check/g, "Product");
       router.push(updateURL);
+    } else if (
+      window.location.pathname === "/reservation" &&
+      params.get("step") === "Product"
+    ) {
+      router.push(`/${stylistKey}`);
     } else {
       router.back();
     }

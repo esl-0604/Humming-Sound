@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import ContentsDetailCard from "./ContentsDetailCard";
 import {
   contentType,
@@ -16,14 +16,14 @@ import { useEffect } from "react";
 interface Props extends contentsType {}
 
 export default function ContentsDetail() {
-  const stylistKey = useSearchParams().get("stylistKey");
+  const stylistKey = usePathname() ? usePathname().slice(1) : "testStylist";
   const contentId = useSearchParams().get("contentId");
   const stylists = useRecoilValue<stylistType>(stylistData);
   const [focusContentId, setFocusContentId] = useRecoilState(ContentId);
 
-  const StylistContent = stylists[
-    stylistKey ? stylistKey : "testStylist"
-  ].contentsList.find((contents) => contents.id === Number(contentId));
+  const StylistContent = stylists[stylistKey].contentsList.find(
+    (contents) => contents.id === Number(contentId),
+  );
 
   // useEffect(() => {
   //   setFocusContentId(Number(contentId));

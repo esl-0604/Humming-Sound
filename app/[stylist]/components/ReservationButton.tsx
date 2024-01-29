@@ -1,8 +1,10 @@
 "use client";
 import { ScrolledButton } from "@/app/utils/atom/scrolledButton";
+import { userData } from "@/app/utils/atom/userData";
+import LocalStorage from "@/app/utils/localstorage";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 interface Props {
   stylistKey: string;
@@ -10,7 +12,7 @@ interface Props {
 
 export default function ReservationButton({ stylistKey }: Props) {
   const router = useRouter();
-  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
+  const isScrolled = useRecoilValue(ScrolledButton);
   const [disabled, setDisabled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -27,6 +29,33 @@ export default function ReservationButton({ stylistKey }: Props) {
         else setDisabled(false);
       });
   }, []);
+
+  const userId = LocalStorage.getItem("userId");
+  const [user, setUser] = useRecoilState(userData);
+
+  useEffect(() => {
+    // console.log(userId);
+    if (userId && !user) {
+      fetch("/api/user/getUserByUserId?user_id=" + userId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.is_reserved) setDisabled(true);
+          // setUser(data);
+        })
+        .catch((error) => {
+          console.log(error);
+          // setUser(null);
+        });
+    } else {
+      setUser(null);
+    }
+  }, [userId]);
 
   return (
     <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
