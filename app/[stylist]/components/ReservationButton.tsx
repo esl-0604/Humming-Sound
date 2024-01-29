@@ -24,9 +24,9 @@ export default function ReservationButton({ stylistKey }: Props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.length === 0) setDisabled(true);
-        else setDisabled(false);
+        // else setDisabled(false);
       });
   }, []);
 
@@ -34,28 +34,23 @@ export default function ReservationButton({ stylistKey }: Props) {
   const [user, setUser] = useRecoilState(userData);
 
   useEffect(() => {
-    // console.log(userId);
-    if (userId && !user) {
-      fetch("/api/user/getUserByUserId?user_id=" + userId, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    fetch("/api/user/getUserByUserId?user_id=" + userId, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.is_reserved) setDisabled(true);
+        // setUser(data);
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.is_reserved) setDisabled(true);
-          // setUser(data);
-        })
-        .catch((error) => {
-          console.log(error);
-          // setUser(null);
-        });
-    } else {
-      setUser(null);
-    }
-  }, [userId]);
+      .catch((error) => {
+        console.log(error);
+        // setUser(null);
+      });
+  }, []);
 
   return (
     <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">

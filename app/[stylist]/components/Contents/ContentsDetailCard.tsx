@@ -19,8 +19,10 @@ export default function ContentsDetailCard({
       {subTitle ? <Image src={BLOCK} alt="block" /> : null}
 
       <div className="flex w-full flex-col gap-[5px]">
-        <div className="font-highlight text-[30px] ">{subTitle}</div>
-        <div className=" w-full text-[12px] font-extralight ">{content}</div>
+        <div className="mb-[5px] font-highlight text-[24px]">{subTitle}</div>
+        <div className=" w-full text-[12px] font-extralight leading-6">
+          {content}
+        </div>
       </div>
 
       <div className="flex h-full w-full items-center justify-start gap-[5px] overflow-x-scroll">
