@@ -16,7 +16,7 @@ import { useEffect } from "react";
 interface Props extends contentsType {}
 
 export default function ContentsDetail() {
-  const stylistKey = usePathname() ? usePathname().slice(1) : "testStylist";
+  const stylistKey = usePathname()?.slice(1);
   const contentId = useSearchParams().get("contentId");
   const stylists = useRecoilValue<stylistType>(stylistData);
   const [focusContentId, setFocusContentId] = useRecoilState(ContentId);
