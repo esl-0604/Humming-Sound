@@ -240,6 +240,55 @@ const jennyStylistContentImages = jennyStylistContentPngFiles.map(
   jennyStylistContentContext,
 );
 // -------------------------------------------------------------------------
+// stylist_test ------------------------------------------------------------
+// 이미지 폴더 내의 모든 PNG 파일 가져오기
+const musinsaHardShopperStylistContext = require.context(
+  "./stylist_musinsa_hard_shopper",
+  false,
+  /\.png$/,
+);
+const musinsaHardShopperStylistReviewContext = require.context(
+  "./stylist_musinsa_hard_shopper/review_images",
+  false,
+  /\.png$/,
+);
+const musinsaHardShopperStylistPersonalContext = require.context(
+  "./stylist_musinsa_hard_shopper/personal_images",
+  false,
+  /\.png$/,
+);
+const musinsaHardShopperStylistContentContext = require.context(
+  "./stylist_musinsa_hard_shopper/content_images",
+  false,
+  /\.png$/,
+);
+// context.keys()는 해당 폴더 내의 모든 파일 경로를 배열로 반환합니다.
+const musinsaHardShopperStylistPngFiles =
+  musinsaHardShopperStylistContext.keys();
+const musinsaHardShopperStylistReviewPngFiles =
+  musinsaHardShopperStylistReviewContext.keys();
+const musinsaHardShopperStylistPersonalPngFiles =
+  musinsaHardShopperStylistPersonalContext.keys();
+const musinsaHardShopperStylistContentPngFiles =
+  musinsaHardShopperStylistContentContext.keys();
+
+// pngFiles 배열을 사용하여 각 이미지를 import
+const musinsaHardShopperStylistImages = musinsaHardShopperStylistPngFiles.map(
+  musinsaHardShopperStylistContext,
+);
+const musinsaHardShopperStylistReviewImages =
+  musinsaHardShopperStylistReviewPngFiles.map(
+    musinsaHardShopperStylistReviewContext,
+  );
+const musinsaHardShopperStylistPersonalImages =
+  musinsaHardShopperStylistPersonalPngFiles.map(
+    musinsaHardShopperStylistPersonalContext,
+  );
+const musinsaHardShopperStylistContentImages =
+  musinsaHardShopperStylistContentPngFiles.map(
+    musinsaHardShopperStylistContentContext,
+  );
+// -------------------------------------------------------------------------
 
 export const stylistDB = {
   jenfloxStylist: {
@@ -989,7 +1038,53 @@ export const stylistDB = {
       },
     ],
   },
-
+  musinsaHardShopperStylist: {
+    profile: musinsaHardShopperStylistImages[0].default.src,
+    thumbnail: musinsaHardShopperStylistImages[1].default.src,
+    name: "무신사하드쇼퍼",
+    comment: "8년차 무신사 정복기",
+    instagramId: "musinsa.hard.shopper",
+    avgGrade: "5.0",
+    consultingAmount: "1",
+    styleTags: ["스트릿", "아메카지", "미니멀"],
+    aboutMe: [
+      "무신사 지출 금액 = 중형 세단 외제차",
+      "일주일마다 무신사에서의 최고의 30만원 쇼핑리스트 뽑기 8년째 진행중",
+    ],
+    forWho: [
+      "무신사에서 전체 쇼핑의 80% 이상을 하시는 분",
+      "무신사에서 하트, 후기 확인, 스냅 확인에 지치신 분",
+      "무신사에서 옷 고르는데 1시간 이상 소요되시는 분",
+      "무신사에서 10분만에 최고의 옷을 고르고 싶으신 분",
+    ],
+    phillosophy: [
+      '<b>"154,233"</b>',
+      "<b>무신사</b>에 존재하는 상의 개수입니다.",
+      "매일 8시간씩 제품 마다 5초씩 들여다보시면,",
+      "모두 확인하는데 <b>300일</b> 걸립니다. ",
+      "",
+      "3일만에 옷을 고르셨다면 놓치고 계실지도 모릅니다.",
+      "<b>99%</b>의 남겨진 가능성 말입니다.",
+      "",
+      "<b>8년간</b> 들여다본 제가",
+      "남겨진 <b>297일</b>의 시간을",
+      "<b>3천원</b>에 드리겠습니다.",
+    ],
+    personalImageList: musinsaHardShopperStylistPersonalImages.map(
+      (curr) => curr.default.src,
+    ),
+    reviewList: [
+      {
+        reviewer: "전**",
+        date: "24.01.19",
+        grade: "5.0",
+        comment:
+          "6만원 이하의 청바지 하나 추천 부탁드렸더니, 2023년도에 런칭한 브랜드의 3만원대 제품을 추천해주시더라구요? 사진만 봤을때는 마음에 들긴했지만, 신생 브랜드의 저가 제품이라 긴가민가 했습니다. 제품 배송 받자 마자 입을 틀어막을정도로 마음에 들었습니다ㅋㅋㅋ 이 가격대에 이 정도로 훌륭한 품질의 청바지를 구매할 수 있다는게 믿기지가 않더라구요ㅋㅋㅋ 아마 신생 브랜드라 가능한게 아닐까 싶은데, 이런 브랜드는 또 어떻게 알고 추천해주신건지 그냥 놀랍습니다. 셔츠도 하나 추천 부탁드리려구요.",
+        imageList: [musinsaHardShopperStylistReviewImages[0].default.src],
+      },
+    ],
+    contentsList: [],
+  },
   // jennyStylist: {
   //   profile: jennyStylistImages[0].default.src,
   //   thumbnail: jennyStylistImages[1].default.src,
