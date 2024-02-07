@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
 import Image from "next/image";
 import { stylistViewType } from "../utils/atom/stylistViewType";
+import LocalStorage from "../utils/localstorage";
 
 interface StylistProfileCardProps {
   stylistKey: string;
@@ -20,7 +21,7 @@ export default function StylistProfileCard({
   const [viewType, setViewType] = useRecoilState<string>(stylistViewType);
   const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
-
+  const userId = LocalStorage.getItem("userId");
   const previewImages =
     stylist.personalImageList.length >= 3
       ? stylist.personalImageList.slice(0, 3)
@@ -36,10 +37,28 @@ export default function StylistProfileCard({
             stylist.personalImageList[0],
           ];
 
+  const profileClickLog = async (stylistKey: string) => {
+    const body = {
+      logging_id: "main_profile_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: {
+        stylist_key: stylistKey,
+      },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
   return (
     <div
       onClick={() => {
         router.push(`/${stylistKey}`);
+        profileClickLog(stylistKey);
         setViewType("소개");
       }}
       className="relative z-0 mb-[10px] flex h-fit w-full cursor-pointer flex-col bg-[#161616] px-[21.5px]"

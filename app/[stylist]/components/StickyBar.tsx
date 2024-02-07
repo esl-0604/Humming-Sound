@@ -1,6 +1,7 @@
 "use client";
 
 import { stylistData, stylistType } from "@/app/utils/atom/stylistTestData";
+import LocalStorage from "@/app/utils/localstorage";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRecoilValue } from "recoil";
 
@@ -19,6 +20,53 @@ export default function StickyBar({
   const router = useRouter();
   const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey];
+  const userId = LocalStorage.getItem("userId");
+
+  const introTabClickLog = async (stylistKey: string) => {
+    const body = {
+      logging_id: "stylist_intro_tab_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: { stylist_key: stylistKey },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
+  const reviewTabClickLog = async (stylistKey: string) => {
+    const body = {
+      logging_id: "stylist_review_tab_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: { stylist_key: stylistKey },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
+  const contentsTabClickLog = async (stylistKey: string) => {
+    const body = {
+      logging_id: "stylist_contents_tab_ click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: { stylist_key: stylistKey },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
   return (
     <div className="sticky top-0 z-30 flex w-full flex-col whitespace-nowrap bg-[#161616]">
       <div className="flex h-[65px] w-full justify-between px-[30px] pt-[10px]">
@@ -63,7 +111,10 @@ export default function StickyBar({
               className={`flex h-full flex-1 cursor-pointer items-center justify-center  ${
                 viewType === "소개" ? "font-highlight" : "font-extralight "
               }`}
-              onClick={() => setViewType("소개")}
+              onClick={() => {
+                introTabClickLog(stylistKey);
+                setViewType("소개");
+              }}
             >
               소개
             </div>
@@ -71,7 +122,10 @@ export default function StickyBar({
               className={`flex h-full flex-1 cursor-pointer items-center justify-center ${
                 viewType === "후기" ? "font-highlight" : "font-extralight "
               }`}
-              onClick={() => setViewType("후기")}
+              onClick={() => {
+                reviewTabClickLog(stylistKey);
+                setViewType("후기");
+              }}
             >
               후기
             </div>
@@ -79,7 +133,10 @@ export default function StickyBar({
               className={`flex h-full flex-1 cursor-pointer items-center justify-center ${
                 viewType === "컨텐츠" ? "font-highlight" : "font-extralight "
               }`}
-              onClick={() => setViewType("컨텐츠")}
+              onClick={() => {
+                contentsTabClickLog(stylistKey);
+                setViewType("컨텐츠");
+              }}
             >
               컨텐츠
             </div>

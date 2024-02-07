@@ -56,7 +56,9 @@ export default function ReviewBox({ stylistKey }: Props) {
               }}
             >
               <ReviewCard
+                stylistKey={stylistKey}
                 open={openCard === idx}
+                idx={idx}
                 reviewer={review.reviewer}
                 date={review.date}
                 grade={review.grade}

@@ -2,21 +2,54 @@ import Image from "next/image";
 import { useState } from "react";
 import OpenedReviewCard from "./OpenedReviewCard";
 import { reviewType } from "@/app/utils/atom/stylistTestData";
+import LocalStorage from "@/app/utils/localstorage";
 
 interface Props extends reviewType {
+  stylistKey: string;
   open: boolean;
+  idx: number;
 }
 
 export default function ReviewCard({
+  stylistKey,
   open,
+  idx,
   reviewer,
   date,
   grade,
   comment,
   imageList,
 }: Props) {
+  const userId = LocalStorage.getItem("userId");
+  const reviewClickLog = async (
+    stylistKey: string,
+    idx: number,
+    open: boolean,
+  ) => {
+    const body = {
+      logging_id: "stylist_review_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: {
+        stylist_key: stylistKey,
+        review_id: idx,
+        state: open == true ? "closed" : "opened",
+      },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
   return (
-    <div>
+    <div
+      onClick={() => {
+        reviewClickLog(stylistKey, idx, open);
+      }}
+    >
       {open ? (
         <OpenedReviewCard
           reviewer={reviewer}
