@@ -9,12 +9,14 @@ import { useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import ARROW from "@/public/images/toggleClosed.svg";
+import LocalStorage from "./utils/localstorage";
 
 export default function RootTemplate({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const userId = LocalStorage.getItem("userId");
   useEffect(() => {
     const generateUniqueSessionId = () => {
       const timestamp = new Date().getTime(); // 현재 시간을 timestamp로 변환
@@ -29,8 +31,25 @@ export default function RootTemplate({
         session_id = generateUniqueSessionId();
       }
       sessionStorage.setItem("sessionId", session_id);
+      sessionCreateLog();
     }
   }, []);
+
+  const sessionCreateLog = async () => {
+    const body = {
+      logging_id: "session_create",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: null,
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
 
   // 1. 플로팅 버튼 스크롤 감지 ----------------------------------------------
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);

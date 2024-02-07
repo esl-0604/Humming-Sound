@@ -54,7 +54,7 @@ export default function StickyBar({
   };
   const contentsTabClickLog = async (stylistKey: string) => {
     const body = {
-      logging_id: "stylist_contents_tab_ click",
+      logging_id: "stylist_contents_tab_click",
       session_id: sessionStorage.getItem("sessionId"),
       user_id: userId ? userId : null,
       etc: { stylist_key: stylistKey },
