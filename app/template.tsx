@@ -1,6 +1,6 @@
 "use client";
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ScrolledButton,
   ScrolledStylistButton,
@@ -15,6 +15,23 @@ export default function RootTemplate({
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    const generateUniqueSessionId = () => {
+      const timestamp = new Date().getTime(); // 현재 시간을 timestamp로 변환
+      return `${timestamp}_${Math.random().toString(36)}`; // timestamp와 무작위 문자열을 조합하여 세션 아이디 생성
+    };
+
+    const existingSession = sessionStorage.getItem("sessionId");
+
+    if (!existingSession) {
+      let session_id = generateUniqueSessionId();
+      while (sessionStorage.getItem(session_id)) {
+        session_id = generateUniqueSessionId();
+      }
+      sessionStorage.setItem("sessionId", session_id);
+    }
+  }, []);
+
   // 1. 플로팅 버튼 스크롤 감지 ----------------------------------------------
   const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
   const [isStylistScrolled, setIsStylistScrolled] = useRecoilState(
@@ -41,6 +58,9 @@ export default function RootTemplate({
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
+      }
+
+      if (scrollHeight <= (scrollTop + clientHeight) * 2) {
       }
     };
     window.addEventListener("scroll", handleScroll);

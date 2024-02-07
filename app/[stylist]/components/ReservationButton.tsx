@@ -50,12 +50,32 @@ export default function ReservationButton({ stylistKey }: Props) {
       });
   }, []);
 
+  const reserveClickLog = async (stylistKey: string) => {
+    const body = {
+      logging_id: "stylist_reserve_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: {
+        stylist_key: stylistKey,
+      },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
+
   return (
     <div className="fixed bottom-[30px] z-10 h-[50px] w-full max-w-[480px] px-[55px]">
       <div
         onClick={() => {
-          if (!disabled)
+          if (!disabled) {
             router.push(`/reservation?stylistKey=${stylistKey}&step=Product`);
+            reserveClickLog(stylistKey);
+          }
         }}
         className={`flex h-[50px] w-full cursor-pointer items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out ${
           isScrolled

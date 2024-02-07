@@ -26,7 +26,21 @@ export default function ContentBox() {
           setNickname("고객");
       });
   }, [userId]);
-
+  const randomContentClickLog = async () => {
+    const body = {
+      logging_id: "main_random_content_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: null,
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
   const RandomContentsLink = () => {
     const Keys = Object.keys(stylists).filter(
       (key) => key !== "jenfloxStylist",
@@ -35,6 +49,7 @@ export default function ContentBox() {
     const randomIndex = Math.floor(Math.random() * Keys.length);
     // console.log(Keys[randomIndex]);
     router.push(`/${Keys[randomIndex]}`);
+    randomContentClickLog();
     setViewType("컨텐츠");
   };
 

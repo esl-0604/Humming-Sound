@@ -2,6 +2,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { contentsType } from "@/app/utils/atom/stylistTestData";
 import { formatHilightText } from "@/app/utils/function/formatHilightText";
 import Image from "next/image";
+import LocalStorage from "@/app/utils/localstorage";
 
 interface Props extends contentsType {
   stylistKey: string;
@@ -15,12 +16,31 @@ export default function ContentsCard({
   image,
 }: Props) {
   const router = useRouter();
-
+  const userId = LocalStorage.getItem("userId");
+  const contentClickLog = async (stylistKey: string, idx: number) => {
+    const body = {
+      logging_id: "stylist_content_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      etc: {
+        stylist_key: stylistKey,
+        idx: idx,
+      },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
   return (
     <div
       className="relative mt-[20px] h-[200px] w-full min-w-[280px] cursor-pointer"
       onClick={() => {
         router.push(`/${stylistKey}?contentId=${id}`);
+        contentClickLog(stylistKey, id);
       }}
     >
       <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-[5px] bg-[#222222]">
