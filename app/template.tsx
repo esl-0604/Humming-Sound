@@ -40,7 +40,7 @@ export default function RootTemplate({
       logging_id: "session_create",
       session_id: sessionStorage.getItem("sessionId"),
       user_id: userId ? userId : null,
-      etc: null,
+      etc: { path: window.location.pathname },
     };
     await fetch("/api/log/postLog", {
       method: "POST",
