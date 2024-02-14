@@ -109,7 +109,11 @@ export default function ProductBox() {
                       : "flex"
                   }`}
                 >
-                  <ProductCard title={type} productList={sortedProductList} />
+                  <ProductCard
+                    title={type}
+                    productList={sortedProductList}
+                    stylistKey={stylistKey}
+                  />
                 </div>
               );
             })

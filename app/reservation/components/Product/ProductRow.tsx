@@ -7,12 +7,15 @@ import { formatMainText } from "@/app/utils/function/formatMainText";
 import { ReservationContext } from "../../context";
 import { updateServiceType } from "./ProductCard";
 import { insertNewline } from "@/app/utils/function/insertNewline";
+import LocalStorage from "@/app/utils/localstorage";
 
 interface Props extends updateServiceType {
   card: string;
+  stylistKey: string | null;
 }
 
 export default function ProductRow({
+  stylistKey,
   card,
   service_id,
   stylist_id,
@@ -26,7 +29,28 @@ export default function ProductRow({
   const [select, setSelected] = useState<boolean>(false);
   const [optionNum, setOptionNum] = useState<number>(1);
   const { productList, setProductList } = useContext(ReservationContext);
+  const userId = LocalStorage.getItem("userId");
 
+  const productSelectionLog = async (step: string, isSelected: boolean) => {
+    const body = {
+      logging_id: "product_selection_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      stylist_key: stylistKey,
+      etc: {
+        step: step,
+        service_id: service_id,
+        isSelected: isSelected,
+      },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
   useEffect(() => {
     if (productList) {
       // card 당 상품 중복 선택 불가능 (optional은 가능)
@@ -63,6 +87,7 @@ export default function ProductRow({
     }
 
     setSelected(!select);
+    productSelectionLog("Product", !select);
     setOptionNum(1);
   };
 
