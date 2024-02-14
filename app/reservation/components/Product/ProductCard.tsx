@@ -19,6 +19,7 @@ import SHOPPING from "@/public/gif/reservation/add/shopping.json";
 interface Props {
   title: string;
   productList: ServiceType[];
+  stylistKey: string | null;
 }
 
 export interface updateServiceType extends ServiceType {
@@ -26,7 +27,7 @@ export interface updateServiceType extends ServiceType {
   comment?: string;
 }
 
-export default function ProductCard({ title, productList }: Props) {
+export default function ProductCard({ stylistKey, title, productList }: Props) {
   // console.log({ title: title, productList: productList });
   let comment = "";
 
@@ -91,6 +92,7 @@ export default function ProductCard({ title, productList }: Props) {
           return (
             <ProductRow
               key={idx}
+              stylistKey={stylistKey}
               card={title}
               service_id={item.service_id}
               stylist_id={item.stylist_id}

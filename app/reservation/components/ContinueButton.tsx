@@ -2,10 +2,9 @@
 import { ScrolledButton } from "@/app/utils/atom/scrolledButton";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { ReservationContext } from "../context";
 import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
-import PopUp from "./PopUp";
 import { popUp } from "@/app/utils/atom/popUp";
 import { formatMainText } from "@/app/utils/function/formatMainText";
 import { userData } from "@/app/utils/atom/userData";
@@ -17,8 +16,9 @@ export default function ContinueButton({}: Props) {
   const stylistKey = useSearchParams().get("stylistKey");
 
   const [isPopUp, setIsPopUp] = useRecoilState(popUp);
-  const [isScrolled, setIsScrolled] = useRecoilState(ScrolledButton);
-  const [user, setUser] = useRecoilState(userData);
+  const isScrolled = useRecoilValue(ScrolledButton);
+  const user = useRecoilValue(userData);
+  const userId = user?.user_id;
   const {
     step,
     totalCost,
@@ -27,6 +27,34 @@ export default function ContinueButton({}: Props) {
     setFirstClick,
     setInputPhoneNum,
   } = useContext(ReservationContext);
+
+  const reservationContinueLog = async (step: string) => {
+    const body = {
+      logging_id: "reservation_continue_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: userId ? userId : null,
+      stylist_key: stylistKey,
+      etc: {
+        step: step,
+        selected_product: {
+          consulting: productList.consulting?.map(
+            (item: any) => item.service_id,
+          ),
+          how: productList.how?.map((item: any) => item.service_id),
+          optional: productList.optional?.map((item: any) => item.service_id),
+
+          shopping: productList.shopping?.map((item: any) => item.service_id),
+        },
+      },
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
 
   useEffect(() => {
     window.scrollTo({
@@ -51,7 +79,6 @@ export default function ContinueButton({}: Props) {
     let nextStep = "";
     const defaultURL = `/reservation?stylistKey=${stylistKey}&step=`;
     const CardList = Object.keys(productList);
-
     // 현재 == product 일 경우,
     if (step.step === "Product") {
       // 1) 필수 옵션 선택 안함 (consulting && how) --> 팝업창 : 필수
@@ -81,6 +108,7 @@ export default function ContinueButton({}: Props) {
           if (productList["how"][0].title !== "설문지") {
             nextStep = "Date1";
             router.push(defaultURL + nextStep);
+            reservationContinueLog(step.step);
           }
 
           // 3-2) how == 설문지
@@ -92,6 +120,7 @@ export default function ContinueButton({}: Props) {
             ) {
               nextStep = "Date2";
               router.push(defaultURL + nextStep);
+              reservationContinueLog(step.step);
             }
 
             // 3-1-2) shopping 없음 --> nextStep : Check
@@ -99,6 +128,7 @@ export default function ContinueButton({}: Props) {
             else {
               nextStep = "Check";
               router.push(defaultURL + nextStep);
+              reservationContinueLog(step.step);
             }
           }
         }
@@ -116,6 +146,7 @@ export default function ContinueButton({}: Props) {
         if (!CardList.includes("shopping")) {
           nextStep = "Check";
           router.push(defaultURL + nextStep);
+          reservationContinueLog(step.step);
         }
 
         // 2) shopping 상품 선택 && shopping == 제품 추천 --> nextStep : Check
@@ -123,12 +154,14 @@ export default function ContinueButton({}: Props) {
           if (productList["shopping"][0].title === "제품 추천") {
             nextStep = "Check";
             router.push(defaultURL + nextStep);
+            reservationContinueLog(step.step);
           }
 
           // 3) shopping 상품 선택 && shopping == 온라인 동행쇼핑 or 오프라인 퍼스널 쇼핑 --> nextStep : Date2
           else {
             nextStep = "Date2";
             router.push(defaultURL + nextStep);
+            reservationContinueLog(step.step);
           }
         }
       }
@@ -148,6 +181,7 @@ export default function ContinueButton({}: Props) {
       ) {
         nextStep = "Check";
         router.push(defaultURL + nextStep);
+        reservationContinueLog(step.step);
       }
       // 날짜와 타임슬롯을 선택하지 않았다면, 넘어갈 수 없음.
       else {
@@ -162,6 +196,7 @@ export default function ContinueButton({}: Props) {
       if (!user) {
         nextStep = "Login";
         router.push(defaultURL + nextStep);
+        reservationContinueLog(step.step);
       }
 
       // 로그인 상태라면, 전화번호 입력 창 open
