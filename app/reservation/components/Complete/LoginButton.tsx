@@ -1,15 +1,33 @@
 "use client";
 
+import { log } from "console";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ReservationLoginButton() {
   const redirectURL = window.location.origin + window.location.pathname;
   // console.log(redirectURL);
-
+  const loginClickLog = async () => {
+    const body = {
+      logging_id: "reservation_login_click",
+      session_id: sessionStorage.getItem("sessionId"),
+      user_id: null,
+      etc: null,
+    };
+    await fetch("/api/log/postLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
   return (
     <div className="itmes-center absolute bottom-[30px] z-10 flex h-fit w-full justify-center px-[55px]">
       <Link
+        onClick={() => {
+          loginClickLog();
+        }}
         href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${redirectURL}&response_type=code&scope=profile_nickname,account_email`}
       >
         <Image
