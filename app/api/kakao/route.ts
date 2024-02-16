@@ -61,6 +61,7 @@ export async function GET(req: NextRequest) {
         id: Number(userInfoResponse.id),
         email: userInfoResponse.kakao_account.email,
         nickname: userInfoResponse.kakao_account.profile.nickname,
+        registered_at: new Date().toLocaleString("kr-KO"),
       });
       return String(insertUserResponse.insertedId);
     }
