@@ -100,25 +100,35 @@ export default function StylistProfileCard({
           />
         </div> */}
 
-        <div className="absolute bottom-[20px] left-[10px] z-30">
+        <div className="absolute bottom-[10px] left-[10px] z-30">
           <p className="text-start font-highlight text-[15px] text-white">
             {stylistName} <span className="font-default">스타일리스트</span>
           </p>
           <p className="text-start font-main text-[10px] text-white">
             {stylistComment}
           </p>
+          <div className="mt-[5px] flex h-[20px] w-fit flex-row items-center justify-between rounded-[15px]">
+            <p className="right-[20px] z-20 mr-[5px] flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
+              {stylistStyleTags[0]}
+            </p>
+            <p className="right-[20px] z-20 mr-[5px] flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
+              {stylistStyleTags[1]}
+            </p>
+            <p className="right-[20px] z-20 flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
+              {stylistStyleTags[2]}
+            </p>
+          </div>
         </div>
-        <div className="absolute bottom-[10px] right-[10px] z-30 flex h-[20px] w-fit flex-row items-center justify-between rounded-[15px]">
-          <p className="right-[20px] z-20 mr-[5px] flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
-            {stylistStyleTags[0]}
-          </p>
-          <p className="right-[20px] z-20 mr-[5px] flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
-            {stylistStyleTags[1]}
-          </p>
-          <p className="right-[20px] z-20 flex h-[20px] items-center justify-center rounded-[50px] border-[0.462px] border-[#E8E8E8] px-[12px] font-main text-[8px] text-[#E8E8E8]">
-            {stylistStyleTags[2]}
-          </p>
+        <div className="absolute bottom-[5px] z-30 flex h-[30px] w-full justify-end pr-[10px]">
+          <div
+            className={`flex h-[30px] w-[160px] items-center justify-center rounded-[48px] bg-[rgba(0,0,0,0.10)] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out`}
+          >
+            <p className={`font-main text-[12px] text-[#ffffff]`}>
+              스타일리스트 자세히 보기
+            </p>
+          </div>
         </div>
+        {/* <div className="absolute bottom-[10px] right-[10px] z-30 flex h-[20px] w-fit flex-row items-center justify-between rounded-[15px]"> */}
       </div>
       <div className="to-[#161616]-0% absolute left-[21.5px] right-[21.5px] top-0 z-20 h-full w-[full] bg-gradient-to-t from-[#161616]" />
     </div>
