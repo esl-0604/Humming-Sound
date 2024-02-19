@@ -119,9 +119,9 @@ export default function StylistProfileCard({
             </p>
           </div>
         </div>
-        <div className="absolute bottom-[5px] z-30 flex h-[30px] w-full justify-end pr-[10px]">
+        <div className="absolute bottom-[5px] z-30 flex h-[30px] w-full justify-end ">
           <div
-            className={`flex h-[30px] w-[160px] items-center justify-center rounded-[48px] bg-[rgba(0,0,0,0.10)] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out`}
+            className={`flex h-[30px] w-[170px] items-center justify-center rounded-[5px] bg-[rgba(0,0,0,0.10)] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out`}
           >
             <p className={`font-main text-[12px] text-[#ffffff]`}>
               스타일리스트 자세히 보기
