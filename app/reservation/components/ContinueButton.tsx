@@ -193,18 +193,18 @@ export default function ContinueButton({}: Props) {
     else if (step.step === "Check") {
       // 로그아웃 상태라면, nextStep : Login
       // console.log(user);
-      if (!user) {
-        nextStep = "Login";
-        router.push(defaultURL + nextStep);
-        reservationContinueLog(step.step);
-      }
+      // if (!user) {
+      //   nextStep = "Login";
+      //   router.push(defaultURL + nextStep);
+      //   reservationContinueLog(step.step);
+      // }
 
       // 로그인 상태라면, 전화번호 입력 창 open
-      else {
-        // nextStep = "Done";
-        // router.push(defaultURL + nextStep);
-        setInputPhoneNum(true);
-      }
+      // else {
+      // nextStep = "Done";
+      // router.push(defaultURL + nextStep);
+      setInputPhoneNum(true);
+      // }
     }
 
     // 현재 == Done 일 경우, main 으로 라우팅
@@ -274,12 +274,28 @@ export default function ContinueButton({}: Props) {
               ₩ {addCommasToNumber(totalCost)}
               {step.step !== "Check" ? "~" : null}
             </p>
-            <p
+            {/* <p
               className={` whitespace-nowrap text-[16px] ${
                 isScrolled ? "font-main" : "font-default"
               }`}
             >
               {step.step === "Check" && !user ? "로그인 후" : "계속"}
+              <span
+                className={`whitespace-pre ${
+                  isScrolled ? "font-highlight" : "font-main"
+                }`}
+              >
+                {" "}
+                진행하기
+              </span>{" "}
+              &gt;
+            </p> */}
+            <p
+              className={` whitespace-nowrap text-[16px] ${
+                isScrolled ? "font-main" : "font-default"
+              }`}
+            >
+              계속
               <span
                 className={`whitespace-pre ${
                   isScrolled ? "font-highlight" : "font-main"
