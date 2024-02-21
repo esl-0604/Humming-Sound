@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 
   if (
     !reservation.stylist_id ||
-    !reservation.user_id ||
+    // !reservation.user_id ||
     !reservation.user_phone_number ||
     !reservation.user_name ||
     !reservation.services ||
