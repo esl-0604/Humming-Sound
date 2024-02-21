@@ -90,7 +90,7 @@ export default function Reservation() {
             <PopUp type={isPopUp.type} />
           ) : null}
           {spinner ? <Spinner type="half" /> : null}
-          {step.step === "Login" ? <LoginBox /> : null}
+          {/* {step.step === "Login" ? <LoginBox /> : null} */}
           <div className="relative flex h-full w-full flex-col">
             <div className="sticky top-0 z-30 h-fit w-full bg-[#161616] px-[30px]">
               <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">
