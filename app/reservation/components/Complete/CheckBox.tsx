@@ -23,16 +23,20 @@ export interface CheckRowType {
 }
 
 export default function CheckBox({}: Props) {
-  const { setProductList, productList, inputPhoneNum, setInputPhoneNum } =
-    useContext(ReservationContext);
+  const {
+    setSelectedProductList,
+    selectedProductList,
+    inputPhoneNum,
+    setInputPhoneNum,
+  } = useContext(ReservationContext);
   const [checkList, setCheckList] = useState<CheckRowType[]>([]);
 
   useEffect(() => {
-    const keys = Object.keys(productList);
+    const keys = Object.keys(selectedProductList);
     if (keys.length > 0) {
       const resultList: CheckRowType[] = [];
       for (const key of keys) {
-        productList[key].forEach((item: any) => {
+        selectedProductList[key].forEach((item: any) => {
           const itemElement = {
             title: item.title,
             type: item.type,
@@ -56,7 +60,7 @@ export default function CheckBox({}: Props) {
           stylistKey: stylistKey,
           productListCache: productListCache,
         });
-        setProductList(productListCache);
+        setSelectedProductList(productListCache);
         LocalStorage.removeItem("reservationData");
         const keys = Object.keys(productListCache);
         const resultList: CheckRowType[] = [];
@@ -82,15 +86,18 @@ export default function CheckBox({}: Props) {
   }, []);
 
   return (
-    <div className="flex h-fit w-full flex-col pb-[50px] text-[#E8E8E8]">
-      {inputPhoneNum ? <PhoneInput /> : null}
-      <Image src={BLOCK} alt="block" priority={true} />
-
-      <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px] font-branding text-[30px] font-normal">
-        <Image src={CHECK} alt="check" priority={true} />
+    <div className="text-custom_white mt-[25px] flex h-fit w-full flex-col items-center">
+      <div className="font-branding text-[24px]">
+        Step4. <span className="font-main">예약 확정</span>
       </div>
+      <div className="mt-[3px] flex h-[60px] w-full items-center pl-[10px] font-main text-[12px]">
+        최종 선택하신 상품들을 확인해주세요.
+        <br />
+        확인 후 다음 단계 진행 시 결제 화면으로 넘어갑니다.
+      </div>
+      {inputPhoneNum ? <PhoneInput /> : null}
 
-      <div className="flex w-full flex-1 flex-col items-center gap-[15px]">
+      <div className="mt-[12px] flex h-fit w-full flex-col gap-[12px] px-[3%]">
         {checkList.map((item: CheckRowType, idx: number) => {
           return (
             <CheckRow

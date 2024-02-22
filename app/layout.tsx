@@ -20,7 +20,7 @@ export default function RootLayout({
       <html>
         <body className="overscroll-y-none">
           <div className="flex w-screen items-center justify-center bg-white">
-            <div className="relative h-full w-full max-w-[480px] select-none">
+            <div className="relative h-fit w-full max-w-[480px] select-none">
               {children}
             </div>
           </div>

@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import ContinueButton from "./components/ContinueButton";
 import { ReservationContext } from "./context";
 import { useEffect, useState } from "react";
-import ProductBox from "./components/Product/ProductBox";
+
 import CalendarBox from "./components/Date/CalendarBox";
 import CompleteBox from "./components/Complete/CompleteBox";
 import { stylistData, stylistType } from "../utils/atom/stylistTestData";
@@ -18,13 +18,17 @@ import LoginBox from "./components/Complete/LoginBox";
 import { userData } from "../utils/atom/userData";
 import Spinner from "./components/Spinner";
 import Image from "next/image";
+import ProductConsultingBox from "./components/Product/ProductConsultingBox";
+import ProductOptionalBox from "./components/Product/ProductOptionalBox";
+import ProductShoppingBox from "./components/Product/ProductShoppingBox";
+import { ServiceType } from "../utils/atom/productData";
 
 export default function Reservation() {
   const stylistKey = useSearchParams().get("stylistKey");
   const stepKey = useSearchParams().get("step");
 
   const [step, setStep] = useState<any>({ step: "Product" });
-  const [productList, setProductList] = useState<any>({});
+  const [selectedProductList, setSelectedProductList] = useState<any>({});
   const [totalCost, setTotalCost] = useState<number>(0);
 
   const [isPopUp, setIsPopUp] = useRecoilState<PopUpType>(popUp);
@@ -35,26 +39,66 @@ export default function Reservation() {
   const user = useRecoilValue(userData);
   const stylists = useRecoilValue<stylistType>(stylistData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
+  const [serviceList, setServiceList] = useState<ServiceType[]>([]);
+  const [sortedServiceList, setSortedServiceList] = useState<any>({});
+  // useEffect(() => {
+  //   const typeList = Object.keys(productList);
+  //   let costs = 0;
+  //   typeList.forEach((card: any) => {
+  //     productList[card].forEach((item: any) => {
+  //       if (item.type === "total") {
+  //         costs += item.price;
+  //       } else if (item.type === "byEA") {
+  //         costs += item.price * item.count;
+  //       } else {
+  //         if (item.timeslots.length > 0)
+  //           costs += item.price * item.timeslots.length;
+  //         else costs += item.price;
+  //       }
+  //     });
+  //   });
+  //   setTotalCost(costs);
+  // }, [productList]);
 
   useEffect(() => {
-    // console.log(productList);
-    const typeList = Object.keys(productList);
-    let costs = 0;
-    typeList.forEach((card: any) => {
-      productList[card].forEach((item: any) => {
-        if (item.type === "total") {
-          costs += item.price;
-        } else if (item.type === "byEA") {
-          costs += item.price * item.count;
-        } else {
-          if (item.timeslots.length > 0)
-            costs += item.price * item.timeslots.length;
-          else costs += item.price;
-        }
-      });
+    if (serviceList.length === 0) {
+      fetch(
+        "/api/reservation/getServiceByStylistKey?stylist_key=" + stylistKey,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          setServiceList(data);
+          setSortedServiceList(sortServiceList(data));
+
+          if (data.length > 0) {
+            const stylistID = data[0].stylist_id;
+          }
+        });
+    }
+  }, []);
+
+  const sortServiceList = (serviceList: ServiceType[]) => {
+    const resultObject: { [key: string]: ServiceType[] } = {};
+    [
+      ...new Set(serviceList.map((item: ServiceType) => item.product.type)),
+    ].forEach((type: string) => {
+      const sortedProductList = serviceList
+        .filter((item: ServiceType) => item.product.type === type)
+        .sort((a, b) => {
+          return a.product.order - b.product.order;
+        });
+      resultObject[type] = sortedProductList;
     });
-    setTotalCost(costs);
-  }, [productList]);
+    // console.log(resultObject.how);
+    return resultObject;
+  };
 
   useEffect(() => {
     if (stepKey) setStep({ step: stepKey });
@@ -74,8 +118,8 @@ export default function Reservation() {
         value={{
           step,
           setStep,
-          productList,
-          setProductList,
+          selectedProductList,
+          setSelectedProductList,
           totalCost,
           setTotalCost,
           firstClick,
@@ -85,7 +129,7 @@ export default function Reservation() {
           setSpinner,
         }}
       >
-        <main className="relative flex min-h-screen w-full flex-col bg-[#161616] pb-[60px] text-[#E8E8E8]">
+        <main className="relative flex h-fit min-h-screen w-full flex-col bg-[#161616] text-[#E8E8E8]">
           {isPopUp.pop && isPopUp.type === "필수" ? (
             <PopUp type={isPopUp.type} />
           ) : null}
@@ -94,68 +138,72 @@ export default function Reservation() {
           <div className="relative flex h-full w-full flex-col">
             <div className="sticky top-0 z-30 h-fit w-full bg-[#161616] px-[30px]">
               <div className="mb-[35px] mt-[11px] flex h-[15px] w-full items-center font-highlight text-[15px]">
-                예약하기
+                예약하기 - {stylist.name}
+                <span className="ml-[3px] font-main">스타일리스트</span>
               </div>
-
-              <div className="flex w-full flex-col gap-[10px] pb-[27px]">
-                <Block />
-                <div className="flex min-h-[60px] w-full flex-col font-default text-[30px] leading-[100%]">
-                  <div className="flex min-h-[30px] flex-wrap items-center">
-                    <span className="flex h-full items-center whitespace-pre font-highlight">
-                      {step.step === "Check" || step.step === "Done"
-                        ? user
-                          ? user.nickname
-                          : "멋진 수달"
-                        : stylist.name}{" "}
-                    </span>
-                    <span className="flex h-full items-center whitespace-nowrap">
-                      {step.step === "Check" || step.step === "Done"
-                        ? "고객님의"
-                        : "스타일리스트"}
-                    </span>
+            </div>
+            {serviceList.length > 0 && step.step === "ProductConsulting" ? (
+              <div className="flex flex-row items-center justify-center px-[3%]">
+                <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
+                  <div className="z-30 flex h-fit w-full flex-row">
+                    <div className="bg-custom_white h-[5px] w-[18.5%]" />
+                    <div className="bg-custom_grey h-[5px] w-[81.5%]" />
                   </div>
-                  <span className="flex min-h-[30px] items-center">
-                    {step.step === "Check"
-                      ? "예약을 확인해주세요!"
-                      : step.step === "Done"
-                        ? "예약이 확정되었어요!"
-                        : "예약을 도와드릴게요."}
-                  </span>
                 </div>
-
-                <div className="flex min-h-[45px] w-full flex-col font-default text-[15px] leading-[20px]">
-                  <span>
-                    {step.step === "Check"
-                      ? "고객님만의 멋있는 분위기를 만들어줄 더 다양한"
-                      : step.step === "Done"
-                        ? formatMainText(
-                            "아래 버튼을 누르고 <b>진행중인 과정을 확인해보세요.</b>",
-                          )
-                        : "무엇을 원하시든 맞춰드릴게요."}
-                  </span>
-                  <span>
-                    {step.step === "Check"
-                      ? "컨설팅이 준비되어 있어요. 빠진게 없는지 확인해주세요!"
-                      : step.step === "Done"
-                        ? "입금 확인 후 최종 일정이 확정됩니다!"
-                        : "자유롭게 골라주세요!"}
-                  </span>
-                </div>
+                <ProductConsultingBox
+                  productList={sortedServiceList.how}
+                  stylistKey={stylistKey}
+                />
               </div>
-            </div>
-
-            <div className="w-full px-[30px]">
-              {step.step === "Product" ? (
-                <ProductBox />
-              ) : step.step === "Date1" || step.step === "Date2" ? (
-                <CalendarBox />
-              ) : step.step === "Check" ? (
+            ) : serviceList.length > 0 && step.step === "ProductOptional" ? (
+              <div className="flex flex-row items-center justify-center px-[3%]">
+                <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
+                  <div className="z-30 flex h-fit w-full flex-row">
+                    <div className="bg-custom_white h-[5px] w-[37%]" />
+                    <div className="bg-custom_grey h-[5px] w-[63%]" />
+                  </div>
+                </div>
+                <ProductOptionalBox
+                  productList={sortedServiceList.optional}
+                  stylistKey={stylistKey}
+                />
+              </div>
+            ) : serviceList.length > 0 && step.step === "ProductShopping" ? (
+              <div className="flex flex-row items-center justify-center px-[3%]">
+                <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
+                  <div className="z-30 flex h-fit w-full flex-row">
+                    <div className="bg-custom_white h-[5px] w-[55.5%]" />
+                    <div className="bg-custom_grey h-[5px] w-[44.5%]" />
+                  </div>
+                </div>
+                <ProductShoppingBox
+                  productList={sortedServiceList.shopping}
+                  stylistKey={stylistKey}
+                />
+              </div>
+            ) : serviceList.length > 0 && step.step === "Check" ? (
+              <div className="flex flex-row items-center justify-center px-[3%]">
+                <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
+                  <div className="z-30 flex h-fit w-full flex-row">
+                    <div className="bg-custom_white h-[5px] w-[74%]" />
+                    <div className="bg-custom_grey h-[5px] w-[26%]" />
+                  </div>
+                </div>
                 <CheckBox />
-              ) : step.step === "Done" ? (
+              </div>
+            ) : serviceList.length > 0 && step.step === "Done" ? (
+              <div className="flex flex-row items-center justify-center px-[3%]">
+                <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
+                  <div className="z-30 flex h-fit w-full flex-row">
+                    <div className="bg-custom_white h-[5px] w-[100%]" />
+                    <div className="bg-custom_grey h-[5px] w-[0%]" />
+                  </div>
+                </div>
                 <CompleteBox />
-              ) : null}
-            </div>
+              </div>
+            ) : null}
           </div>
+
           <ContinueButton />
         </main>
       </ReservationContext.Provider>

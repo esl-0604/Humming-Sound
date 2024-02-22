@@ -24,30 +24,41 @@ import {
   getWorkingHours,
   parseTimeSlots,
 } from "@/app/utils/function/getWorkingHours";
+import { ServiceType, updateServiceType } from "@/app/utils/atom/productData";
 
-interface Props {}
+interface Props {
+  type: string;
+}
 
-export default function CalendarBox({}: Props) {
-  const { step, productList, setProductList } = useContext(ReservationContext);
+export default function CalendarBox({ type }: Props) {
+  const { step, selectedProductList, setSelectedProductList } =
+    useContext(ReservationContext);
 
+  // useEffect(() => {
+  //   console.log(selectedProductList);
+  // }, [selectedProductList]);
   const [dateOfWhat, setDateOfWhat] = useState<string>("");
   const [dateSelected, setDateSelected] = useState<boolean>(false);
 
-  useEffect(() => {
-    // step == Date1
-    if (step.step === "Date1") {
-      if (productList["how"]) {
-        setDateOfWhat(productList["how"][0].title + " 컨설팅");
-      }
-    }
+  // useEffect(() => {
+  //   console.log(productList);
+  // }, []);
 
-    // step == Date2
-    else {
-      if (productList["shopping"]) {
-        setDateOfWhat(productList["shopping"][0].title);
-      }
-    }
-  }, [productList, step]);
+  // useEffect(() => {
+  //   // step == Date1
+  //   if (step.step === "Date1") {
+  //     if (productList["how"]) {
+  //       setDateOfWhat(productList["how"][0].title + " 컨설팅");
+  //     }
+  //   }
+
+  //   // step == Date2
+  //   else {
+  //     if (productList["shopping"]) {
+  //       setDateOfWhat(productList["shopping"][0].title);
+  //     }
+  //   }
+  // }, [productList, step]);
 
   const stylistKey = useSearchParams().get("stylistKey");
   useEffect(() => {
@@ -91,15 +102,15 @@ export default function CalendarBox({}: Props) {
         behavior: "smooth",
         block: "center",
       });
-  }, [productList]);
+  }, [selectedProductList]);
 
-  const type = step.step === "Date1" ? "how" : "shopping";
+  // const type = step.step === "Date1" ? "how" : "shopping";
 
   useEffect(() => {
     setDateSelected(false);
-    let updatepProductList = { ...productList };
+    let updatepProductList = { ...selectedProductList };
     updatepProductList[type][0].timeslots = [];
-    setProductList(updatepProductList);
+    setSelectedProductList(updatepProductList);
   }, [step]);
 
   useEffect(() => {
@@ -134,7 +145,7 @@ export default function CalendarBox({}: Props) {
         inline: "start",
       });
     }
-  }, [focusSlot, productList]);
+  }, [focusSlot, selectedProductList]);
 
   // 근무가능시간, 불가능시간, 선택요일을 전부 고려하여 근무할 수 있는 시간 업데이트
   useEffect(() => {
@@ -151,12 +162,14 @@ export default function CalendarBox({}: Props) {
   // 만약 타임슬롯 하나를 선택했다면, 해당 슬롯에서 연속적으로 가능한 시간대만 고를 수 있도록 나머지 구간은 disabled
   useEffect(() => {
     if (selectedTime.length === 0) {
-      if (productList[type][0].date) {
-        setGetDay(new Date(productList[type][0].date).getDay()?.toString());
+      if (selectedProductList[type][0].date) {
+        setGetDay(
+          new Date(selectedProductList[type][0].date).getDay()?.toString(),
+        );
       }
       let updateDisabledTimeSlot: string[] = [];
       workingHour.disabled.forEach((item: ScheduleType) => {
-        if (item.date === productList[type][0].date)
+        if (item.date === selectedProductList[type][0].date)
           updateDisabledTimeSlot = [...item.timeslots];
       });
       setDisabledTimeSlot(updateDisabledTimeSlot);
@@ -207,7 +220,7 @@ export default function CalendarBox({}: Props) {
       }
       setDisabledTimeSlot(updateDisabledTimeSlot);
     }
-  }, [selectedTime, productList]);
+  }, [selectedTime, selectedProductList]);
 
   useEffect(() => {
     if (selectedTime.length === 2) {
@@ -215,16 +228,16 @@ export default function CalendarBox({}: Props) {
         return Number(a.split(":")[0]) - Number(b.split(":")[0]);
       });
       // console.log(generateTimeArray(sortedTime[0], sortedTime[1]));
-      let updatepProductList = { ...productList };
+      let updatepProductList = { ...selectedProductList };
       updatepProductList[type][0].timeslots = [
         ...generateTimeArray(sortedTime[0], sortedTime[1]),
       ];
       // console.log(updatepProductList);
-      setProductList(updatepProductList);
+      setSelectedProductList(updatepProductList);
     } else {
-      let updatepProductList = { ...productList };
+      let updatepProductList = { ...selectedProductList };
       updatepProductList[type][0].timeslots = [];
-      setProductList(updatepProductList);
+      setSelectedProductList(updatepProductList);
     }
   }, [selectedTime]);
 
@@ -256,29 +269,19 @@ export default function CalendarBox({}: Props) {
   // }, [productList]);
 
   return (
-    <div className="flex h-fit w-full flex-col pb-[160px] text-[#E8E8E8]">
-      <Image src={BLOCK} alt="block" priority={true} />
-
-      <div className="mb-[15px] mt-[10px] flex h-[30px] w-full items-center px-[10px] ">
-        <Image src={WHEN} alt="when" priority={true} />
-      </div>
-
-      <div className="flex min-h-[45px] w-full flex-col font-default text-[15px] leading-[20px]">
-        <span>{formatMainText(`선택하신 <b>${dateOfWhat}의</b>`)}</span>
-        {formatMainText("날짜와 시간을 정해주세요!")}
-      </div>
-
+    <div className="flex h-fit w-full flex-col text-[#E8E8E8]">
       <div className="flex h-fit w-full flex-col">
         <div className="flex min-h-[30px] w-full items-end justify-center whitespace-pre font-default text-[10px]">
-          {step.step === "Date1"
-            ? formatMainText("<b>최소</b> 1시간 / <b>최대</b> 2시간")
-            : formatMainText("<b>최소</b> 1시간 / <b>최대</b> 4시간")}
+          {type === "how"
+            ? formatMainText("<b>최소</b> 1시간 / <b>최대</b> 3시간")
+            : formatMainText("<b>최소</b> 1시간 / <b>최대</b> 3시간")}
         </div>
 
         <div className="relative flex h-[390px] w-full">
           <div className="absolute left-1/2 top-0 flex h-fit w-full -translate-x-1/2 flex-col items-center">
             <div className="flex h-fit w-full items-center justify-center pt-[10px]">
               <STCLCalendar
+                type={type}
                 setDateSelected={setDateSelected}
                 setSelectedTime={setSelectedTime}
               />
