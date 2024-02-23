@@ -6,13 +6,16 @@ import Calendar from "react-calendar";
 import { ReservationContext } from "../../context";
 import { formatDateToString } from "@/app/utils/function/formatDateToString";
 import { compareDatesByDay } from "@/app/utils/function/compareDatesByDay";
+import { updateServiceType } from "@/app/utils/atom/productData";
 
 interface Props {
+  type: string;
   setDateSelected: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTime: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export default function STCLCalendar({
+  type,
   setDateSelected,
   setSelectedTime,
 }: Props) {
@@ -49,9 +52,9 @@ export default function STCLCalendar({
       .toLowerCase();
   };
 
-  const { step, productList, setProductList } = useContext(ReservationContext);
+  const { step, selectedProductList, setSelectedProductList } =
+    useContext(ReservationContext);
   const [date, setDate] = useState<Date | null>(null);
-  const type = step.step === "Date1" ? "how" : "shopping";
 
   useEffect(() => {
     setDate(null);
@@ -59,10 +62,10 @@ export default function STCLCalendar({
 
   const DatePick = (date: Date) => {
     // console.log(productList);
-    let updatepProductList = { ...productList };
+    let updatepProductList = { ...selectedProductList };
     updatepProductList[type][0].date = formatDateToString(date);
     updatepProductList[type][0].timeslots = [];
-    setProductList(updatepProductList);
+    setSelectedProductList(updatepProductList);
 
     setDate(date);
     setDateSelected(true);
@@ -76,8 +79,8 @@ export default function STCLCalendar({
         compareDatesByDay(date, new Date()) < 0 ? true : false;
       return view === "month" && returnValue;
     } else {
-      if (productList["how"][0].date) {
-        const standardDate = new Date(productList["how"][0].date);
+      if (selectedProductList["how"][0].date) {
+        const standardDate = new Date(selectedProductList["how"][0].date);
         const returnValue =
           compareDatesByDay(date, standardDate) < 2 ? true : false;
         return view === "month" && returnValue;
@@ -107,7 +110,7 @@ export default function STCLCalendar({
         }}
         tileClassName={({ date, view }) => {
           if (type === "shopping") {
-            const standardDate = new Date(productList["how"][0].date);
+            const standardDate = new Date(selectedProductList[type][0].date);
             // 여기에서 원하는 날짜에 대한 조건을 추가
             const isSpecialDate = compareDatesByDay(date, standardDate) === 0;
 

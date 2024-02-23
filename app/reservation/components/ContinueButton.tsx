@@ -22,7 +22,7 @@ export default function ContinueButton({}: Props) {
   const {
     step,
     totalCost,
-    productList,
+    selectedProductList,
     firstClick,
     setFirstClick,
     setInputPhoneNum,
@@ -37,13 +37,17 @@ export default function ContinueButton({}: Props) {
       etc: {
         step: step,
         selected_product: {
-          consulting: productList.consulting?.map(
+          consulting: selectedProductList.consulting?.map(
             (item: any) => item.service_id,
           ),
-          how: productList.how?.map((item: any) => item.service_id),
-          optional: productList.optional?.map((item: any) => item.service_id),
+          how: selectedProductList.how?.map((item: any) => item.service_id),
+          optional: selectedProductList.optional?.map(
+            (item: any) => item.service_id,
+          ),
 
-          shopping: productList.shopping?.map((item: any) => item.service_id),
+          shopping: selectedProductList.shopping?.map(
+            (item: any) => item.service_id,
+          ),
         },
       },
     };
@@ -56,137 +60,65 @@ export default function ContinueButton({}: Props) {
     }).then((res) => res.json());
   };
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-    if (step.step !== "Product") setFirstClick(false);
-  }, [step]);
-
-  useEffect(() => {
-    if (isPopUp.pop && isPopUp.type === "필수") {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    }
-  }, [isPopUp]);
-
   const ContinueClick = () => {
     let nextStep = "";
     const defaultURL = `/reservation?stylistKey=${stylistKey}&step=`;
-    const CardList = Object.keys(productList);
+    const CardList = Object.keys(selectedProductList);
     // 현재 == product 일 경우,
-    if (step.step === "Product") {
-      // 1) 필수 옵션 선택 안함 (consulting && how) --> 팝업창 : 필수
-      if (!CardList.includes("consulting") || !CardList.includes("how")) {
+    if (step.step === "ProductConsulting") {
+      // 1) 필수 옵션 선택 안함 (consulting) --> 팝업창 : 필수
+      if (!CardList.includes("how")) {
         console.log("필수 상품을 선택해주세요!");
         setIsPopUp({ pop: true, type: "필수" });
       } else {
-        // 2) 필수 옵션 선택 O && 선택 옵션 하나도 안함 최초 시도 --> 팝업창 : 옵션
-        if (
-          !CardList.includes("optional") &&
-          !CardList.includes("shopping") &&
-          !firstClick
-        ) {
-          console.log("옵션 상품들을 다시 한번 살펴봐주세요!");
-          setIsPopUp({ pop: true, type: "옵션" });
-          setFirstClick(true);
-          window.scrollTo({
-            top: 100000,
-            left: 0,
-            behavior: "smooth",
-          });
-        }
-
-        // 3) 필수 옵션 선택 O && (재시도 or 선택 옵션 O)
-        else {
-          // 3-1) how == 온라인 or 오프라인 --> nextStep : Date1
-          if (productList["how"][0].title !== "설문지") {
-            nextStep = "Date1";
+        if (selectedProductList["how"][0].title !== "설문지") {
+          if (
+            selectedProductList["how"][0].date &&
+            selectedProductList["how"][0].timeslots.length > 0
+          ) {
+            nextStep = "ProductShopping";
             router.push(defaultURL + nextStep);
             reservationContinueLog(step.step);
+          } else {
+            console.log("날짜와 타임슬롯을 선택해주세요.");
           }
-
-          // 3-2) how == 설문지
-          else {
-            // 3-1-1) shopping == 온라인 or 오프라인 --> nextStep : Date2
-            if (
-              CardList.includes("shopping") &&
-              productList["shopping"][0].title !== "제품 추천"
-            ) {
-              nextStep = "Date2";
-              router.push(defaultURL + nextStep);
-              reservationContinueLog(step.step);
-            }
-
-            // 3-1-2) shopping 없음 --> nextStep : Check
-            // 3-1-3) shopping == 제품 추천 --> nextStep : Check
-            else {
-              nextStep = "Check";
-              router.push(defaultURL + nextStep);
-              reservationContinueLog(step.step);
-            }
-          }
-        }
-      }
-    }
-
-    // 현재 == date1 일 경우,
-    else if (step.step === "Date1") {
-      // 날짜와 타임슬롯을 선택해야만 넘어갈 수 있음.
-      if (
-        productList["how"][0].date &&
-        productList["how"][0].timeslots.length > 0
-      ) {
-        // 1) shopping 상품 미선택 --> nextStep : Check
-        if (!CardList.includes("shopping")) {
-          nextStep = "Check";
+        } else {
+          nextStep = "ProductShopping";
           router.push(defaultURL + nextStep);
           reservationContinueLog(step.step);
         }
-
-        // 2) shopping 상품 선택 && shopping == 제품 추천 --> nextStep : Check
-        else {
-          if (productList["shopping"][0].title === "제품 추천") {
-            nextStep = "Check";
-            router.push(defaultURL + nextStep);
-            reservationContinueLog(step.step);
-          }
-
-          // 3) shopping 상품 선택 && shopping == 온라인 동행쇼핑 or 오프라인 퍼스널 쇼핑 --> nextStep : Date2
-          else {
-            nextStep = "Date2";
-            router.push(defaultURL + nextStep);
-            reservationContinueLog(step.step);
-          }
-        }
       }
-
-      // 날짜와 타임슬롯을 선택하지 않았다면, 넘어갈 수 없음.
-      else {
-        console.log("날짜와 타임슬롯을 선택해주세요.");
+    } else if (step.step === "ProductShopping") {
+      if (!CardList.includes("shopping")) {
+        console.log("필수 상품을 선택해주세요!");
+        setIsPopUp({ pop: true, type: "필수" });
+      } else {
+        if (selectedProductList["shopping"][0].title !== "제품 추천") {
+          if (
+            selectedProductList["shopping"][0].date &&
+            selectedProductList["shopping"][0].timeslots.length > 0
+          ) {
+            nextStep = "ProductOptional";
+            router.push(defaultURL + nextStep);
+            reservationContinueLog(step.step);
+          } else {
+            console.log("날짜와 타임슬롯을 선택해주세요.");
+          }
+        } else {
+          nextStep = "ProductOptional";
+          router.push(defaultURL + nextStep);
+          reservationContinueLog(step.step);
+        }
       }
     }
 
     // 현재 == date2 일 경우, nextStep : Check
-    else if (step.step === "Date2") {
+    else if (step.step === "ProductOptional") {
       // 날짜와 타임슬롯을 선택해야만 넘어갈 수 있음.
-      if (
-        productList["shopping"][0].date &&
-        productList["shopping"][0].timeslots.length > 0
-      ) {
-        nextStep = "Check";
-        router.push(defaultURL + nextStep);
-        reservationContinueLog(step.step);
-      }
-      // 날짜와 타임슬롯을 선택하지 않았다면, 넘어갈 수 없음.
-      else {
-        console.log("날짜와 타임슬롯을 선택해주세요.");
-      }
+
+      nextStep = "Check";
+      router.push(defaultURL + nextStep);
+      reservationContinueLog(step.step);
     }
 
     // 현재 == Check 일 경우,
@@ -214,22 +146,34 @@ export default function ContinueButton({}: Props) {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (step.step === "Date1") {
-      if (
-        productList["how"][0].date &&
-        productList["how"][0].timeslots.length > 0
-      )
-        setDisabled(false);
-      else setDisabled(true);
-    } else if (step.step === "Date2") {
-      if (
-        productList["shopping"][0].date &&
-        productList["shopping"][0].timeslots.length > 0
-      )
-        setDisabled(false);
-      else setDisabled(true);
+    if (step.step === "ProductConsulting") {
+      if (selectedProductList["how"]) {
+        if (selectedProductList["how"][0].title == "설문지") {
+          setDisabled(false);
+        } else if (selectedProductList["how"][0].title !== "설문지") {
+          if (
+            selectedProductList["how"][0].date &&
+            selectedProductList["how"][0].timeslots.length > 0
+          ) {
+            setDisabled(false);
+          } else setDisabled(true);
+        }
+      } else setDisabled(true);
+    } else if (step.step === "ProductShopping") {
+      if (selectedProductList["shopping"]) {
+        if (selectedProductList["shopping"][0].title == "제품 추천") {
+          setDisabled(false);
+        } else if (selectedProductList["shopping"][0].title !== "제품 추천") {
+          if (
+            selectedProductList["shopping"][0].date &&
+            selectedProductList["shopping"][0].timeslots.length > 0
+          ) {
+            setDisabled(false);
+          } else setDisabled(true);
+        }
+      } else setDisabled(true);
     } else setDisabled(false);
-  }, [productList, step]);
+  }, [selectedProductList, step]);
 
   return (
     <div
@@ -238,13 +182,13 @@ export default function ContinueButton({}: Props) {
       <div
         className={`relative flex h-[50px] w-full cursor-pointer items-center justify-center rounded-[48px] shadow-button2 backdrop-blur-[7.5px] transition duration-500 ease-in-out ${
           isScrolled
-            ? "bg-[#E8E8E8] text-[#161617]"
-            : "bg-[rgba(0,0,0,0.10)] text-[#E8E8E8]"
+            ? "bg-custom_white text-[#161617]"
+            : "text-custom_white bg-[rgba(0,0,0,0.10)]"
         }`}
         onClick={ContinueClick}
       >
         {firstClick && isScrolled ? (
-          <div className="absolute left-1/2 top-[-56px] flex h-[40px] w-[150px] -translate-x-1/2 transform flex-col items-center justify-center font-default text-[12px] text-[#E8E8E8] ">
+          <div className="text-custom_white absolute left-1/2 top-[-56px] flex h-[40px] w-[150px] -translate-x-1/2 transform flex-col items-center justify-center font-default text-[12px] ">
             <span>{formatMainText("<b>만족도 높은 선택 옵션들</b>이")}</span>
             <span>{"아직 고객님을 기다리고 있어요!"}</span>
           </div>

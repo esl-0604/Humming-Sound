@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        custom_white: "#E8E8E8",
+        custom_grey: "#363636",
+      },
       fontFamily: {
         highlight: ["Pretendard-Black"],
         main: ["Pretendard-Medium"],

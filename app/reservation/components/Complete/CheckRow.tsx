@@ -29,7 +29,7 @@ export default function CheckRow({
           <Lottie animationData={gif} />
         </div>
         <div
-          className={`flex h-[16px] w-full  flex-col items-center justify-center font-highlight text-[13.15px] leading-[100%]`}
+          className={`flex h-[16px] w-full  flex-col items-center justify-center font-default text-[13.15px] leading-[100%]`}
         >
           {titleList.map((list: string, index: number) => {
             // const formatText = formatMainText(list);
@@ -43,7 +43,7 @@ export default function CheckRow({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col font-main ">
+      <div className="flex flex-1 flex-col justify-center font-main">
         <div className="mb-[2px] flex h-[20px] items-center justify-between text-[12px]">
           {/* {price > 0 ? (
             <div className="flex h-full items-center">
@@ -63,26 +63,37 @@ export default function CheckRow({
           ) : (
             <div className="flex h-full items-center px-[10px]">기본 제공</div>
           )} */}
-          <div></div>
           {type === "byEA" ? (
             <div className="mr-[10px] flex h-full w-[20px] items-center justify-center rounded-[5px] bg-[rgba(255,255,255,0.01)] font-main shadow-button3">
-              {count}
+              {count}장
             </div>
           ) : type === "byHour" ? (
             <div className="mr-[10px] flex h-full items-center justify-center rounded-[5px] bg-[rgba(255,255,255,0.01)] font-main shadow-button3">
               {date.slice(2) +
                 " " +
-                getWorkingHours(timeslots)[0].replace(/ ~ /g, "~")}
+                getWorkingHours(timeslots)[0].replace(/ ~ /g, "~")}{" "}
+              &#40;{timeslots.length}시간&#41;
             </div>
           ) : null}
         </div>
+        {type === "byEA" ? (
+          <div className="font-branding text-[24px]">
+            {addCommasToNumber(count * price)}{" "}
+            <span className="text-[12px]">&#8361;</span>
+          </div>
+        ) : type === "byHour" ? (
+          <div className="font-branding text-[24px]">
+            {addCommasToNumber(timeslots.length * price)}{" "}
+            <span className="text-[12px]">&#8361;</span>
+          </div>
+        ) : null}
 
-        <div className="flex flex-1 flex-col justify-center font-default text-[11px] leading-[16.157px] opacity-75 ">
+        {/* <div className="flex flex-1 flex-col justify-center font-default text-[11px] leading-[16.157px] opacity-75 ">
           {memoList.map((list: string, index: number) => {
             const formatText = formatMainText(list);
             return <span key={index}>{formatText}</span>;
           })}
-        </div>
+        </div> */}
       </div>
     </div>
   );

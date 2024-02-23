@@ -12,11 +12,9 @@ interface Props {}
 
 export default function CompleteBox({}: Props) {
   return (
-    <div className="flex h-fit w-full flex-col text-[#E8E8E8]">
-      <Image src={BLOCK} alt="block" priority={true} />
-
-      <div className="mb-[30px] mt-[10px] flex h-[30px] w-full items-center px-[10px] font-branding text-[30px] font-normal">
-        <Image src={DONE} alt="done" priority={true} />
+    <div className="text-custom_white mt-[25px] flex h-fit w-full flex-col items-center">
+      <div className="mb-[100px] font-branding text-[24px]">
+        Step5. <span className="font-main">결제</span>
       </div>
 
       <div className="flex w-full flex-1 flex-col items-center">

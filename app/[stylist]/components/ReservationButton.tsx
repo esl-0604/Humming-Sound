@@ -73,7 +73,9 @@ export default function ReservationButton({ stylistKey }: Props) {
       <div
         onClick={() => {
           if (!disabled) {
-            router.push(`/reservation?stylistKey=${stylistKey}&step=Product`);
+            router.push(
+              `/reservation?stylistKey=${stylistKey}&step=ProductConsulting`,
+            );
             reserveClickLog(stylistKey);
           }
         }}

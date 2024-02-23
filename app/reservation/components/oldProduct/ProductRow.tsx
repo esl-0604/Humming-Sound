@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
 import { formatMainText } from "@/app/utils/function/formatMainText";
 import { ReservationContext } from "../../context";
-import { updateServiceType } from "@/app/utils/atom/productData";
+import { updateServiceType } from "./ProductCard";
 import { insertNewline } from "@/app/utils/function/insertNewline";
 import LocalStorage from "@/app/utils/localstorage";
 
@@ -28,8 +28,7 @@ export default function ProductRow({
 
   const [select, setSelected] = useState<boolean>(false);
   const [optionNum, setOptionNum] = useState<number>(1);
-  const { selectedProductList, setSelectedProductList } =
-    useContext(ReservationContext);
+  const { productList, setProductList } = useContext(ReservationContext);
   const userId = LocalStorage.getItem("userId");
 
   const productSelectionLog = async (step: string, isSelected: boolean) => {
@@ -53,27 +52,26 @@ export default function ProductRow({
     }).then((res) => res.json());
   };
   useEffect(() => {
-    if (selectedProductList) {
+    if (productList) {
       // card 당 상품 중복 선택 불가능 (optional은 가능)
       if (card !== "optional") {
-        if (Object.keys(selectedProductList).includes(card)) {
-          if (selectedProductList[card][0].title === product.title)
-            setSelected(true);
+        if (Object.keys(productList).includes(card)) {
+          if (productList[card][0].title === product.title) setSelected(true);
           else setSelected(false);
         } else setSelected(false);
       }
       // card가 optional일 경우
       else {
-        if (selectedProductList[card]?.length === 0) {
+        if (productList[card]?.length === 0) {
           let updateProductList = {
-            ...selectedProductList,
+            ...productList,
           };
           delete updateProductList[card];
-          setSelectedProductList(updateProductList);
+          setProductList(updateProductList);
         }
       }
     }
-  }, [selectedProductList]);
+  }, [productList]);
 
   const SetProductList = () => {
     // card 당 상품 중복 선택 불가능
@@ -81,10 +79,10 @@ export default function ProductRow({
       // 선택 -> 미선택
       if (select) {
         let updateProductList = {
-          ...selectedProductList,
+          ...productList,
         };
         delete updateProductList[card];
-        setSelectedProductList(updateProductList);
+        setProductList(updateProductList);
       }
     }
 
@@ -99,7 +97,7 @@ export default function ProductRow({
       // 미선택 -> 선택
       if (select) {
         let updateProductList = {
-          ...selectedProductList,
+          ...productList,
         };
         if (product.cost_type === "byEA") {
           updateProductList[card] = [
@@ -138,13 +136,13 @@ export default function ProductRow({
             },
           ];
         }
-        setSelectedProductList(updateProductList);
+        setProductList(updateProductList);
       }
     }
 
     // optional card의 경우에는 상품 중복 선택이 가능
     else {
-      let temp = { ...selectedProductList };
+      let temp = { ...productList };
       if (select) {
         if (temp[card]) {
           // console.log(temp);
@@ -162,7 +160,7 @@ export default function ProductRow({
             gifURL: gifURL,
           });
           temp[card] = updateCard;
-          setSelectedProductList(temp);
+          setProductList(temp);
         } else {
           temp[card] = [];
           temp[card].push({
@@ -175,17 +173,17 @@ export default function ProductRow({
             gifURL: gifURL,
           });
           // console.log(temp);
-          setSelectedProductList(temp);
+          setProductList(temp);
         }
       } else {
-        let temp = { ...selectedProductList };
+        let temp = { ...productList };
         // console.log(temp);
         if (temp[card]) {
           let updateCard = temp[card].filter(
             (item: any) => item.title !== product.title,
           );
           temp[card] = updateCard;
-          setSelectedProductList(temp);
+          setProductList(temp);
         }
       }
     }
@@ -213,7 +211,7 @@ export default function ProductRow({
       className={`flex h-fit w-full cursor-pointer gap-[30px] ${select ? "" : "opacity-50"}`}
       onClick={SetProductList}
     >
-      <div className="text-custom_white ml-[4px] flex w-[50px] flex-col gap-[10px] ">
+      <div className="ml-[4px] flex w-[50px] flex-col gap-[10px] text-[#E8E8E8] ">
         <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[10px]">
           <Lottie animationData={gifURL} lottieRef={lottieRef} />
         </div>
@@ -233,27 +231,26 @@ export default function ProductRow({
       </div>
 
       <div className="flex flex-1 flex-col font-main ">
-        <div className="mt-[12px] flex h-[20px] items-center justify-between text-[12px]">
+        <div className="mb-[2px] flex h-[20px] items-center justify-between text-[12px]">
           {price > 0 ? (
             <div className="flex h-full items-center">
               <span className="mr-[7px] flex h-full w-[10px] items-center">
                 ₩
               </span>
-              <span className="mr-[4px] flex h-full items-center justify-end font-branding text-[24px]">
+              <span className="flex h-full items-center justify-end">
+                {product.cost_type !== "total" ? "+" : null}
                 {addCommasToNumber(price)}
               </span>
               {product.cost_type === "byHour" ? (
-                <span className="font-default">/ 1시간</span>
+                <span className="font-default">/h</span>
               ) : product.cost_type === "byEA" ? (
                 <span className="font-default">
-                  / {card === "optional" ? "3" : "1"}장
+                  /{card === "optional" ? "3" : "1"}개
                 </span>
               ) : null}
             </div>
           ) : (
-            <div className="flex h-full items-center font-branding text-[24px]">
-              free
-            </div>
+            <div className="flex h-full items-center px-[10px]">기본 제공</div>
           )}
           {product.cost_type === "byEA" && select ? (
             <div
@@ -283,7 +280,7 @@ export default function ProductRow({
           ) : null}
         </div>
 
-        <div className="flex flex-1 flex-col justify-center font-main text-[12px] leading-[16.157px] opacity-75 ">
+        <div className="flex flex-1 flex-col justify-center font-default text-[11px] leading-[16.157px] opacity-75 ">
           {memoList.map((list: string, index: number) => {
             const formatText = formatMainText(list);
             return <span key={index}>{formatText}</span>;

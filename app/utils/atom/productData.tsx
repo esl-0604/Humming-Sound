@@ -4,6 +4,14 @@ export interface ServiceType {
   product: productType;
   price: number;
 }
+
+export interface updateServiceType extends ServiceType {
+  gifURL?: object;
+  comment?: string;
+  date?: string | number | null;
+  timeslots?: string[] | [];
+}
+
 export interface productType {
   title: string;
   memo: string;
