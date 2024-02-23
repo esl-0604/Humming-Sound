@@ -111,7 +111,9 @@ export default function RootTemplate({
     else if (path === "/reservation") {
       // 예약페이지/Check -> 예약페이지/Product
       if (step === "Check")
-        router.replace(`/reservation?stylistKey=${stylistKey}&step=Product`);
+        router.replace(
+          `/reservation?stylistKey=${stylistKey}&step=ProductConsulting`,
+        );
       // 예약페이지 나머지 -> router.back()
       else router.back();
     }

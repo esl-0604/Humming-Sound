@@ -28,6 +28,7 @@ export default function CheckBox({}: Props) {
     selectedProductList,
     inputPhoneNum,
     setInputPhoneNum,
+    totalCost,
   } = useContext(ReservationContext);
   const [checkList, setCheckList] = useState<CheckRowType[]>([]);
 
@@ -97,7 +98,7 @@ export default function CheckBox({}: Props) {
       </div>
       {inputPhoneNum ? <PhoneInput /> : null}
 
-      <div className="mt-[12px] flex h-fit w-full flex-col gap-[12px] px-[3%]">
+      <div className="mt-[12px] flex h-fit w-full flex-col gap-[23px] px-[3%]">
         {checkList.map((item: CheckRowType, idx: number) => {
           return (
             <CheckRow
@@ -113,6 +114,14 @@ export default function CheckBox({}: Props) {
             />
           );
         })}
+      </div>
+      <div className="mt-[23px] w-full px-[3%]">
+        <div className="bg-custom_grey h-[4px] w-full" />
+        <div className="flex w-full flex-row items-center justify-end font-branding">
+          <div className="mr-[16px] text-[24px]">total</div>
+          <div className="mr-[5px] text-[36px]">{totalCost}</div>
+          <div className="pt-[8px] text-[24px]">&#8361;</div>
+        </div>
       </div>
     </div>
   );

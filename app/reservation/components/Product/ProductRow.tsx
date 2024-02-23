@@ -52,27 +52,28 @@ export default function ProductRow({
       body: JSON.stringify(body),
     }).then((res) => res.json());
   };
-  // useEffect(() => {
-  //   if (productList) {
-  //     // card 당 상품 중복 선택 불가능 (optional은 가능)
-  //     if (card !== "optional") {
-  //       if (Object.keys(productList).includes(card)) {
-  //         if (productList[card][0].title === product.title) setSelected(true);
-  //         else setSelected(false);
-  //       } else setSelected(false);
-  //     }
-  //     // card가 optional일 경우
-  //     else {
-  //       if (productList[card]?.length === 0) {
-  //         let updateProductList = {
-  //           ...productList,
-  //         };
-  //         delete updateProductList[card];
-  //         setProductList(updateProductList);
-  //       }
-  //     }
-  //   }
-  // }, [productList]);
+  useEffect(() => {
+    if (selectedProductList) {
+      // card 당 상품 중복 선택 불가능 (optional은 가능)
+      if (card !== "optional") {
+        if (Object.keys(selectedProductList).includes(card)) {
+          if (selectedProductList[card][0].title === product.title)
+            setSelected(true);
+          else setSelected(false);
+        } else setSelected(false);
+      }
+      // card가 optional일 경우
+      else {
+        if (selectedProductList[card]?.length === 0) {
+          let updateProductList = {
+            ...selectedProductList,
+          };
+          delete updateProductList[card];
+          setSelectedProductList(updateProductList);
+        }
+      }
+    }
+  }, [selectedProductList]);
 
   const SetProductList = () => {
     // card 당 상품 중복 선택 불가능

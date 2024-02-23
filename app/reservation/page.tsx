@@ -41,24 +41,24 @@ export default function Reservation() {
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
   const [serviceList, setServiceList] = useState<ServiceType[]>([]);
   const [sortedServiceList, setSortedServiceList] = useState<any>({});
-  // useEffect(() => {
-  //   const typeList = Object.keys(productList);
-  //   let costs = 0;
-  //   typeList.forEach((card: any) => {
-  //     productList[card].forEach((item: any) => {
-  //       if (item.type === "total") {
-  //         costs += item.price;
-  //       } else if (item.type === "byEA") {
-  //         costs += item.price * item.count;
-  //       } else {
-  //         if (item.timeslots.length > 0)
-  //           costs += item.price * item.timeslots.length;
-  //         else costs += item.price;
-  //       }
-  //     });
-  //   });
-  //   setTotalCost(costs);
-  // }, [productList]);
+  useEffect(() => {
+    const typeList = Object.keys(selectedProductList);
+    let costs = 0;
+    typeList.forEach((card: any) => {
+      selectedProductList[card].forEach((item: any) => {
+        if (item.type === "total") {
+          costs += item.price;
+        } else if (item.type === "byEA") {
+          costs += item.price * item.count;
+        } else {
+          if (item.timeslots.length > 0)
+            costs += item.price * item.timeslots.length;
+          else costs += item.price;
+        }
+      });
+    });
+    setTotalCost(costs);
+  }, [selectedProductList]);
 
   useEffect(() => {
     if (serviceList.length === 0) {
@@ -146,8 +146,8 @@ export default function Reservation() {
               <div className="flex flex-row items-center justify-center px-[3%]">
                 <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
                   <div className="z-30 flex h-fit w-full flex-row">
-                    <div className="bg-custom_white h-[5px] w-[18.5%]" />
-                    <div className="bg-custom_grey h-[5px] w-[81.5%]" />
+                    <div className="bg-custom_white h-[5px] w-[20%]" />
+                    <div className="bg-custom_grey h-[5px] w-[80%]" />
                   </div>
                 </div>
                 <ProductConsultingBox
@@ -155,25 +155,12 @@ export default function Reservation() {
                   stylistKey={stylistKey}
                 />
               </div>
-            ) : serviceList.length > 0 && step.step === "ProductOptional" ? (
-              <div className="flex flex-row items-center justify-center px-[3%]">
-                <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
-                  <div className="z-30 flex h-fit w-full flex-row">
-                    <div className="bg-custom_white h-[5px] w-[37%]" />
-                    <div className="bg-custom_grey h-[5px] w-[63%]" />
-                  </div>
-                </div>
-                <ProductOptionalBox
-                  productList={sortedServiceList.optional}
-                  stylistKey={stylistKey}
-                />
-              </div>
             ) : serviceList.length > 0 && step.step === "ProductShopping" ? (
               <div className="flex flex-row items-center justify-center px-[3%]">
                 <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
                   <div className="z-30 flex h-fit w-full flex-row">
-                    <div className="bg-custom_white h-[5px] w-[55.5%]" />
-                    <div className="bg-custom_grey h-[5px] w-[44.5%]" />
+                    <div className="bg-custom_white h-[5px] w-[40%]" />
+                    <div className="bg-custom_grey h-[5px] w-[60%]" />
                   </div>
                 </div>
                 <ProductShoppingBox
@@ -181,12 +168,25 @@ export default function Reservation() {
                   stylistKey={stylistKey}
                 />
               </div>
+            ) : serviceList.length > 0 && step.step === "ProductOptional" ? (
+              <div className="flex flex-row items-center justify-center px-[3%]">
+                <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
+                  <div className="z-30 flex h-fit w-full flex-row">
+                    <div className="bg-custom_white h-[5px] w-[60%]" />
+                    <div className="bg-custom_grey h-[5px] w-[40%]" />
+                  </div>
+                </div>
+                <ProductOptionalBox
+                  productList={sortedServiceList.optional}
+                  stylistKey={stylistKey}
+                />
+              </div>
             ) : serviceList.length > 0 && step.step === "Check" ? (
               <div className="flex flex-row items-center justify-center px-[3%]">
                 <div className="absolute top-[52px] flex h-fit w-full flex-col items-center px-[3.75%]">
                   <div className="z-30 flex h-fit w-full flex-row">
-                    <div className="bg-custom_white h-[5px] w-[74%]" />
-                    <div className="bg-custom_grey h-[5px] w-[26%]" />
+                    <div className="bg-custom_white h-[5px] w-[80%]" />
+                    <div className="bg-custom_grey h-[5px] w-[20%]" />
                   </div>
                 </div>
                 <CheckBox />

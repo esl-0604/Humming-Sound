@@ -146,20 +146,32 @@ export default function ContinueButton({}: Props) {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (step.step === "Date1") {
-      if (
-        selectedProductList["how"][0].date &&
-        selectedProductList["how"][0].timeslots.length > 0
-      )
-        setDisabled(false);
-      else setDisabled(true);
-    } else if (step.step === "Date2") {
-      if (
-        selectedProductList["shopping"][0].date &&
-        selectedProductList["shopping"][0].timeslots.length > 0
-      )
-        setDisabled(false);
-      else setDisabled(true);
+    if (step.step === "ProductConsulting") {
+      if (selectedProductList["how"]) {
+        if (selectedProductList["how"][0].title == "설문지") {
+          setDisabled(false);
+        } else if (selectedProductList["how"][0].title !== "설문지") {
+          if (
+            selectedProductList["how"][0].date &&
+            selectedProductList["how"][0].timeslots.length > 0
+          ) {
+            setDisabled(false);
+          } else setDisabled(true);
+        }
+      } else setDisabled(true);
+    } else if (step.step === "ProductShopping") {
+      if (selectedProductList["shopping"]) {
+        if (selectedProductList["shopping"][0].title == "제품 추천") {
+          setDisabled(false);
+        } else if (selectedProductList["shopping"][0].title !== "제품 추천") {
+          if (
+            selectedProductList["shopping"][0].date &&
+            selectedProductList["shopping"][0].timeslots.length > 0
+          ) {
+            setDisabled(false);
+          } else setDisabled(true);
+        }
+      } else setDisabled(true);
     } else setDisabled(false);
   }, [selectedProductList, step]);
 

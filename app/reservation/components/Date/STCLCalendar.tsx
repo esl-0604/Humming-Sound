@@ -79,8 +79,8 @@ export default function STCLCalendar({
         compareDatesByDay(date, new Date()) < 0 ? true : false;
       return view === "month" && returnValue;
     } else {
-      if (selectedProductList[type][0].date) {
-        const standardDate = new Date(selectedProductList[type][0].date);
+      if (selectedProductList["how"][0].date) {
+        const standardDate = new Date(selectedProductList["how"][0].date);
         const returnValue =
           compareDatesByDay(date, standardDate) < 2 ? true : false;
         return view === "month" && returnValue;

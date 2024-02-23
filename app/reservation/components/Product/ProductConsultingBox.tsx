@@ -84,7 +84,7 @@ export default function ProductConsultingBox({
       {selectedProductList.how &&
       selectedProductList.how[0].title !== "설문지" ? (
         <div
-          className="flex h-fit w-full flex-col pb-[200px]"
+          className="flex h-fit w-full flex-col pb-[100px] pt-[40px]"
           ref={calendarRef}
         >
           <CalendarBox type={"how"} />

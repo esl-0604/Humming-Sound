@@ -271,6 +271,11 @@ export default function CalendarBox({ type }: Props) {
   return (
     <div className="flex h-fit w-full flex-col text-[#E8E8E8]">
       <div className="flex h-fit w-full flex-col">
+        <div className="flex h-[45px] px-[3%] font-main text-[15px]">
+          선택하신 상담을 진행할
+          <br />
+          날짜와 시간을 정해주세요!
+        </div>
         <div className="flex min-h-[30px] w-full items-end justify-center whitespace-pre font-default text-[10px]">
           {type === "how"
             ? formatMainText("<b>최소</b> 1시간 / <b>최대</b> 3시간")

@@ -80,7 +80,7 @@ export default function ProductShoppingBox({ productList, stylistKey }: Props) {
       {selectedProductList.shopping &&
       selectedProductList.shopping[0].title !== "제품 추천" ? (
         <div
-          className="flex h-fit w-full flex-col pb-[200px]"
+          className="flex h-fit w-full flex-col pb-[100px] pt-[40px]"
           ref={calendarRef}
         >
           <CalendarBox type={"shopping"} />
