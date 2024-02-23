@@ -239,14 +239,14 @@ export default function ProductRow({
               <span className="mr-[7px] flex h-full w-[10px] items-center">
                 ₩
               </span>
-              <span className="flex h-full items-center justify-end font-branding text-[24px]">
+              <span className="mr-[4px] flex h-full items-center justify-end font-branding text-[24px]">
                 {addCommasToNumber(price)}
               </span>
               {product.cost_type === "byHour" ? (
-                <span className="font-default">/h</span>
+                <span className="font-default">/ 1시간</span>
               ) : product.cost_type === "byEA" ? (
                 <span className="font-default">
-                  /{card === "optional" ? "3" : "1"}개
+                  / {card === "optional" ? "3" : "1"}장
                 </span>
               ) : null}
             </div>

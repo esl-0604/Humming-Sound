@@ -15,7 +15,7 @@ import { PopUpType, popUp } from "../utils/atom/popUp";
 import CheckBox from "./components/Complete/CheckBox";
 import { formatMainText } from "../utils/function/formatMainText";
 import LoginBox from "./components/Complete/LoginBox";
-import { userData } from "../utils/atom/userData";
+import { stylistIdData, userData } from "../utils/atom/userData";
 import Spinner from "./components/Spinner";
 import Image from "next/image";
 import ProductConsultingBox from "./components/Product/ProductConsultingBox";
@@ -38,6 +38,7 @@ export default function Reservation() {
 
   const user = useRecoilValue(userData);
   const stylists = useRecoilValue<stylistType>(stylistData);
+  const [stylistId, setStylistId] = useRecoilState(stylistIdData);
   const stylist = stylists[stylistKey ? stylistKey : "testStylist"];
   const [serviceList, setServiceList] = useState<ServiceType[]>([]);
   const [sortedServiceList, setSortedServiceList] = useState<any>({});
@@ -79,6 +80,7 @@ export default function Reservation() {
 
           if (data.length > 0) {
             const stylistID = data[0].stylist_id;
+            setStylistId(stylistID);
           }
         });
     }

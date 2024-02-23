@@ -14,7 +14,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 interface Props {}
 
 export default function PhoneInput({}: Props) {
-  const { productList, setInputPhoneNum, setSpinner } =
+  const { selectedProductList, setInputPhoneNum, setSpinner } =
     useContext(ReservationContext);
   const user = useRecoilValue(userData);
   const stylistId = useRecoilValue(stylistIdData);
@@ -54,8 +54,8 @@ export default function PhoneInput({}: Props) {
       };
 
       Object.keys(updateProductList).forEach((type) => {
-        if (Object.keys(productList).includes(type)) {
-          let newList: any = productList[type][0];
+        if (Object.keys(selectedProductList).includes(type)) {
+          let newList: any = selectedProductList[type][0];
           delete newList.gifURL;
           delete newList.memo;
           // console.log(newList);

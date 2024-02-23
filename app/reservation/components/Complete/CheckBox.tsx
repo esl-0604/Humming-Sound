@@ -8,6 +8,7 @@ import { ReservationContext } from "../../context";
 import CheckRow from "./CheckRow";
 import PhoneInput from "./PhoneInput";
 import LocalStorage from "@/app/utils/localstorage";
+import { addCommasToNumber } from "@/app/utils/function/addCommasToNumber";
 
 interface Props {}
 
@@ -119,7 +120,9 @@ export default function CheckBox({}: Props) {
         <div className="bg-custom_grey h-[4px] w-full" />
         <div className="flex w-full flex-row items-center justify-end font-branding">
           <div className="mr-[16px] text-[24px]">total</div>
-          <div className="mr-[5px] text-[36px]">{totalCost}</div>
+          <div className="mr-[5px] text-[36px]">
+            {addCommasToNumber(totalCost)}
+          </div>
           <div className="pt-[8px] text-[24px]">&#8361;</div>
         </div>
       </div>

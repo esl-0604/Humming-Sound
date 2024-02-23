@@ -78,11 +78,12 @@ export default function CheckRow({
         </div>
         {type === "byEA" ? (
           <div className="font-branding text-[24px]">
-            {count * price} <span className="text-[12px]">&#8361;</span>
+            {addCommasToNumber(count * price)}{" "}
+            <span className="text-[12px]">&#8361;</span>
           </div>
         ) : type === "byHour" ? (
           <div className="font-branding text-[24px]">
-            {timeslots.length * price}{" "}
+            {addCommasToNumber(timeslots.length * price)}{" "}
             <span className="text-[12px]">&#8361;</span>
           </div>
         ) : null}
