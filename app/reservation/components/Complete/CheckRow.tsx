@@ -86,7 +86,11 @@ export default function CheckRow({
             {addCommasToNumber(timeslots.length * price)}{" "}
             <span className="text-[12px]">&#8361;</span>
           </div>
-        ) : null}
+        ) : (
+          <div className="font-branding text-[24px]">
+            0 <span className="text-[12px]">&#8361;</span>
+          </div>
+        )}
 
         {/* <div className="flex flex-1 flex-col justify-center font-default text-[11px] leading-[16.157px] opacity-75 ">
           {memoList.map((list: string, index: number) => {
