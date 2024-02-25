@@ -207,14 +207,14 @@ export default function CalendarBox({ type }: Props) {
             const gap =
               Number(selectedTime[0].split(":")[0]) -
               Number(time.split(":")[0]);
-            if (gap > 2 || gap <= -2) updateDisabledTimeSlot.push(time);
+            if (gap > 3 || gap <= -3) updateDisabledTimeSlot.push(time);
           });
         } else {
           parseTimeSlots(AbledTimeSlots).forEach((time: string) => {
             const gap =
               Number(selectedTime[0].split(":")[0]) -
               Number(time.split(":")[0]);
-            if (gap > 4 || gap <= -4) updateDisabledTimeSlot.push(time);
+            if (gap > 3 || gap <= -3) updateDisabledTimeSlot.push(time);
           });
         }
       }
