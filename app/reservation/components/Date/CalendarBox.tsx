@@ -175,7 +175,17 @@ export default function CalendarBox({ type }: Props) {
         selectedProductList["shopping"][0].date ===
           selectedProductList["how"][0].date
       ) {
-        updateDisabledTimeSlot = selectedProductList["how"][0].timeslots;
+        const timeslots = generateTimeArray("09:00", "22:00");
+        const selectedOfflineSurveyTime =
+          selectedProductList["how"][0].timeslots[
+            selectedProductList["how"][0].timeslots.length - 1
+          ];
+        const startIndex = timeslots.indexOf("09:00");
+        const endIndex = timeslots.indexOf(selectedOfflineSurveyTime);
+
+        const newArray = timeslots.slice(startIndex, endIndex + 1);
+
+        updateDisabledTimeSlot = newArray;
       }
       workingHour.disabled.forEach((item: ScheduleType) => {
         if (item.date === selectedProductList[type][0].date)
