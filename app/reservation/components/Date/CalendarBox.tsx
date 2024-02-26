@@ -183,7 +183,6 @@ export default function CalendarBox({ type }: Props) {
       });
       setDisabledTimeSlot(updateDisabledTimeSlot);
 
-      console.log(updateDisabledTimeSlot);
       // console.log(updateDisabledTimeSlot);
     } else {
       // console.log(getWorkingHours(availableTimeSlot));
