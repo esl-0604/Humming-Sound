@@ -37,15 +37,11 @@ export default function ContinueButton({}: Props) {
       etc: {
         step: step,
         selected_product: {
-          consulting: selectedProductList.consulting?.map(
-            (item: any) => item.service_id,
-          ),
           how: selectedProductList.how?.map((item: any) => item.service_id),
-          optional: selectedProductList.optional?.map(
+          shopping: selectedProductList.shopping?.map(
             (item: any) => item.service_id,
           ),
-
-          shopping: selectedProductList.shopping?.map(
+          optional: selectedProductList.optional?.map(
             (item: any) => item.service_id,
           ),
         },
@@ -135,6 +131,7 @@ export default function ContinueButton({}: Props) {
       // else {
       // nextStep = "Done";
       // router.push(defaultURL + nextStep);
+      reservationContinueLog(step.step);
       setInputPhoneNum(true);
       // }
     }
