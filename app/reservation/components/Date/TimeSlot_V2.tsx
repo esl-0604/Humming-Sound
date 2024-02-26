@@ -5,6 +5,7 @@ import "./Calendar.css";
 import { ReservationContext } from "../../context";
 
 interface Props {
+  type: string;
   time: string;
   leftDisabled: boolean;
   rightDisabled: boolean;
@@ -21,14 +22,13 @@ export default function TimeSlotV2({
   selectedTime,
   setSelectedTime,
 }: Props) {
-  const { step, productList, setProductList } = useContext(ReservationContext);
+  const { step, selectedProductList, setSelectedProductList } =
+    useContext(ReservationContext);
   const [selected, setSelected] = useState<boolean>(false);
   const [startTile, setStartTile] = useState<boolean>(false);
   const [middleTile, setMiddleTile] = useState<boolean>(false);
   const [endTile, setEndTile] = useState<boolean>(false);
   const [disabledTile, setDisabledTile] = useState<boolean>(false);
-
-  const type = step.step === "Date1" ? "how" : "shopping";
 
   useEffect(() => {
     if (selectedTime.length === 2) {

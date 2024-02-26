@@ -10,19 +10,21 @@ interface Props {
 }
 
 export default function TimeSlot({ time, disabled }: Props) {
-  const { step, productList, setProductList } = useContext(ReservationContext);
+  const { step, selectedProductList, setSelectedProductList } =
+    useContext(ReservationContext);
   const [selected, setSelected] = useState(false);
 
   const type = step.step === "Date1" ? "how" : "shopping";
 
   useEffect(() => {
-    if (productList[type][0].timeslots.includes(time)) setSelected(true);
+    if (selectedProductList[type][0].timeslots.includes(time))
+      setSelected(true);
     else setSelected(false);
-  }, [productList]);
+  }, [selectedProductList]);
 
   const TimePick = () => {
     // console.log(productList);
-    let updatepProductList = { ...productList };
+    let updatepProductList = { ...selectedProductList };
 
     // 이미 선택된 slot 선택 시, 선택 해제
     if (selected) {
@@ -31,7 +33,7 @@ export default function TimeSlot({ time, disabled }: Props) {
       ][0].timeslots.filter((item: string) => {
         return item !== time;
       });
-      setProductList(updatepProductList);
+      selectedProductList(updatepProductList);
     }
 
     // 새로운 slot 선택 시, 선택
@@ -44,7 +46,7 @@ export default function TimeSlot({ time, disabled }: Props) {
         const [b_num, b_rest] = b.split(":");
         return Number(a_num) - Number(b_num);
       });
-      setProductList(updatepProductList);
+      setSelectedProductList(updatepProductList);
     }
   };
 

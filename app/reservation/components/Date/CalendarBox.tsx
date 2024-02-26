@@ -168,11 +168,23 @@ export default function CalendarBox({ type }: Props) {
         );
       }
       let updateDisabledTimeSlot: string[] = [];
+      if (
+        type === "shopping" &&
+        selectedProductList["how"][0].title === "오프라인 + 설문지" &&
+        selectedProductList["shopping"][0].title === "오프라인 동행 쇼핑" &&
+        selectedProductList["shopping"][0].date ===
+          selectedProductList["how"][0].date
+      ) {
+        updateDisabledTimeSlot = selectedProductList["how"][0].timeslots;
+      }
       workingHour.disabled.forEach((item: ScheduleType) => {
         if (item.date === selectedProductList[type][0].date)
           updateDisabledTimeSlot = [...item.timeslots];
       });
       setDisabledTimeSlot(updateDisabledTimeSlot);
+
+      console.log(updateDisabledTimeSlot);
+      // console.log(updateDisabledTimeSlot);
     } else {
       // console.log(getWorkingHours(availableTimeSlot));
       // console.log(selectedTime[0]);
@@ -185,6 +197,7 @@ export default function CalendarBox({ type }: Props) {
             selectedTime[0],
           ).includes(element),
       );
+
       const DisabledTimeSlots = getWorkingHours(availableTimeSlot).filter(
         (element) =>
           !filterTimeRanges(
@@ -328,6 +341,7 @@ export default function CalendarBox({ type }: Props) {
 
                     return (
                       <TimeSlotV2
+                        type={type}
                         key={index}
                         time={time}
                         leftDisabled={type === "Start"}

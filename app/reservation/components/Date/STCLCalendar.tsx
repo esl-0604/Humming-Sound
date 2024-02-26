@@ -80,13 +80,23 @@ export default function STCLCalendar({
       return view === "month" && returnValue;
     } else {
       if (selectedProductList["how"][0].date) {
-        const standardDate = new Date(selectedProductList["how"][0].date);
-        const returnValue =
-          compareDatesByDay(date, standardDate) < 2 ? true : false;
-        return view === "month" && returnValue;
+        if (
+          selectedProductList["how"][0].title === "오프라인 + 설문지" &&
+          selectedProductList["shopping"][0].title === "오프라인 동행 쇼핑"
+        ) {
+          const standardDate = new Date(selectedProductList["how"][0].date);
+          const returnValue =
+            compareDatesByDay(date, standardDate) < 0 ? true : false;
+          return view === "month" && returnValue;
+        } else {
+          const standardDate = new Date(selectedProductList["how"][0].date);
+          const returnValue =
+            compareDatesByDay(date, standardDate) < 2 ? true : false;
+          return view === "month" && returnValue;
+        }
       } else {
         const returnValue =
-          compareDatesByDay(date, new Date()) < 0 ? true : false;
+          compareDatesByDay(date, new Date()) < 3 ? true : false;
         return view === "month" && returnValue;
       }
     }
