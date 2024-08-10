@@ -1,5 +1,5 @@
 {
-  "name": "stcl_front",
+  "name": "humming sound",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -29,5 +29,9 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/KairosFashionDev/stcl_front.git",
+  "author": "esl-0604 <eslee850@gmail.com>",
+  "license": "MIT"
 }
