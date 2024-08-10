@@ -1,5 +1,5 @@
 {
-  "name": "humming sound",
+  "name": "hummingsound",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -31,7 +31,7 @@
     "typescript": "^5"
   },
   "main": "index.js",
-  "repository": "https://github.com/KairosFashionDev/stcl_front.git",
+  "repository": "https://github.com/esl-0604/Humming-Sound.git",
   "author": "esl-0604 <eslee850@gmail.com>",
   "license": "MIT"
 }

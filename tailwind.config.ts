@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        custom: "400px",
+      },
       colors: {
         custom_white: "#E8E8E8",
         custom_grey: "#363636",
