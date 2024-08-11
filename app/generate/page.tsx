@@ -3,16 +3,20 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TitleBox from "./TitleBox";
+import AudioRecorder from "./RecordButton";
 
 export default function Generate() {
   return (
     <div className="flex h-full w-full flex-col items-start bg-transparent px-[30px] pt-[30px]">
       <TitleBox title={"Style of music"} />
-      <textarea className="mb-[50px] mt-[10px] box-border h-[100px] w-full resize-none overflow-auto rounded-[15px] border-none bg-[#505050] p-[10px] text-[15px] font-normal text-white focus:outline-none" />
+      <textarea
+        maxLength={80}
+        className="mb-[50px] mt-[10px] box-border h-[100px] w-full resize-none overflow-auto rounded-[15px] border-none bg-[#505050] p-[10px] text-[15px] font-normal text-white focus:outline-none"
+      />
 
       <TitleBox title={"Upload Audio"} />
       <div className="mb-[50px] mt-[10px] flex w-full items-center justify-center">
-        <img className="cursor-pointer" src="/images/AudioUpload.svg" />
+        <AudioRecorder />
       </div>
 
       <div className="flex w-full items-center justify-between">
